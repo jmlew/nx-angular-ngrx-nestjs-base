@@ -3,6 +3,7 @@
   "root": "apps/web-app",
   "sourceRoot": "apps/web-app/src",
   "prefix": "example-app",
+  "tags": ["type:app"],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
@@ -86,6 +87,5 @@
         "passWithNoTests": true
       }
     }
-  },
-  "tags": []
+  }
 }

@@ -12,10 +12,56 @@
             "enforceBuildableLibDependency": true,
             "allow": [],
             "depConstraints": [
+              // Restrict by types:
               {
-                "sourceTag": "*",
-                "onlyDependOnLibsWithTags": ["*"]
+                "sourceTag": "type:app",
+                "onlyDependOnLibsWithTags": [
+                  "type:feature",
+                  "type:domain",
+                  "type:data-access",
+                  "type:util",
+                  "type:ui"
+                ]
+              },
+              {
+                "sourceTag": "type:feature",
+                "onlyDependOnLibsWithTags": [
+                  "type:domain",
+                  "type:data-access",
+                  "type:util",
+                  "type:ui"
+                ]
+              },
+              {
+                "sourceTag": "type:data-access",
+                "onlyDependOnLibsWithTags": ["type:util", "type:ui"]
+              },
+              {
+                "sourceTag": "type:domain",
+                "onlyDependOnLibsWithTags": ["type:util", "type:ui", "type:data-access"]
+              },
+              {
+                "sourceTag": "type:util",
+                "onlyDependOnLibsWithTags": ["type:util"]
+              },
+              {
+                "sourceTag": "type:ui",
+                "onlyDependOnLibsWithTags": ["type:util"]
+              },
+              // Restrict by scopes:
+              {
+                "sourceTag": "scope:shared",
+                "onlyDependOnLibsWithTags": ["scope:shared"]
+              },
+              {
+                "sourceTag": "scope:home",
+                "onlyDependOnLibsWithTags": ["scope:home", "scope:shared"]
               }
+
+              // Restrict by named libraries:
+
+              /* Example of allowing a specific domain to interact with another through its api:
+              { "sourceTag": "name:ordering-feature", "onlyDependOnLibsWithTags": ["name:catalog-api"] } */
             ]
           }
         ]

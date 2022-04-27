@@ -2,6 +2,7 @@
   "root": "apps/mock-api",
   "sourceRoot": "apps/mock-api/src",
   "projectType": "application",
+  "tags": ["type:app"],
   "targets": {
     "build": {
       "executor": "@nrwl/node:webpack",
@@ -47,6 +48,5 @@
         "passWithNoTests": true
       }
     }
-  },
-  "tags": []
+  }
 }
