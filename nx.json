@@ -2,7 +2,7 @@
   "npmScope": "example-app",
   "defaultProject": "web-app",
   "affected": {
-    "defaultBase": "main"
+    "defaultBase": "master"
   },
   "cli": {
     "defaultCollection": "@nrwl/angular",
