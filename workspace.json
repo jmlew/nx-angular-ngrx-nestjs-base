@@ -1,9 +1,9 @@
 {
   "version": 2,
   "projects": {
-    "web-app": "apps/web-app",
-    "web-app-e2e": "apps/web-app-e2e",
+    "api-interfaces": "libs/api-interfaces",
     "mock-api": "apps/mock-api",
-    "api-interfaces": "libs/api-interfaces"
+    "web-app": "apps/web-app",
+    "web-app-e2e": "apps/web-app-e2e"
   }
 }

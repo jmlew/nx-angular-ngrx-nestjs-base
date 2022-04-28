@@ -9,6 +9,7 @@
     "serve:web": "nx run web-app:serve --hmr",
     "serve:api": "nx run mock-api:serve",
     "serve:dist": "live-server dist/apps/web-app --no-browser --port=6600",
+    "story:web-app": "nx run web-app:storybook",
     "----- BUILD --------------------": "",
     "build": "nx build",
     "build:prod": "nx build --prod",
@@ -56,7 +57,13 @@
     "@nrwl/linter": "14.0.3",
     "@nrwl/nest": "14.0.3",
     "@nrwl/node": "14.0.3",
+    "@nrwl/storybook": "^14.0.3",
     "@nrwl/workspace": "14.0.3",
+    "@storybook/addon-essentials": "~6.4.12",
+    "@storybook/angular": "~6.4.12",
+    "@storybook/builder-webpack5": "~6.4.12",
+    "@storybook/core-server": "~6.4.12",
+    "@storybook/manager-webpack5": "~6.4.12",
     "@types/node": "16.11.7",
     "@typescript-eslint/eslint-plugin": "~5.18.0",
     "@typescript-eslint/parser": "~5.18.0",
@@ -72,6 +79,7 @@
     "prettier": "^2.5.1",
     "ts-jest": "27.1.4",
     "ts-node": "9.1.1",
-    "typescript": "~4.6.2"
+    "typescript": "~4.6.2",
+    "webpack": "^5.64.0"
   }
 }
