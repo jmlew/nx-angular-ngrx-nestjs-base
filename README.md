@@ -1,41 +1,24 @@
-# ExampleApp
+# Angular + NestJS Boilerplate Web App
 
-This project was generated using [Nx](https://nx.dev).
+A Base [Angular](https://angular.io) web app and [NestJS](https://docs.nestjs.com/) mock backend API server.
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+Organised as a [Nx](https://nx.dev) monorepo and composed using Domain Driven Design (DDD) principles to provides a best-practice starting point for developing modular and scaleable Angular apps.
 
-🔎 **Smart, Fast and Extensible Build System**
+## Architecture
 
-## Quick Start & Documentation
+### Structure
 
-[Nx Documentation](https://nx.dev/angular)
+The codebase is combined into a number of separate 'applications' (apps) and 'libraries' (libs) in a [NX Monorepo](https://nx.dev).
 
-[10-minute video showing all Nx features](https://nx.dev/getting-started/intro)
+## Features
 
-[Interactive Tutorial](https://nx.dev/tutorial/01-create-application)
+### NestJS Mock API app
 
-## Adding capabilities to your workspace
+The 'mock-api' app contains a NestJS application which replicates the APIs requested to ensure development can continue in parallel to that of the Backend. This mock API can be enabled as the source of all HTTP requests within the web-app when serving in dev mode and when the environments property `useMockInDev` is set to `true` (located in `src/environments/environment.ts`).
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+#### Serving the mock API
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
-
-Below are our core plugins:
-
-- [Angular](https://angular.io)
-  - `ng add @nrwl/angular`
-- [React](https://reactjs.org)
-  - `ng add @nrwl/react`
-- Web (no framework frontends)
-  - `ng add @nrwl/web`
-- [Nest](https://nestjs.com)
-  - `ng add @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `ng add @nrwl/express`
-- [Node](https://nodejs.org)
-  - `ng add @nrwl/node`
-
-There are also many [community plugins](https://nx.dev/community) you could add.
+The app serves on the port defined in a variable in the .env file (`process.env.NX_MOCK_API_PORT`) and this matches the port number defined in the web-app's proxy file (`proxy.conf.json`), which is used to ensure all API calls within the app are redirected to the mock API.
 
 ## Generate an application
 
@@ -84,15 +67,3 @@ Run `nx graph` to see a diagram of the dependencies of your projects.
 ## Further help
 
 Visit the [Nx Documentation](https://nx.dev/angular) to learn more.
-
-## ☁ Nx Cloud
-
-### Distributed Computation Caching & Distributed Task Execution
-
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
-
-Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
-
-Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
-
-Visit [Nx Cloud](https://nx.app/) to learn more.
