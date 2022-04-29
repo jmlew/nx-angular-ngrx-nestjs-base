@@ -1,6 +1,7 @@
-import { Controller, Get } from '@nestjs/common';
+import { Observable } from 'rxjs';
 
-import { Message } from '@example-app/api-interfaces';
+import { User } from '@example-app/users/domain';
+import { Controller, Get } from '@nestjs/common';
 
 import { AppService } from './app.service';
 
@@ -8,8 +9,8 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get('hello')
-  getData(): Message {
+  @Get('users')
+  getData(): Observable<User[]> {
     return this.appService.getData();
   }
 }

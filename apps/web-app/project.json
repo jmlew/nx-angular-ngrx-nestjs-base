@@ -2,8 +2,7 @@
   "projectType": "application",
   "root": "apps/web-app",
   "sourceRoot": "apps/web-app/src",
-  "prefix": "example-app",
-  "tags": ["type:app"],
+  "prefix": "app",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
@@ -120,5 +119,6 @@
         }
       }
     }
-  }
+  },
+  "tags": ["type:app"]
 }

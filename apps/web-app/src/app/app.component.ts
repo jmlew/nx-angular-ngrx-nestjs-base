@@ -1,15 +1,9 @@
-import { map } from 'rxjs/operators';
-
-import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
-import { Message } from '@example-app/api-interfaces';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'example-app-root',
+  selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {
-  hello$ = this.http.get<Message>('/api/hello').pipe(map((message) => message.message));
-  constructor(private http: HttpClient) {}
-}
+export class AppComponent {}

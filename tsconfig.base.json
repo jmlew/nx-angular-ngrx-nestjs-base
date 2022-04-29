@@ -15,7 +15,13 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@example-app/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+      "@example-app/users/domain": ["libs/users/domain/src/index.ts"],
+      "@example-app/users/feature-filter": [
+        "libs/users/feature-filter/src/index.ts"
+      ],
+      "@example-app/users/feature-manage": [
+        "libs/users/feature-manage/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,8 +1,10 @@
 {
   "version": 2,
   "projects": {
-    "api-interfaces": "libs/api-interfaces",
     "mock-api": "apps/mock-api",
+    "users-domain": "libs/users/domain",
+    "users-feature-filter": "libs/users/feature-filter",
+    "users-feature-manage": "libs/users/feature-manage",
     "web-app": "apps/web-app",
     "web-app-e2e": "apps/web-app-e2e"
   }

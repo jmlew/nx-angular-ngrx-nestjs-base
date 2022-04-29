@@ -12,33 +12,27 @@
             "enforceBuildableLibDependency": true,
             "allow": [],
             "depConstraints": [
-              // Restrict by types:
               {
                 "sourceTag": "type:app",
                 "onlyDependOnLibsWithTags": [
+                  "type:api",
+                  "type:domain-logic",
                   "type:feature",
-                  "type:domain",
-                  "type:data-access",
                   "type:util",
                   "type:ui"
                 ]
+              },
+              {
+                "sourceTag": "type:api",
+                "onlyDependOnLibsWithTags": ["type:domain-logic", "type:util", "type:ui"]
               },
               {
                 "sourceTag": "type:feature",
-                "onlyDependOnLibsWithTags": [
-                  "type:domain",
-                  "type:data-access",
-                  "type:util",
-                  "type:ui"
-                ]
+                "onlyDependOnLibsWithTags": ["type:domain-logic", "type:util", "type:ui"]
               },
               {
-                "sourceTag": "type:data-access",
-                "onlyDependOnLibsWithTags": ["type:util", "type:ui"]
-              },
-              {
-                "sourceTag": "type:domain",
-                "onlyDependOnLibsWithTags": ["type:util", "type:ui", "type:data-access"]
+                "sourceTag": "type:domain-logic",
+                "onlyDependOnLibsWithTags": ["type:util"]
               },
               {
                 "sourceTag": "type:util",
@@ -46,22 +40,21 @@
               },
               {
                 "sourceTag": "type:ui",
-                "onlyDependOnLibsWithTags": ["type:util"]
-              },
-              // Restrict by scopes:
-              {
-                "sourceTag": "scope:shared",
-                "onlyDependOnLibsWithTags": ["scope:shared"]
+                "onlyDependOnLibsWithTags": ["type:util", "type:domain-logic"]
               },
               {
-                "sourceTag": "scope:home",
-                "onlyDependOnLibsWithTags": ["scope:home", "scope:shared"]
+                "sourceTag": "domain:shared",
+                "onlyDependOnLibsWithTags": ["domain:shared"]
+              },
+              {
+                "sourceTag": "domain:home",
+                "onlyDependOnLibsWithTags": ["domain:home", "domain:shared"]
+              },
+              {
+                "sourceTag": "domain:users",
+                "onlyDependOnLibsWithTags": ["domain:users", "domain:shared"]
               }
-
-              // Restrict by named libraries:
-
-              /* Example of allowing a specific domain to interact with another through its api:
-              { "sourceTag": "name:ordering-feature", "onlyDependOnLibsWithTags": ["name:catalog-api"] } */
+              // { "sourceTag": "name:roles-feature", "onlyDependOnLibsWithTags": ["name:users-api"] }
             ]
           }
         ]
