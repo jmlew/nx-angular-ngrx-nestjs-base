@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/shared/dynamicform/feature-form-generator",
+  "sourceRoot": "libs/shared/dynamicform/feature-form-generator/src",
+  "prefix": "dynamicform",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/dynamicform/feature-form-generator"],
+      "options": {
+        "jestConfig": "libs/shared/dynamicform/feature-form-generator/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/dynamicform/feature-form-generator/**/*.ts",
+          "libs/shared/dynamicform/feature-form-generator/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["domain:shared", "type:feature"]
+}

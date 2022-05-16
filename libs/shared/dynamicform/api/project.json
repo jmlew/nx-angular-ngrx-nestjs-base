@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/shared/dynamicform/api",
+  "sourceRoot": "libs/shared/dynamicform/api/src",
+  "prefix": "dynamicform",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/dynamicform/api"],
+      "options": {
+        "jestConfig": "libs/shared/dynamicform/api/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/dynamicform/api/**/*.ts",
+          "libs/shared/dynamicform/api/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["type:api", "domain:shared"]
+}

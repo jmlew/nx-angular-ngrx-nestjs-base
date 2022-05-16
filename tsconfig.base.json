@@ -15,10 +15,16 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@example-app/users/domain": ["libs/users/domain/src/index.ts"],
-      "@example-app/users/feature-filter": [
-        "libs/users/feature-filter/src/index.ts"
+      "@example-app/shared/dynamicform/api": [
+        "libs/shared/dynamicform/api/src/index.ts"
       ],
+      "@example-app/shared/dynamicform/domain": [
+        "libs/shared/dynamicform/domain/src/index.ts"
+      ],
+      "@example-app/shared/dynamicform/feature-form-generator": [
+        "libs/shared/dynamicform/feature-form-generator/src/index.ts"
+      ],
+      "@example-app/users/domain": ["libs/users/domain/src/index.ts"],
       "@example-app/users/feature-manage": [
         "libs/users/feature-manage/src/index.ts"
       ]

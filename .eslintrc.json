@@ -24,11 +24,21 @@
               },
               {
                 "sourceTag": "type:api",
-                "onlyDependOnLibsWithTags": ["type:domain-logic", "type:util", "type:ui"]
+                "onlyDependOnLibsWithTags": [
+                  "type:domain-logic",
+                  "type:feature",
+                  "type:util",
+                  "type:ui"
+                ]
               },
               {
                 "sourceTag": "type:feature",
-                "onlyDependOnLibsWithTags": ["type:domain-logic", "type:util", "type:ui"]
+                "onlyDependOnLibsWithTags": [
+                  "type:domain-logic",
+                  "type:util",
+                  "type:ui",
+                  "type:api"
+                ]
               },
               {
                 "sourceTag": "type:domain-logic",
@@ -47,14 +57,9 @@
                 "onlyDependOnLibsWithTags": ["domain:shared"]
               },
               {
-                "sourceTag": "domain:home",
-                "onlyDependOnLibsWithTags": ["domain:home", "domain:shared"]
-              },
-              {
                 "sourceTag": "domain:users",
                 "onlyDependOnLibsWithTags": ["domain:users", "domain:shared"]
               }
-              // { "sourceTag": "name:roles-feature", "onlyDependOnLibsWithTags": ["name:users-api"] }
             ]
           }
         ]

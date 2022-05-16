@@ -1,0 +1,18 @@
+<h4>Dynamicform Form Generator</h4>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let formConfig of formConfigList$ | async">
+      <td>{{ formConfig.id }}</td>
+      <td>{{ formConfig.name }}</td>
+      <td>{{ formConfig.label }}</td>
+    </tr>
+  </tbody>
+</table>
