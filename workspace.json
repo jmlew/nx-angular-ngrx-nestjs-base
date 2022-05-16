@@ -2,6 +2,7 @@
   "version": 2,
   "projects": {
     "mock-api": "apps/mock-api",
+    "my-nest-app": "apps/my-nest-app",
     "shared-dynamicform-api": "libs/shared/dynamicform/api",
     "shared-dynamicform-domain": "libs/shared/dynamicform/domain",
     "shared-dynamicform-feature-form-generator": "libs/shared/dynamicform/feature-form-generator",

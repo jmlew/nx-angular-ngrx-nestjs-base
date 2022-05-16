@@ -2,10 +2,10 @@ import { BehaviorSubject } from 'rxjs';
 
 import { Injectable } from '@angular/core';
 
-import { User } from '../entities/user.model';
+import { GetUsersResponse, User } from '../entities/user-api.model';
 import { UserDataService } from '../infrastructure/user.data.service';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class UsersManageFacade {
   private usersListSubject = new BehaviorSubject<User[]>([]);
   usersList$ = this.usersListSubject.asObservable();
@@ -13,9 +13,9 @@ export class UsersManageFacade {
   constructor(private userDataService: UserDataService) {}
 
   load(): void {
-    this.userDataService.load().subscribe({
-      next: (usersList) => {
-        this.usersListSubject.next(usersList);
+    this.userDataService.getUsers().subscribe({
+      next: (response: GetUsersResponse) => {
+        this.usersListSubject.next(response.data);
       },
       error: (err) => {
         console.error('err', err);

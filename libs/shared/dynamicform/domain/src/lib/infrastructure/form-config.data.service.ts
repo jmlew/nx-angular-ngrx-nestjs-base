@@ -2,7 +2,7 @@ import { Observable, of } from 'rxjs';
 
 import { Injectable } from '@angular/core';
 
-import { FormConfig } from '../entities/form-config';
+import { FormConfig } from '../entities/form-config.model';
 
 @Injectable({ providedIn: 'root' })
 export class FormConfigDataService {

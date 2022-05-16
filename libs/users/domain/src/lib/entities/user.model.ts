@@ -1,5 +1,12 @@
-export interface User {
+export interface UserDbItem {
   id: number;
-  name: string;
-  description?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
+
+export interface UserParams {
+  name: string;
+  email: string;
+}
+
+export interface User extends UserParams, UserDbItem {}

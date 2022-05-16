@@ -2,4 +2,4 @@
 
 export * from './lib/dynamicform-domain.module';
 export * from './lib/application/dynamicform.facade';
-export * from './lib/entities/form-config';
+export * from './lib/entities/form-config.model';

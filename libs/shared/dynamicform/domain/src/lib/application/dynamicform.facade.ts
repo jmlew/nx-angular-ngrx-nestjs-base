@@ -2,7 +2,7 @@ import { BehaviorSubject } from 'rxjs';
 
 import { Injectable } from '@angular/core';
 
-import { FormConfig } from '../entities/form-config';
+import { FormConfig } from '../entities/form-config.model';
 import { FormConfigDataService } from '../infrastructure/form-config.data.service';
 
 @Injectable({ providedIn: 'root' })

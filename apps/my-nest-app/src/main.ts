@@ -9,13 +9,14 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true });
+  const app = await NestFactory.create(AppModule);
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
-  // Ensure local proxy defined in web-app/proxy.conf.json aligns.
-  const port = process.env.NX_MOCK_API_PORT;
+  const port = process.env.PORT || 3333;
   await app.listen(port);
-  Logger.log(`Nest app is running on: http://localhost:${port}/${globalPrefix}`);
+  Logger.log(
+    `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`
+  );
 }
 
 bootstrap();

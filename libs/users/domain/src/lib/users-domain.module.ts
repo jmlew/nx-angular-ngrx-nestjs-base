@@ -7,6 +7,7 @@ import { UsersEffects } from './+state/users/users.effects';
 import { UsersStoreFacade } from './+state/users/users.facade';
 import * as fromUsers from './+state/users/users.reducer';
 import { UsersManageFacade } from './application/users-manage.facade';
+import { UserDataService } from './infrastructure/user.data.service';
 
 @NgModule({
   imports: [
@@ -14,6 +15,6 @@ import { UsersManageFacade } from './application/users-manage.facade';
     // StoreModule.forFeature(fromUsers.USERS_FEATURE_KEY, fromUsers.reducer),
     // EffectsModule.forFeature([UsersEffects]),
   ],
-  providers: [UsersStoreFacade, UsersManageFacade],
+  providers: [UsersStoreFacade, UsersManageFacade, UserDataService],
 })
 export class UsersDomainModule {}

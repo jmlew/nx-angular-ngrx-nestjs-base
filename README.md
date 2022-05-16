@@ -35,6 +35,16 @@ _Example: `nx g @angular-architects/ddd:feature manage --domain users --entity u
 
 > NB: uses the [DDD plugin schematics](https://github.com/angular-architects/nx-ddd-plugin/blob/master/libs/ddd/README.md). Must be done after a domain has been generated. Advised to remove component files and generate separate feature components within sub directories using the generate component command below.
 
+### Generate an API within a domain (DDD schematics)
+
+`nx g @angular-architects/ddd:api <optional-specific-api-name> --directory <some-domain> --shared --type=internal --dry-run`
+
+Adds an API module top provide the exported modules to other domains to import, if a domain's features are imported into other domains. Using the --shared flag automatically adds it to the shared directory under the sub directory defined through the --directory name. If the domain is not shared, but is only to be imported into specific dependant domains, then --shared should not be used, and the project tagged with a specific name which is used to grant access. See [here for example.](https://www.angulararchitects.io/aktuelles/sustainable-angular-architectures-2/#:~:text=Access%20to%20APIs%20such%20as%20catalog%2Dapi)
+
+_Example: `nx g @angular-architects/ddd:api --directory dynamicform --shared --type=internal`_
+
+> NB: uses the [DDD plugin schematics](https://github.com/angular-architects/nx-ddd-plugin/blob/master/libs/ddd/README.md). Must be done after a domain has been generated. Advised to remove component files and generate separate feature components within sub directories using the generate component command below.
+
 ### Adding NgRX
 
 `nx g @nrwl/angular:ngrx <some-domain> --directory +state/<some-state-category> --module=<some-domain-module-path> --syntax creators --facade --no-interactive --dry-run`
