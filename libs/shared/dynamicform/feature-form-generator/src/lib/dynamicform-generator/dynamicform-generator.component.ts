@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { DynamicformFacade } from '@example-app/shared/dynamicform/domain';
+import { DynamicformFacade } from '@app/shared/dynamicform/domain';
 
 @Component({
   selector: 'dynamicform-generator',

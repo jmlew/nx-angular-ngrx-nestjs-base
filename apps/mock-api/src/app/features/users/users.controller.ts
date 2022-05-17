@@ -16,7 +16,7 @@ import {
   UpdateUserResponse,
   User,
   UserParams,
-} from '@example-app/users/api-model';
+} from '@app/users/api-model';
 
 import { toStreamWithDelay } from '../../shared/utils';
 import { UsersService } from './users.service';

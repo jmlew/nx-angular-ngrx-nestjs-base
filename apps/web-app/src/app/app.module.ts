@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { CoreDomainModule } from '@example-app/core/domain';
-import { UsersFeatureManageModule } from '@example-app/users/feature-manage';
+import { CoreDomainModule } from '@app/core/domain';
+import { UsersFeatureManageModule } from '@app/users/feature-manage';
 
 import { AppComponent } from './app.component';
 

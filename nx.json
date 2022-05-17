@@ -1,5 +1,5 @@
 {
-  "npmScope": "example-app",
+  "npmScope": "app",
   "defaultProject": "web-app",
   "affected": {
     "defaultBase": "master"

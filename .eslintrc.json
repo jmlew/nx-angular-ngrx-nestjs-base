@@ -54,7 +54,7 @@
               },
               {
                 "sourceTag": "domain:core",
-                "onlyDependOnLibsWithTags": []
+                "onlyDependOnLibsWithTags": ["domain:core"]
               },
               {
                 "sourceTag": "domain:shared",

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { DynamicformFeatureFormGeneratorModule } from '@example-app/shared/dynamicform/feature-form-generator';
+import { DynamicformFeatureFormGeneratorModule } from '@app/shared/dynamicform/feature-form-generator';
 
 const exportedModules = [DynamicformFeatureFormGeneratorModule];
 

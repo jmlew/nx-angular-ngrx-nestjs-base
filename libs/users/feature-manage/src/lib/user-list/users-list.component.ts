@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { UsersManageFacade } from '@example-app/users/domain';
+import { UsersManageFacade } from '@app/users/domain';
 
 @Component({
   selector: 'users-list',

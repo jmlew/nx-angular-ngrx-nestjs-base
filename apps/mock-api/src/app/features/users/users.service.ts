@@ -5,7 +5,7 @@ import {
   UpdateUserResponse,
   User,
   UserParams,
-} from '@example-app/users/api-model';
+} from '@app/users/api-model';
 import { Injectable } from '@nestjs/common';
 
 import * as usersDb from '../../../assets/db/users.json';
