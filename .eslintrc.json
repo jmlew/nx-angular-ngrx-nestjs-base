@@ -53,6 +53,10 @@
                 "onlyDependOnLibsWithTags": ["type:util", "type:domain-logic"]
               },
               {
+                "sourceTag": "domain:core",
+                "onlyDependOnLibsWithTags": []
+              },
+              {
                 "sourceTag": "domain:shared",
                 "onlyDependOnLibsWithTags": ["domain:shared"]
               },
