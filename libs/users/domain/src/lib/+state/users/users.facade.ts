@@ -8,7 +8,7 @@ import * as fromSelectors from './users.selectors';
 export class UsersStoreFacade {
   loaded$ = this.store.pipe(select(fromSelectors.getUsersLoaded));
   allUsers$ = this.store.pipe(select(fromSelectors.getAllUsers));
-  selectedUsers$ = this.store.pipe(select(fromSelectors.getSelected));
+  selectedUser$ = this.store.pipe(select(fromSelectors.getSelected));
 
   constructor(private readonly store: Store<fromReducer.State>) {}
 

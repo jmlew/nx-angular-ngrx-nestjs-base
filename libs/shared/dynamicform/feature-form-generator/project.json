@@ -6,7 +6,9 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/shared/dynamicform/feature-form-generator"],
+      "outputs": [
+        "coverage/libs/shared/dynamicform/feature-form-generator"
+      ],
       "options": {
         "jestConfig": "libs/shared/dynamicform/feature-form-generator/jest.config.ts",
         "passWithNoTests": true
@@ -22,5 +24,8 @@
       }
     }
   },
-  "tags": ["domain:shared", "type:feature"]
+  "tags": [
+    "domain:shared",
+    "type:feature"
+  ]
 }

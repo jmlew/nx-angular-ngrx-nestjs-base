@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/users/ui-manage",
+  "sourceRoot": "libs/users/ui-manage/src",
+  "prefix": "users",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/users/ui-manage"],
+      "options": {
+        "jestConfig": "libs/users/ui-manage/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/users/ui-manage/**/*.ts",
+          "libs/users/ui-manage/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["type:ui", "domain:users"]
+}

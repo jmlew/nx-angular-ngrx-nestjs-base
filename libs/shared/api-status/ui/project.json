@@ -1,0 +1,31 @@
+{
+  "projectType": "library",
+  "root": "libs/shared/api-status/ui",
+  "sourceRoot": "libs/shared/api-status/ui/src",
+  "prefix": "api-status",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "coverage/libs/shared/api-status/ui"
+      ],
+      "options": {
+        "jestConfig": "libs/shared/api-status/ui/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/api-status/ui/**/*.ts",
+          "libs/shared/api-status/ui/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": [
+    "type:ui",
+    "domain:shared"
+  ]
+}

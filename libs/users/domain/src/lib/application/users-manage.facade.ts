@@ -1,25 +1,40 @@
-import { BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { Injectable } from '@angular/core';
 
-import { GetUsersResponse, User } from '../entities/user-api.model';
+import {
+  CreateUserResponse,
+  UpdateUserResponse,
+  User,
+  UserParams,
+} from '../entities/user-api.model';
 import { UserDataService } from '../infrastructure/user.data.service';
 
 @Injectable()
 export class UsersManageFacade {
-  private usersListSubject = new BehaviorSubject<User[]>([]);
-  usersList$ = this.usersListSubject.asObservable();
-
   constructor(private userDataService: UserDataService) {}
 
-  load(): void {
-    this.userDataService.getUsers().subscribe({
-      next: (response: GetUsersResponse) => {
-        this.usersListSubject.next(response.data);
-      },
-      error: (err) => {
-        console.error('err', err);
-      },
-    });
+  getAllUsers(): Observable<User[]> {
+    return this.userDataService.getAllUsers();
+  }
+
+  getUserById(id: number): Observable<User> {
+    return this.userDataService.getUserById(id);
+  }
+
+  createUser(user: UserParams): Observable<CreateUserResponse> {
+    return this.userDataService.createUser(user);
+  }
+
+  updateUser(user: User): Observable<UpdateUserResponse> {
+    return this.userDataService.updateUser(user);
+  }
+
+  deleteUser(id: number): Observable<number> {
+    return this.userDataService.deleteUser(id);
+  }
+
+  deleteUsers(ids: number[]): Observable<number[]> {
+    return this.userDataService.deleteUsers(ids);
   }
 }

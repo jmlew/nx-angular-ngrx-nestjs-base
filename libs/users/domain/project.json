@@ -4,24 +4,6 @@
   "sourceRoot": "libs/users/domain/src",
   "prefix": "users",
   "targets": {
-    "build": {
-      "executor": "@nrwl/angular:ng-packagr-lite",
-      "outputs": [
-        "dist/libs/users/domain"
-      ],
-      "options": {
-        "project": "libs/users/domain/ng-package.json"
-      },
-      "configurations": {
-        "production": {
-          "tsConfig": "libs/users/domain/tsconfig.lib.prod.json"
-        },
-        "development": {
-          "tsConfig": "libs/users/domain/tsconfig.lib.json"
-        }
-      },
-      "defaultConfiguration": "production"
-    },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": [

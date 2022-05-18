@@ -3,13 +3,17 @@
   "projects": {
     "core-domain": "libs/core/domain",
     "mock-api": "apps/mock-api",
+    "shared-api-status-ui": "libs/shared/api-status/ui",
+    "shared-api-status-util": "libs/shared/api-status/util",
     "shared-dynamicform-api": "libs/shared/dynamicform/api",
     "shared-dynamicform-domain": "libs/shared/dynamicform/domain",
     "shared-dynamicform-feature-form-generator": "libs/shared/dynamicform/feature-form-generator",
     "shared-ui-common": "libs/shared/ui-common",
+    "shared-ui-external-libraries": "libs/shared/ui-external-libraries",
     "shared-util-common": "libs/shared/util-common",
     "users-domain": "libs/users/domain",
     "users-feature-manage": "libs/users/feature-manage",
+    "users-ui-manage": "libs/users/ui-manage",
     "web-app": "apps/web-app",
     "web-app-e2e": "apps/web-app-e2e"
   }

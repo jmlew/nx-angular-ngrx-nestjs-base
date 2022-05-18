@@ -1,0 +1,12 @@
+:host {
+  display: block;
+}
+
+.status-loading {
+  padding: 1rem;
+}
+
+.status-error {
+  padding: 2rem;
+  border: 1px solid red;
+}

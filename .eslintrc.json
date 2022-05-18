@@ -50,7 +50,7 @@
               },
               {
                 "sourceTag": "type:ui",
-                "onlyDependOnLibsWithTags": ["type:util", "type:domain-logic"]
+                "onlyDependOnLibsWithTags": ["type:ui", "type:util", "type:domain-logic"]
               },
               {
                 "sourceTag": "domain:core",

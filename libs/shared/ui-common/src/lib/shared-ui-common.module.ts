@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { SharedUiExternalLibrariesModule } from '@app/shared-ui-external-libraries';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [SharedUiExternalLibrariesModule],
+  exports: [SharedUiExternalLibrariesModule],
 })
 export class SharedUiCommonModule {}

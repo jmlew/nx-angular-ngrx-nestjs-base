@@ -39,7 +39,7 @@ export class UsersController {
 
   @Get()
   getUsers(): Observable<GetUsersResponse> {
-    return this.toStream(this.userService.getAllUsers());
+    return this.toStream(this.userService.getAllUsers(), 1000);
   }
 
   @Get(':id')

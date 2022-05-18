@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { SharedUtilCommonModule } from '@app/shared/util-common';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
@@ -12,6 +13,7 @@ import { UserDataService } from './infrastructure/user.data.service';
 @NgModule({
   imports: [
     CommonModule,
+    SharedUtilCommonModule,
     // StoreModule.forFeature(fromUsers.USERS_FEATURE_KEY, fromUsers.reducer),
     // EffectsModule.forFeature([UsersEffects]),
   ],

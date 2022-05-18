@@ -73,7 +73,7 @@ _Example: `nx g lib --name=feature-filter --directory=users --tags='type:feature
 
 > This component name should also be included here to generate the selector explicitly. The selector name should prepend the domain name to align with `prefix` property in the library's `project.json` definitions as well as its ES Lint config rules for `directive-selector` and `component-selector`.
 
-_Example: `nx g component --name=users-list --selector=users-list --project=users-feature-manage --module=users-feature-manage --path=libs/users/feature-manage/src/lib --changeDetection=OnPush --export --no-interactive`_
+_Example: `nx g component --name=users-manage --selector=users-manage --project=users-feature-manage --module=users-feature-manage --path=libs/users/feature-manage/src/lib --changeDetection=OnPush --export --no-interactive`_
 
 ### Managing libraries
 
