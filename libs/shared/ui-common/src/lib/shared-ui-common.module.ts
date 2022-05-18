@@ -4,5 +4,6 @@ import { SharedUiExternalLibrariesModule } from '@app/shared-ui-external-librari
 @NgModule({
   imports: [SharedUiExternalLibrariesModule],
   exports: [SharedUiExternalLibrariesModule],
+  declarations: [],
 })
 export class SharedUiCommonModule {}

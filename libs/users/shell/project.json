@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/users/shell",
+  "sourceRoot": "libs/users/shell/src",
+  "prefix": "app",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/users/shell"],
+      "options": {
+        "jestConfig": "libs/users/shell/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/users/shell/**/*.ts",
+          "libs/users/shell/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["type:shell", "domain:users"]
+}

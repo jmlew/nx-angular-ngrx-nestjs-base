@@ -43,6 +43,7 @@
       ],
       "@app/users/domain": ["libs/users/domain/src/index.ts"],
       "@app/users/feature-manage": ["libs/users/feature-manage/src/index.ts"],
+      "@app/users/shell": ["libs/users/shell/src/index.ts"],
       "@app/users/ui-manage": ["libs/users/ui-manage/src/index.ts"]
     }
   },

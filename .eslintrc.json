@@ -19,7 +19,8 @@
                   "type:domain-logic",
                   "type:feature",
                   "type:util",
-                  "type:ui"
+                  "type:ui",
+                  "type:shell"
                 ]
               },
               {
@@ -51,6 +52,10 @@
               {
                 "sourceTag": "type:ui",
                 "onlyDependOnLibsWithTags": ["type:ui", "type:util", "type:domain-logic"]
+              },
+              {
+                "sourceTag": "type:shell",
+                "onlyDependOnLibsWithTags": ["type:shell", "type:feature"]
               },
               {
                 "sourceTag": "domain:core",
