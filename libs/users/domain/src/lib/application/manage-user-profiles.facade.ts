@@ -10,8 +10,10 @@ import {
 } from '../entities/user-api.model';
 import { UserDataService } from '../infrastructure/user.data.service';
 
+/* Facade to provides an API to expose functionality for the usecase of managing users. */
+
 @Injectable()
-export class UsersManageFacade {
+export class ManageUserProfilesFacade {
   constructor(private userDataService: UserDataService) {}
 
   getAllUsers(): Observable<User[]> {
@@ -32,9 +34,5 @@ export class UsersManageFacade {
 
   deleteUser(id: number): Observable<number> {
     return this.userDataService.deleteUser(id);
-  }
-
-  deleteUsers(ids: number[]): Observable<number[]> {
-    return this.userDataService.deleteUsers(ids);
   }
 }

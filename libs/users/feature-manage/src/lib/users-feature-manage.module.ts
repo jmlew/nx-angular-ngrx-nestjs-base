@@ -6,7 +6,7 @@ import { UsersDomainModule } from '@app/users/domain';
 import { UsersUiManageModule } from '@app/users/ui-manage';
 
 import { UsersFeatureManageRoutingModule } from './users-feature-manage-routing.module';
-import { UsersManageComponent } from './users-manage/users-manage.component';
+import { UsersManageProfilesComponent } from './users-manage-profiles/users-manage-profiles.component';
 
 const sharedModules = [SharedDynamicformApiModule, SharedApiStatusUiModule];
 const domainModules = [UsersDomainModule, UsersUiManageModule];
@@ -18,7 +18,7 @@ const domainModules = [UsersDomainModule, UsersUiManageModule];
     ...domainModules,
     UsersFeatureManageRoutingModule,
   ],
-  declarations: [UsersManageComponent],
-  exports: [UsersManageComponent],
+  declarations: [UsersManageProfilesComponent],
+  exports: [UsersManageProfilesComponent],
 })
 export class UsersFeatureManageModule {}

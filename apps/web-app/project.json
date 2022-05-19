@@ -6,9 +6,7 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/web-app",
         "index": "apps/web-app/src/index.html",
@@ -16,13 +14,10 @@
         "polyfills": "apps/web-app/src/polyfills.ts",
         "tsConfig": "apps/web-app/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": [
-          "apps/web-app/src/favicon.ico",
-          "apps/web-app/src/assets"
-        ],
+        "assets": ["apps/web-app/src/favicon.ico", "apps/web-app/src/assets"],
         "styles": [
-          "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-          "apps/web-app/src/styles.scss"
+          "libs/shared/ui-common/src/lib/styles/mat-theme.scss",
+          "libs/shared/ui-common/src/lib/styles/global.scss"
         ],
         "scripts": []
       },
@@ -83,17 +78,12 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "apps/web-app/**/*.ts",
-          "apps/web-app/**/*.html"
-        ]
+        "lintFilePatterns": ["apps/web-app/**/*.ts", "apps/web-app/**/*.html"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/apps/web-app"
-      ],
+      "outputs": ["coverage/apps/web-app"],
       "options": {
         "jestConfig": "apps/web-app/jest.config.ts",
         "passWithNoTests": true
@@ -117,9 +107,7 @@
     },
     "build-storybook": {
       "executor": "@nrwl/storybook:build",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
         "uiFramework": "@storybook/angular",
         "outputPath": "dist/storybook/web-app",
@@ -135,7 +123,5 @@
       }
     }
   },
-  "tags": [
-    "type:app"
-  ]
+  "tags": ["type:app"]
 }

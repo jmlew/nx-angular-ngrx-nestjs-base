@@ -7,13 +7,13 @@ import { User } from '@app/users/domain';
 import { UsersStore } from './users.store';
 
 @Component({
-  selector: 'users-manage',
-  templateUrl: './users-manage.component.html',
-  styleUrls: ['./users-manage.component.scss'],
+  selector: 'users-manage-profiles',
+  templateUrl: './users-manage-profiles.component.html',
+  styleUrls: ['./users-manage-profiles.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [UsersStore],
 })
-export class UsersManageComponent implements OnInit {
+export class UsersManageProfilesComponent implements OnInit {
   readonly ApiStatus = fromApiStatus.ApiStatus;
   readonly allUsers$: Observable<User[]> = this.usersStore.allUsers$;
   readonly usersRequestState$: Observable<fromApiStatus.ApiRequestState> =

@@ -1,12 +1,4 @@
 :host {
   display: block;
-  width: 100%;
-}
-
-.table {
-  margin: 0 auto;
-  td {
-    border: 1px solid;
-    padding: 10px;
-  }
+  max-width: 600px;
 }

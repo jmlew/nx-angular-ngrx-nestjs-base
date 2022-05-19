@@ -2,10 +2,10 @@ import { EMPTY, Observable, catchError, pipe, switchMap, tap } from 'rxjs';
 
 import { Injectable } from '@angular/core';
 import * as fromApiStatus from '@app/shared/api-status/util';
-import { User, UsersManageFacade } from '@app/users/domain';
+import { ManageUserProfilesFacade, User } from '@app/users/domain';
 import { ComponentStore } from '@ngrx/component-store';
 
-// TODO: Create a sample using full NgRX with the +state users.facade.
+/* Component Store providing state management to the manage users feature.  */
 
 interface UsersState extends fromApiStatus.ApiRequestState {
   users: User[];
@@ -24,7 +24,7 @@ export class UsersStore extends ComponentStore<UsersState> {
     (state: UsersState) => state.selectedId
   );
 
-  constructor(private usersManageFacade: UsersManageFacade) {
+  constructor(private manageProfiles: ManageUserProfilesFacade) {
     super({
       users: [],
       selectedId: null,
@@ -36,7 +36,7 @@ export class UsersStore extends ComponentStore<UsersState> {
     pipe(
       tap(() => this.patchState(fromApiStatus.getApiStatusPending())),
       switchMap(() =>
-        this.usersManageFacade.getAllUsers().pipe(
+        this.manageProfiles.getAllUsers().pipe(
           tap({
             next: (users: User[]) =>
               this.patchState({ users, ...fromApiStatus.getApiStatusSuccess() }),

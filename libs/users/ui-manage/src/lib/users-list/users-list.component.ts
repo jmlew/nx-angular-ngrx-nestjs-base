@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
+import { IconMat } from '@app/shared/ui-common';
 import { User } from '@app/users/domain';
 
 @Component({
@@ -9,4 +16,8 @@ import { User } from '@app/users/domain';
 })
 export class UsersListComponent {
   @Input() users: User[];
+  @Output() edit = new EventEmitter<User>();
+  @Output() remove = new EventEmitter<number>();
+
+  IconMat = IconMat;
 }
