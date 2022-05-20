@@ -33,7 +33,7 @@ export class UsersController {
 
   @Get('reset')
   getResetDb(): string {
-    this.userService.initData();
+    this.userService.initDb();
     return 'Mock API Users DB has been reset.';
   }
 

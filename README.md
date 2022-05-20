@@ -101,6 +101,11 @@ Or run each separately using `npm run serve:web` for the frontend and `npm run s
 - Navigate to `http://localhost:4200/` for the main frontend.
 - Navigate to `http://localhost:3333/api/` for the mock API backend.
 
+> NB: You may need to kill the port previously run by Node if an error persists which claims the port is still in use
+
+- Web app server: `kill $(lsof -t -i:4200)`
+- Mock API server: `kill $(lsof -t -i:3333)`
+
 ## Build
 
 Run `npm run build` to build the project.

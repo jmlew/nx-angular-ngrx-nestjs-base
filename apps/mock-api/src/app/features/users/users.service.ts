@@ -9,89 +9,67 @@ import {
 import { Injectable } from '@nestjs/common';
 
 import * as usersDb from '../../../assets/db/users.json';
-import { EntitiesService, Entity } from '../../shared/utils';
-
-type UserEntities = Entity<User>;
+import { EntitiesApiBaseService } from '../../shared/services';
 
 @Injectable()
-export class UsersService {
-  private usersDb: GetUsersResponse;
-  private entityService: EntitiesService<User>;
-  private userEntities: UserEntities;
-  private primaryId: keyof User = 'id';
-
+export class UsersService extends EntitiesApiBaseService<User, number> {
   constructor() {
-    this.entityService = new EntitiesService(this.primaryId);
-    this.initData();
+    const primaryId: keyof User = 'id';
+    super(primaryId);
+    this.initDb();
   }
 
-  public initData() {
-    this.usersDb = { ...usersDb };
-    const data: User[] = this.usersDb.data;
-    this.userEntities = this.entityService.createEntities(data);
+  initDb() {
+    const db = { ...usersDb }.data as User[];
+    this.createEntities(db);
   }
 
   getAllUsers(): GetUsersResponse {
-    const users: User[] = this.entityService.selectAll(this.userEntities);
-    return { ...this.usersDb, data: users };
+    const users: User[] = this.selectAll();
+    const response: GetUsersResponse = { data: users };
+    return response;
   }
 
   getUserById(id: number): GetUserResponse {
-    const user: User = this.userEntities[id];
+    const user: User = this.selectOne(id);
     const response: GetUserResponse = { data: user };
     return response;
   }
 
   createUser(params: UserParams): CreateUserResponse {
     const user: CreateUserResponse = this.normaliseNewUser(params);
-    this.addUserToDb(user);
+    this.addEntity(user);
     return user;
   }
 
   updateUser(id: number, params: UserParams): UpdateUserResponse {
-    this.updateUserInDb(id, this.normaliseEditedUser(params));
-    return this.userEntities[id] as UpdateUserResponse;
+    this.updateEntity(id, this.normaliseEditedUser(params));
+    return this.selectOne(id) as UpdateUserResponse;
   }
 
   deleteUser(id: number): number {
-    this.removeUserFromDb(id);
+    this.removeEntity(id);
     return id;
   }
 
   deleteUsers(ids: number[]): number[] {
-    this.removeUsersFromDb(ids);
+    this.removeEntities(ids);
     return ids;
   }
 
   doesUserExist(id: number): boolean {
-    return this.userEntities[id] !== undefined;
+    return this.doesEntityExist(id);
   }
 
   isUserDuplicate(user: UserParams, ignoreUserId: number = null): boolean {
-    const users: User[] = this.entityService.selectAll(this.userEntities);
+    const users: User[] = this.selectAll();
     return users
       .filter((item: User) => ignoreUserId === null || item.id !== ignoreUserId)
       .some((item: User) => item.email === user.email);
   }
 
-  private updateUserInDb(id: number, changes: Partial<User>) {
-    this.userEntities = this.entityService.updateOne({ id, changes }, this.userEntities);
-  }
-
-  private addUserToDb(user: User) {
-    this.userEntities = this.entityService.addOne(user, this.userEntities);
-  }
-
-  private removeUserFromDb(id: number) {
-    this.userEntities = this.entityService.removeOne(id, this.userEntities);
-  }
-
-  private removeUsersFromDb(ids: number[]) {
-    this.userEntities = this.entityService.removeMany(ids, this.userEntities);
-  }
-
   private normaliseNewUser(params: UserParams): CreateUserResponse {
-    const ids: number[] = this.entityService.selectIds(this.userEntities) as number[];
+    const ids: number[] = this.selectIds() as number[];
     const id: number = Math.max(...ids) + 1;
     return { ...params, id, createdAt: this.timestamp() };
   }
