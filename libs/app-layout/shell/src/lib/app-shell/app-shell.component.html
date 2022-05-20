@@ -10,7 +10,9 @@
   </mat-sidenav>
   <mat-sidenav-content class="content-fill mat-typography">
     <ng-container *ngIf="isAppReady$ | async">
-      <router-outlet></router-outlet>
+      <div class="page-content-padding">
+        <router-outlet></router-outlet>
+      </div>
     </ng-container>
   </mat-sidenav-content>
 </mat-sidenav-container>

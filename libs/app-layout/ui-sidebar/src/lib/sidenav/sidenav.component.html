@@ -4,11 +4,7 @@
     class="btn-hover"
     (click)="itemClick.emit(route)">
     <mat-icon matListIcon>{{route.icon}}</mat-icon>
-    <p
-      matLine
-      class="text-left">
-      {{route.label}}
-    </p>
+    <p matLine>{{route.label}}</p>
     <mat-divider></mat-divider>
   </mat-list-item>
 </mat-nav-list>
