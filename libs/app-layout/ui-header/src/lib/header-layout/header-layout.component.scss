@@ -1,0 +1,25 @@
+@import 'variables';
+
+:host {
+  display: block;
+  height: $height-header;
+  flex-shrink: 0;
+}
+
+.header-toolbar {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  right: 0;
+  left: 0;
+  padding: 0 15px;
+  height: $height-header;
+  background: $color-app-light;
+}
+
+.divider-v {
+  margin: 0 0.75rem;
+  height: $height-header;
+  width: 1px;
+  border-right: 1px solid $color-black;
+}

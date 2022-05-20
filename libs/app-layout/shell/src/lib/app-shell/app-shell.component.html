@@ -1,0 +1,12 @@
+<app-header (menuToggle)="sideNav.toggle()"></app-header>
+<mat-sidenav-container class="content-fill">
+  <mat-sidenav
+    #sideNav
+    mode="over"
+    fixedInViewport="true">
+    <app-sidebar (navItemClick)="onGoTo($event); sideNav.close()"></app-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content class="content-fill mat-typography">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

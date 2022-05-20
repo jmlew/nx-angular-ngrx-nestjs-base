@@ -14,14 +14,7 @@
             "depConstraints": [
               {
                 "sourceTag": "type:app",
-                "onlyDependOnLibsWithTags": [
-                  "type:api",
-                  "type:domain-logic",
-                  "type:feature",
-                  "type:util",
-                  "type:ui",
-                  "type:shell"
-                ]
+                "onlyDependOnLibsWithTags": ["type:domain-logic", "type:shell"]
               },
               {
                 "sourceTag": "type:api",
@@ -42,20 +35,25 @@
                 ]
               },
               {
+                "sourceTag": "type:shell",
+                "onlyDependOnLibsWithTags": ["type:shell", "type:feature", "type:ui"]
+              },
+              {
+                "sourceTag": "type:ui",
+                "onlyDependOnLibsWithTags": [
+                  "type:ui",
+                  "type:util",
+                  "type:domain-logic",
+                  "type:shell"
+                ]
+              },
+              {
                 "sourceTag": "type:domain-logic",
                 "onlyDependOnLibsWithTags": ["type:util"]
               },
               {
                 "sourceTag": "type:util",
                 "onlyDependOnLibsWithTags": ["type:util"]
-              },
-              {
-                "sourceTag": "type:ui",
-                "onlyDependOnLibsWithTags": ["type:ui", "type:util", "type:domain-logic"]
-              },
-              {
-                "sourceTag": "type:shell",
-                "onlyDependOnLibsWithTags": ["type:shell", "type:feature"]
               },
               {
                 "sourceTag": "domain:core",

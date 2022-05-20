@@ -16,31 +16,26 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@app/app-layout/feature-header": ["libs/app-layout/feature-header/src/index.ts"],
+      "@app/app-layout/feature-sidebar": ["libs/app-layout/feature-sidebar/src/index.ts"],
+      "@app/app-layout/shell": ["libs/app-layout/shell/src/index.ts"],
+      "@app/app-layout/ui-header": ["libs/app-layout/ui-header/src/index.ts"],
+      "@app/app-layout/ui-sidebar": ["libs/app-layout/ui-sidebar/src/index.ts"],
       "@app/core/domain": ["libs/core/domain/src/index.ts"],
-      "@app/shared-ui-external-libraries": [
-        "libs/shared/ui-external-libraries/src/index.ts"
-      ],
+      "@app/shared-external-libraries": ["libs/shared/external-libraries/src/index.ts"],
       "@app/shared/api-status/ui": ["libs/shared/api-status/ui/src/index.ts"],
-      "@app/shared/api-status/util": [
-        "libs/shared/api-status/util/src/index.ts"
-      ],
-      "@app/shared/dynamicform/api": [
-        "libs/shared/dynamicform/api/src/index.ts"
-      ],
+      "@app/shared/api-status/util": ["libs/shared/api-status/util/src/index.ts"],
+      "@app/shared/dynamicform/api": ["libs/shared/dynamicform/api/src/index.ts"],
       "@app/shared/dynamicform/api-model": [
         "libs/shared/dynamicform/domain/src/lib/entities/form-config-api.model.ts"
       ],
-      "@app/shared/dynamicform/domain": [
-        "libs/shared/dynamicform/domain/src/index.ts"
-      ],
+      "@app/shared/dynamicform/domain": ["libs/shared/dynamicform/domain/src/index.ts"],
       "@app/shared/dynamicform/feature-form-generator": [
         "libs/shared/dynamicform/feature-form-generator/src/index.ts"
       ],
       "@app/shared/ui-common": ["libs/shared/ui-common/src/index.ts"],
       "@app/shared/util-common": ["libs/shared/util-common/src/index.ts"],
-      "@app/users/api-model": [
-        "libs/users/domain/src/lib/entities/user-api.model.ts"
-      ],
+      "@app/users/api-model": ["libs/users/domain/src/lib/entities/user-api.model.ts"],
       "@app/users/domain": ["libs/users/domain/src/index.ts"],
       "@app/users/feature-manage": ["libs/users/feature-manage/src/index.ts"],
       "@app/users/shell": ["libs/users/shell/src/index.ts"],

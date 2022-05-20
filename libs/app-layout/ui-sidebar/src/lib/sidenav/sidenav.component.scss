@@ -1,0 +1,9 @@
+@import 'variables';
+
+:host {
+  display: block;
+  padding-top: ($height-header + 10px);
+  min-width: 220px;
+  min-height: 100%;
+  border-right: 1px solid $color-grey-400;
+}

@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/shared/external-libraries",
+  "sourceRoot": "libs/shared/external-libraries/src",
+  "prefix": "app",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/external-libraries"],
+      "options": {
+        "jestConfig": "libs/shared/external-libraries/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/external-libraries/**/*.ts",
+          "libs/shared/external-libraries/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["type:ui", "domain:shared"]
+}

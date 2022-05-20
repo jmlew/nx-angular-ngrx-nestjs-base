@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/app-layout/shell",
+  "sourceRoot": "libs/app-layout/shell/src",
+  "prefix": "app",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/app-layout/shell"],
+      "options": {
+        "jestConfig": "libs/app-layout/shell/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/app-layout/shell/**/*.ts",
+          "libs/app-layout/shell/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["type:shell"]
+}

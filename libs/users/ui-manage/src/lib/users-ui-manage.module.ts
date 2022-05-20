@@ -1,10 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { SharedUiExternalLibrariesModule } from '@app/shared-ui-external-libraries';
+import { SharedExternalLibrariesModule } from '@app/shared-external-libraries';
+
 import { UsersListComponent } from './users-list/users-list.component';
 
+const sharedModules = [SharedExternalLibrariesModule];
+
 @NgModule({
-  imports: [CommonModule, SharedUiExternalLibrariesModule],
+  imports: [CommonModule, ...sharedModules],
   declarations: [UsersListComponent],
   exports: [UsersListComponent],
 })

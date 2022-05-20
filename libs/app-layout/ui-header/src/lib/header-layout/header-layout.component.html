@@ -1,0 +1,31 @@
+<div
+  class="header-toolbar mat-elevation-z2"
+  fxLayoutAlign="space-between center">
+  <div fxLayoutAlign="start center">
+    <button
+      mat-icon-button
+      class="btn-hover color-white"
+      (click)="menuClick.emit()">
+      <mat-icon>{{IconMat.Menu}}</mat-icon>
+    </button>
+    <div class="divider-v"></div>
+    <img src="../../assets/logo-icon.png">
+  </div>
+  <div fxLayoutAlign="end center">
+    <button
+      mat-icon-button
+      class="btn-hover color-white"
+      matTooltip="{{isAuth ? 'Sign out' : 'Sign in'}}"
+      (click)="authClick.emit()">
+      <mat-icon>
+        {{isAuth ? IconMat.Person : IconMat.PersonOutline}}
+      </mat-icon>
+    </button>
+    <div class="divider-v"></div>
+    <button
+      mat-icon-button
+      class="btn-hover color-white">
+      <mat-icon>{{IconMat.Apps}}</mat-icon>
+    </button>
+  </div>
+</div>

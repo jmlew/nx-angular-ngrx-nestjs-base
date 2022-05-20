@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/app-layout/ui-header",
+  "sourceRoot": "libs/app-layout/ui-header/src",
+  "prefix": "app",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/app-layout/ui-header"],
+      "options": {
+        "jestConfig": "libs/app-layout/ui-header/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/app-layout/ui-header/**/*.ts",
+          "libs/app-layout/ui-header/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["type:ui", "domain:app-layout"]
+}

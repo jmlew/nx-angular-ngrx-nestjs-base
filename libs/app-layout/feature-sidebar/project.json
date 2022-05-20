@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/app-layout/feature-sidebar",
+  "sourceRoot": "libs/app-layout/feature-sidebar/src",
+  "prefix": "app",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/app-layout/feature-sidebar"],
+      "options": {
+        "jestConfig": "libs/app-layout/feature-sidebar/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/app-layout/feature-sidebar/**/*.ts",
+          "libs/app-layout/feature-sidebar/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["type:feature", "domain:app-layout"]
+}

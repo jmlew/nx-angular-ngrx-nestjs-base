@@ -1,6 +1,11 @@
 {
   "version": 2,
   "projects": {
+    "app-layout-feature-header": "libs/app-layout/feature-header",
+    "app-layout-feature-sidebar": "libs/app-layout/feature-sidebar",
+    "app-layout-shell": "libs/app-layout/shell",
+    "app-layout-ui-header": "libs/app-layout/ui-header",
+    "app-layout-ui-sidebar": "libs/app-layout/ui-sidebar",
     "core-domain": "libs/core/domain",
     "mock-api": "apps/mock-api",
     "shared-api-status-ui": "libs/shared/api-status/ui",
@@ -8,8 +13,8 @@
     "shared-dynamicform-api": "libs/shared/dynamicform/api",
     "shared-dynamicform-domain": "libs/shared/dynamicform/domain",
     "shared-dynamicform-feature-form-generator": "libs/shared/dynamicform/feature-form-generator",
+    "shared-external-libraries": "libs/shared/external-libraries",
     "shared-ui-common": "libs/shared/ui-common",
-    "shared-ui-external-libraries": "libs/shared/ui-external-libraries",
     "shared-util-common": "libs/shared/util-common",
     "users-domain": "libs/users/domain",
     "users-feature-manage": "libs/users/feature-manage",

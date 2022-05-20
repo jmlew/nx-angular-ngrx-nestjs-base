@@ -1,0 +1,10 @@
+<mat-nav-list>
+  <mat-list-item
+    *ngFor="let route of routes"
+    class="btn-hover"
+    (click)="itemClick.emit(route)">
+    <!-- <mat-icon matListIcon>{{route.icon}}</mat-icon> -->
+    <span matLine>{{route}}</span>
+    <mat-divider></mat-divider>
+  </mat-list-item>
+</mat-nav-list>

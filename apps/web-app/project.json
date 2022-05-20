@@ -19,7 +19,10 @@
           "libs/shared/ui-common/src/lib/styles/mat-theme.scss",
           "libs/shared/ui-common/src/lib/styles/global.scss"
         ],
-        "scripts": []
+        "scripts": [],
+        "stylePreprocessorOptions": {
+          "includePaths": ["libs/shared/ui-common/src/lib/styles"]
+        }
       },
       "configurations": {
         "production": {
