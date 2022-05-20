@@ -13,9 +13,9 @@ export class DynamicformFacade {
   constructor(private formConfigDataService: FormConfigDataService) {}
 
   loadConfigs(): void {
-    this.formConfigDataService.loadConfigs().subscribe({
-      next: (formConfigList) => {
-        this.formConfigListSubject.next(formConfigList);
+    this.formConfigDataService.getDynamicFormConfigs().subscribe({
+      next: (configs: FormConfig[]) => {
+        this.formConfigListSubject.next(configs);
       },
       error: (err) => {
         console.error('err', err);

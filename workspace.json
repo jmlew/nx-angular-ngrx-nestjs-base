@@ -10,6 +10,7 @@
     "mock-api": "apps/mock-api",
     "shared-api-status-ui": "libs/shared/api-status/ui",
     "shared-api-status-util": "libs/shared/api-status/util",
+    "shared-dynamicform-api": "libs/shared/dynamicform/api",
     "shared-dynamicform-domain": "libs/shared/dynamicform/domain",
     "shared-dynamicform-feature-form-generator": "libs/shared/dynamicform/feature-form-generator",
     "shared-external-libraries": "libs/shared/external-libraries",

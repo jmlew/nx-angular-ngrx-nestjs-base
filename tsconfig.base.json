@@ -33,6 +33,9 @@
       "@app/shared/api-status/util": [
         "libs/shared/api-status/util/src/index.ts"
       ],
+      "@app/shared/dynamicform/api": [
+        "libs/shared/dynamicform/api/src/index.ts"
+      ],
       "@app/shared/dynamicform/api-model": [
         "libs/shared/dynamicform/domain/src/lib/entities/form-config-api.model.ts"
       ],

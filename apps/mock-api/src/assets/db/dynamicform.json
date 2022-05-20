@@ -1,0 +1,6 @@
+{
+  "configs": [
+    { "id": 1, "name": "attributeFoo", "label": "Form Attribute Label Foo" },
+    { "id": 2, "name": "attributeBar", "label": "Form Attribute Label Bar" }
+  ]
+}
