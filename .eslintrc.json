@@ -36,7 +36,12 @@
               },
               {
                 "sourceTag": "type:shell",
-                "onlyDependOnLibsWithTags": ["type:shell", "type:feature", "type:ui"]
+                "onlyDependOnLibsWithTags": [
+                  "type:shell",
+                  "type:domain-logic",
+                  "type:feature",
+                  "type:ui"
+                ]
               },
               {
                 "sourceTag": "type:ui",
@@ -66,6 +71,10 @@
               {
                 "sourceTag": "domain:users",
                 "onlyDependOnLibsWithTags": ["domain:users", "domain:shared"]
+              },
+              {
+                "sourceTag": "domain:navigation",
+                "onlyDependOnLibsWithTags": ["domain:navigation", "domain:shared"]
               }
             ]
           }

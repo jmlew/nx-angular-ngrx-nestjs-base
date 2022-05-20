@@ -1,15 +1,52 @@
-import { Component } from '@angular/core';
+import { Observable, combineLatest, map, take } from 'rxjs';
+
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DynamicformFacade } from '@app/shared/dynamicform/domain';
+import { NavigationFacade, RouteItem } from '@app/shared/navigation/domain';
 
 @Component({
   selector: 'app-shell',
   templateUrl: './app-shell.component.html',
   styleUrls: ['./app-shell.component.scss'],
 })
-export class AppShellComponent {
-  constructor(private readonly router: Router) {}
+export class AppShellComponent implements OnInit {
+  isAppReady$: Observable<boolean>;
 
-  onGoTo(path: string) {
-    this.router.navigate([path]);
+  constructor(
+    private readonly router: Router,
+    private navigationFacade: NavigationFacade,
+    private dynamicformFacade: DynamicformFacade
+  ) {}
+
+  ngOnInit() {
+    this.initialiseApp();
+  }
+
+  onGoToRoute(item: RouteItem) {
+    this.router.navigate([item.name]);
+  }
+
+  /**
+   * Initialises app by loading a collection of APIs which are dependant for the app to function.
+
+   * TODO: Ensure each stream emits values which represent a successful load of data only
+   * once the API response is retrieved. Since each of the below use BehaviourSubjects
+   * with default intial values.
+   * TODO: Add error and loading streams to ensure API state is reflected in the UI.
+   */
+  private initialiseApp() {
+    console.log('App is initialising.');
+
+    this.isAppReady$ = combineLatest([
+      this.navigationFacade.routeItems$,
+      this.dynamicformFacade.formConfigList$,
+    ]).pipe(
+      map(([routeItems, formConfigList]) => true),
+      take(1)
+    );
+
+    this.dynamicformFacade.loadConfigs();
+    this.navigationFacade.loadRoutes();
   }
 }

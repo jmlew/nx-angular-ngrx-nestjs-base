@@ -2,13 +2,11 @@
   "projectType": "library",
   "root": "libs/shared/dynamicform/api",
   "sourceRoot": "libs/shared/dynamicform/api/src",
-  "prefix": "dynamicform",
+  "prefix": "app",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/libs/shared/dynamicform/api"
-      ],
+      "outputs": ["coverage/libs/shared/dynamicform/api"],
       "options": {
         "jestConfig": "libs/shared/dynamicform/api/jest.config.ts",
         "passWithNoTests": true
@@ -24,8 +22,5 @@
       }
     }
   },
-  "tags": [
-    "domain:shared",
-    "type:api"
-  ]
+  "tags": ["domain:shared", "type:api"]
 }

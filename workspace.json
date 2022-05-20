@@ -14,6 +14,7 @@
     "shared-dynamicform-domain": "libs/shared/dynamicform/domain",
     "shared-dynamicform-feature-form-generator": "libs/shared/dynamicform/feature-form-generator",
     "shared-external-libraries": "libs/shared/external-libraries",
+    "shared-navigation-domain": "libs/shared/navigation/domain",
     "shared-ui-common": "libs/shared/ui-common",
     "shared-util-common": "libs/shared/util-common",
     "users-domain": "libs/users/domain",

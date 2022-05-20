@@ -1,7 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-
-// import { RouteItem } from '../../shared/models';
-// TODO: import shared routes entities.
+import { RouteItem } from '@app/shared/navigation/domain';
 
 @Component({
   selector: 'app-sidenav',
@@ -9,6 +7,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./sidenav.component.scss'],
 })
 export class SidenavComponent {
-  @Input() routes: string[];
-  @Output() itemClick = new EventEmitter<string>();
+  @Input() routeItems: RouteItem[];
+  @Output() itemClick = new EventEmitter<RouteItem>();
 }

@@ -1,5 +1,39 @@
 @import 'variables';
 
+// Text layout and alignment utils.
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+// Text wrapping and truncation utils.
+
+@mixin no-wrap() {
+  white-space: nowrap;
+}
+
+.no-wrap {
+  @include no-wrap();
+}
+
+@mixin text-ellipsis() {
+  @include no-wrap();
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.text-ellipsis {
+  @include text-ellipsis();
+}
+
 // Misc utils.
 
 .no-overflow {
@@ -16,8 +50,4 @@
 
 .opacity-75 {
   opacity: 0.75;
-}
-
-.icon-large {
-  font-size: 40px !important;
 }

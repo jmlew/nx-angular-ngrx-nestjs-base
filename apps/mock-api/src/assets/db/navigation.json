@@ -1,0 +1,3 @@
+{
+  "features": ["users", "home", "profile", "settings", "workitems", "reports"]
+}

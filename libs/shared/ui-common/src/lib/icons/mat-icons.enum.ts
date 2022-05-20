@@ -27,6 +27,7 @@ export enum IconMat {
   OpenInNew = 'open_in_new',
   OpenWith = 'open_with',
   Person = 'person',
+  Users = 'group',
   PersonOutline = 'person_outline',
   Refresh = 'refresh',
 }

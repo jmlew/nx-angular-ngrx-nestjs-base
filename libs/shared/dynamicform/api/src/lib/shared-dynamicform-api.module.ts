@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { DynamicformFeatureFormGeneratorModule } from '@app/shared/dynamicform/feature-form-generator';
+import { SharedDynamicformFeatureFormGeneratorModule } from '@app/shared/dynamicform/feature-form-generator';
 
-const exportedModules = [DynamicformFeatureFormGeneratorModule];
+const exportedModules = [SharedDynamicformFeatureFormGeneratorModule];
 
 @NgModule({
   imports: [CommonModule, ...exportedModules],

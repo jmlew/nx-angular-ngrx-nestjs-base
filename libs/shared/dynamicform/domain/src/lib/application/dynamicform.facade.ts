@@ -1,4 +1,4 @@
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { Injectable } from '@angular/core';
 
@@ -8,7 +8,7 @@ import { FormConfigDataService } from '../infrastructure/form-config.data.servic
 @Injectable({ providedIn: 'root' })
 export class DynamicformFacade {
   private formConfigListSubject = new BehaviorSubject<FormConfig[]>([]);
-  formConfigList$ = this.formConfigListSubject.asObservable();
+  formConfigList$: Observable<FormConfig[]> = this.formConfigListSubject.asObservable();
 
   constructor(private formConfigDataService: FormConfigDataService) {}
 

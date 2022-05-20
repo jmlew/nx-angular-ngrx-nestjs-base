@@ -4,9 +4,13 @@
     #sideNav
     mode="over"
     fixedInViewport="true">
-    <app-sidebar (navItemClick)="onGoTo($event); sideNav.close()"></app-sidebar>
+    <ng-container *ngIf="isAppReady$ | async">
+      <app-sidebar (navItemClick)="onGoToRoute($event); sideNav.close()"></app-sidebar>
+    </ng-container>
   </mat-sidenav>
   <mat-sidenav-content class="content-fill mat-typography">
-    <router-outlet></router-outlet>
+    <ng-container *ngIf="isAppReady$ | async">
+      <router-outlet></router-outlet>
+    </ng-container>
   </mat-sidenav-content>
 </mat-sidenav-container>

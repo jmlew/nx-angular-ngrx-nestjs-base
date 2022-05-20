@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
+import { Observable } from 'rxjs';
 
-// import { RouteItem } from '../../shared/models';
-// TODO: import shared routes.
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
+import { NavigationFacade, RouteItem } from '@app/shared/navigation/domain';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,6 +10,10 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angul
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppSidebarComponent {
-  routes: string[] = ['foo', 'bar', 'baz'];
-  @Output() navItemClick = new EventEmitter<string>();
+  // Loaded via initialisation logic in main app shell.
+  routeItems$: Observable<RouteItem[]> = this.navigationFacade.routeItems$;
+
+  @Output() navItemClick = new EventEmitter<RouteItem>();
+
+  constructor(private navigationFacade: NavigationFacade) {}
 }
