@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { SseStream } from '@app/shared/util-common';
 import { ManageWorkitemsFacade, Workitem } from '@app/workitems/domain';
 
 @Component({
@@ -8,12 +9,19 @@ import { ManageWorkitemsFacade, Workitem } from '@app/workitems/domain';
   templateUrl: './manage.component.html',
   styleUrls: ['./manage.component.scss'],
 })
-export class ManageComponent implements OnInit {
+export class ManageComponent implements OnInit, OnDestroy {
   // TODO: convert into BeahviourSubject stream on facade.
   workitems$: Observable<Workitem[]>;
+  private workitemsStream: SseStream<Workitem[]>;
+
   constructor(private manageFacade: ManageWorkitemsFacade) {}
 
   ngOnInit() {
-    this.workitems$ = this.manageFacade.getAllWorkitemsStream();
+    this.workitemsStream = this.manageFacade.getAllWorkitemsStream();
+    this.workitems$ = this.workitemsStream.data;
+  }
+
+  ngOnDestroy() {
+    this.workitemsStream.source.close();
   }
 }

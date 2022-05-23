@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs';
 
 import { Injectable } from '@angular/core';
+import { SseStream } from '@app/shared/util-common';
 
 import {
   CreateWorkitemResponse,
@@ -17,7 +18,7 @@ import { WorkitemDataService } from '../infrastructure/workitem.data.service';
 export class ManageWorkitemsFacade {
   constructor(private dataService: WorkitemDataService) {}
 
-  getAllWorkitemsStream(): Observable<Workitem[]> {
+  getAllWorkitemsStream(): SseStream<Workitem[]> {
     return this.dataService.getAllWorkitemsStream();
   }
 

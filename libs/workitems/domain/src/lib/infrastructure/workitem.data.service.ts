@@ -1,7 +1,7 @@
 import { Observable, map } from 'rxjs';
 
 import { Injectable } from '@angular/core';
-import { BaseDataService } from '@app/shared/util-common';
+import { BaseDataService, BaseSseDataService, SseStream } from '@app/shared/util-common';
 
 import {
   CreateWorkitemResponse,
@@ -22,13 +22,17 @@ enum ApiEndpoint {
 export class WorkitemDataService {
   private baseUrl = `${ApiEndpoint.Base}/${ApiEndpoint.Workitems}`;
 
-  constructor(private data: BaseDataService) {}
+  constructor(private data: BaseDataService, private sseData: BaseSseDataService) {}
 
-  getAllWorkitemsStream(): Observable<Workitem[]> {
+  getAllWorkitemsStream(): SseStream<Workitem[]> {
     const url = `${this.baseUrl}/${ApiEndpoint.SseStream}`;
-    return this.data
-      .getSse<GetWorkitemsResponse>(url)
-      .pipe(map((response: GetWorkitemsResponse) => response.data));
+    const sse: SseStream<GetWorkitemsResponse> =
+      this.sseData.getStream<GetWorkitemsResponse>(url);
+
+    return {
+      source: sse.source,
+      data: sse.data.pipe(map((response: GetWorkitemsResponse) => response.data)),
+    };
   }
 
   getAllWorkitems(): Observable<Workitem[]> {
