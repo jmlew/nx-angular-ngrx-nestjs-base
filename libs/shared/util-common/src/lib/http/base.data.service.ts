@@ -4,9 +4,17 @@ import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+import { HttpSseDataService } from './http-sse.data.service';
+
 @Injectable()
 export class BaseDataService {
-  constructor(private readonly http: HttpClient) {}
+  constructor(private readonly http: HttpClient, private httpSse: HttpSseDataService) {}
+
+  getSse<T>(url: string): Observable<T> {
+    return this.httpSse
+      .get<T>(url)
+      .pipe(catchError((error: any) => throwError(() => error)));
+  }
 
   get<T>(url: string): Observable<T> {
     return this.http

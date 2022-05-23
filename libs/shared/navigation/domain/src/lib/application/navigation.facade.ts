@@ -14,7 +14,7 @@ export class NavigationFacade {
   constructor(private dataService: NavigationDataService) {}
 
   /**
-   * Load the route names from the server and map to route items.
+   * Loads the route names from the server and maps to route items.
    */
   loadRoutes(): void {
     this.dataService

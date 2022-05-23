@@ -56,7 +56,15 @@
       "@app/users/domain": ["libs/users/domain/src/index.ts"],
       "@app/users/feature-manage": ["libs/users/feature-manage/src/index.ts"],
       "@app/users/shell": ["libs/users/shell/src/index.ts"],
-      "@app/users/ui-manage": ["libs/users/ui-manage/src/index.ts"]
+      "@app/users/ui-manage": ["libs/users/ui-manage/src/index.ts"],
+      "@app/workitems/api-model": [
+        "libs/workitems/domain/src/lib/entities/workitem-api.model.ts"
+      ],
+      "@app/workitems/domain": ["libs/workitems/domain/src/index.ts"],
+      "@app/workitems/feature-manage": [
+        "libs/workitems/feature-manage/src/index.ts"
+      ],
+      "@app/workitems/shell": ["libs/workitems/shell/src/index.ts"]
     }
   },
   "angularCompilerOptions": {

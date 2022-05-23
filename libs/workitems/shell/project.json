@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/workitems/shell",
+  "sourceRoot": "libs/workitems/shell/src",
+  "prefix": "app",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/workitems/shell"],
+      "options": {
+        "jestConfig": "libs/workitems/shell/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/workitems/shell/**/*.ts",
+          "libs/workitems/shell/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["type:shell", "domain:workitems"]
+}

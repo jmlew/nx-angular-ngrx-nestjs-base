@@ -10,6 +10,12 @@ const routes: Routes = [
     loadChildren: () => import('@app/users/shell').then((m) => m.UsersShellModule),
   },
   {
+    path: 'workitems',
+    data: { sample: 'bar' },
+    loadChildren: () =>
+      import('@app/workitems/shell').then((m) => m.WorkitemsShellModule),
+  },
+  {
     path: '',
     redirectTo: 'users',
     pathMatch: 'full',

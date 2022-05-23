@@ -74,7 +74,17 @@
               },
               {
                 "sourceTag": "domain:navigation",
-                "onlyDependOnLibsWithTags": ["domain:navigation", "domain:shared"]
+                "onlyDependOnLibsWithTags": [
+                  "domain:navigation",
+                  "domain:shared"
+                ]
+              },
+              {
+                "sourceTag": "domain:workitems",
+                "onlyDependOnLibsWithTags": [
+                  "domain:workitems",
+                  "domain:shared"
+                ]
               }
             ]
           }

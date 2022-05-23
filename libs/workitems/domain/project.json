@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/workitems/domain",
+  "sourceRoot": "libs/workitems/domain/src",
+  "prefix": "workitems",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/workitems/domain"],
+      "options": {
+        "jestConfig": "libs/workitems/domain/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/workitems/domain/**/*.ts",
+          "libs/workitems/domain/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["domain:workitems", "type:domain-logic"]
+}

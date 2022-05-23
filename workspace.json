@@ -22,6 +22,9 @@
     "users-shell": "libs/users/shell",
     "users-ui-manage": "libs/users/ui-manage",
     "web-app": "apps/web-app",
-    "web-app-e2e": "apps/web-app-e2e"
+    "web-app-e2e": "apps/web-app-e2e",
+    "workitems-domain": "libs/workitems/domain",
+    "workitems-feature-manage": "libs/workitems/feature-manage",
+    "workitems-shell": "libs/workitems/shell"
   }
 }
