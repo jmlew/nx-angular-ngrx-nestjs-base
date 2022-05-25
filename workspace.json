@@ -17,6 +17,7 @@
     "shared-navigation-domain": "libs/shared/navigation/domain",
     "shared-ui-common": "libs/shared/ui-common",
     "shared-util-common": "libs/shared/util-common",
+    "storybook": "libs/storybook",
     "users-domain": "libs/users/domain",
     "users-feature-manage": "libs/users/feature-manage",
     "users-shell": "libs/users/shell",

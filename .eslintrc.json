@@ -13,6 +13,10 @@
             "allow": [],
             "depConstraints": [
               {
+                "sourceTag": "storybook",
+                "onlyDependOnLibsWithTags": ["*"]
+              },
+              {
                 "sourceTag": "type:app",
                 "onlyDependOnLibsWithTags": ["type:domain-logic", "type:shell"]
               },
@@ -74,17 +78,11 @@
               },
               {
                 "sourceTag": "domain:navigation",
-                "onlyDependOnLibsWithTags": [
-                  "domain:navigation",
-                  "domain:shared"
-                ]
+                "onlyDependOnLibsWithTags": ["domain:navigation", "domain:shared"]
               },
               {
                 "sourceTag": "domain:workitems",
-                "onlyDependOnLibsWithTags": [
-                  "domain:workitems",
-                  "domain:shared"
-                ]
+                "onlyDependOnLibsWithTags": ["domain:workitems", "domain:shared"]
               }
             ]
           }

@@ -1,0 +1,55 @@
+{
+  "projectType": "library",
+  "root": "libs/storybook",
+  "sourceRoot": "libs/storybook/src",
+  "prefix": "app",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/storybook/**/*.ts", "libs/storybook/**/*.html"]
+      }
+    },
+    "storybook": {
+      "executor": "@nrwl/storybook:storybook",
+      "options": {
+        "uiFramework": "@storybook/angular",
+        "port": 4400,
+        "config": {
+          "configFolder": "libs/storybook/.storybook"
+        },
+        "projectBuildConfig": "storybook:build-storybook"
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build-storybook": {
+      "executor": "@nrwl/storybook:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "uiFramework": "@storybook/angular",
+        "outputPath": "dist/storybook/storybook",
+        "config": {
+          "configFolder": "libs/storybook/.storybook"
+        },
+        "projectBuildConfig": "storybook:build-storybook",
+        "stylePreprocessorOptions": {
+          "includePaths": ["libs/shared/ui-common/src/lib/styles"]
+        },
+        "styles": [
+          "libs/shared/ui-common/src/lib/styles/mat-theme.scss",
+          "libs/shared/ui-common/src/lib/styles/global.scss"
+        ]
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    }
+  },
+  "tags": ["storybook"]
+}
