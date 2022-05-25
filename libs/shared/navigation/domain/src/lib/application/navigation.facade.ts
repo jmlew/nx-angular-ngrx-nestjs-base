@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable, map } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 import { mapRouteNamesToRouteItems } from '../entities/normalise.util';
+import { orderedRouteNames } from '../entities/routes.constant';
 import { RouteItem } from '../entities/routes.model';
 import { NavigationDataService } from '../infrastructure/navigation.data.service';
 
@@ -14,7 +15,7 @@ export class NavigationFacade {
   constructor(private dataService: NavigationDataService) {}
 
   /**
-   * Loads the route names from the server and maps to route items.
+   * Loads the available route names from the server and maps to route items.
    */
   loadRoutes(): void {
     this.dataService
@@ -28,5 +29,12 @@ export class NavigationFacade {
           console.error('Error loading route items:', err);
         },
       });
+  }
+
+  /**
+   * Returns all available route items.
+   */
+  getAllRouteItems(): RouteItem[] {
+    return mapRouteNamesToRouteItems(orderedRouteNames);
   }
 }

@@ -44,4 +44,3 @@ rootRoutesMap.set(RouteName.Reports, {
   label: 'Reports',
   icon: 'bar_chart',
 });
-console.log('rootRoutesMap', rootRoutesMap);

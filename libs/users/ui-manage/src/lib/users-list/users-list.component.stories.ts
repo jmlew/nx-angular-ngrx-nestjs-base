@@ -1,4 +1,3 @@
-import * as usersDb from '@app/mock-api/assets/db/users.json';
 import { SharedExternalLibrariesModule } from '@app/shared-external-libraries';
 import { User } from '@app/users/domain';
 import { Meta, Story, moduleMetadata } from '@storybook/angular';
