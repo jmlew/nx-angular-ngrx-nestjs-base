@@ -1,21 +1,31 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppLayoutShellModule } from '@app/app-layout/shell';
+import { AppLayoutFeatureHeaderModule } from '@app/app-layout/feature-header';
+import { AppLayoutFeatureSidebarModule } from '@app/app-layout/feature-sidebar';
 import { CoreDomainModule } from '@app/core/domain';
+import { SharedExternalLibrariesModule } from '@app/shared-external-libraries';
 
-import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import { AppRootComponent } from './components/app-root/app-root.component';
+
+const appModules = [
+  CoreDomainModule,
+  AppLayoutFeatureHeaderModule,
+  AppLayoutFeatureSidebarModule,
+];
+const sharedModules = [SharedExternalLibrariesModule];
 
 @NgModule({
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    CoreDomainModule,
-    // App shell module containing main routing. Ensure this is last.
-    AppLayoutShellModule,
+    ...sharedModules,
+    ...appModules,
+    AppRoutingModule,
   ],
-  declarations: [AppComponent],
-  bootstrap: [AppComponent],
+  declarations: [AppRootComponent],
+  bootstrap: [AppRootComponent],
   providers: [],
 })
 export class AppModule {}

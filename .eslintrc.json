@@ -18,7 +18,12 @@
               },
               {
                 "sourceTag": "type:app",
-                "onlyDependOnLibsWithTags": ["type:domain-logic", "type:shell"]
+                "onlyDependOnLibsWithTags": [
+                  "type:domain-logic",
+                  "type:shell",
+                  "type:feature",
+                  "type:ui"
+                ]
               },
               {
                 "sourceTag": "type:api",

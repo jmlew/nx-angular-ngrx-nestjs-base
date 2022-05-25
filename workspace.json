@@ -3,7 +3,6 @@
   "projects": {
     "app-layout-feature-header": "libs/app-layout/feature-header",
     "app-layout-feature-sidebar": "libs/app-layout/feature-sidebar",
-    "app-layout-shell": "libs/app-layout/shell",
     "app-layout-ui-header": "libs/app-layout/ui-header",
     "app-layout-ui-sidebar": "libs/app-layout/ui-sidebar",
     "core-domain": "libs/core/domain",

@@ -6,11 +6,11 @@ import { DynamicformFacade } from '@app/shared/dynamicform/domain';
 import { NavigationFacade, RouteItem } from '@app/shared/navigation/domain';
 
 @Component({
-  selector: 'app-shell',
-  templateUrl: './app-shell.component.html',
-  styleUrls: ['./app-shell.component.scss'],
+  selector: 'app-root',
+  templateUrl: './app-root.component.html',
+  styleUrls: ['./app-root.component.scss'],
 })
-export class AppShellComponent implements OnInit {
+export class AppRootComponent implements OnInit {
   isAppReady$: Observable<boolean>;
 
   constructor(

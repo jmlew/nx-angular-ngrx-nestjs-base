@@ -19,7 +19,6 @@
     "paths": {
       "@app/app-layout/feature-header": ["libs/app-layout/feature-header/src/index.ts"],
       "@app/app-layout/feature-sidebar": ["libs/app-layout/feature-sidebar/src/index.ts"],
-      "@app/app-layout/shell": ["libs/app-layout/shell/src/index.ts"],
       "@app/app-layout/ui-header": ["libs/app-layout/ui-header/src/index.ts"],
       "@app/app-layout/ui-sidebar": ["libs/app-layout/ui-sidebar/src/index.ts"],
       "@app/core/domain": ["libs/core/domain/src/index.ts"],
