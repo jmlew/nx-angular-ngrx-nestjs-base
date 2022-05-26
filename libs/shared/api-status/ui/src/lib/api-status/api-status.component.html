@@ -1,20 +1,31 @@
 <ng-container [ngSwitch]="requestState.status">
   <ng-container *ngSwitchCase="ApiStatus.Succeeded">
-    <ng-content></ng-content>
+    <ng-container *ngTemplateOutlet="success || allContent"></ng-container>
   </ng-container>
-  <!-- TODO: use templateOutlets to pass optional custom error template as input. -->
+  <ng-container *ngSwitchCase="ApiStatus.Failed">
+    <ng-container *ngTemplateOutlet="failed || defaultError"></ng-container>
+  </ng-container>
+  <ng-container *ngSwitchCase="ApiStatus.Pending">
+    <ng-container *ngTemplateOutlet="pending || defaultPending"></ng-container>
+  </ng-container>
+</ng-container>
+
+<ng-template #defaultError>
   <div
-    *ngSwitchCase="ApiStatus.Failed"
     fxLayout="row"
     fxLayoutAlign="center center"
     class="status-error">
-    {{requestState.error || 'Some uncaught error'}}
+    {{requestState.error || 'An error occured.'}}
   </div>
+</ng-template>
+<ng-template #defaultPending>
   <div
-    *ngSwitchCase="ApiStatus.Pending"
     fxLayout="row"
     fxLayoutAlign="center center"
     class="status-loading">
     <mat-spinner diameter="60"></mat-spinner>
   </div>
-</ng-container>
+</ng-template>
+<ng-template #allContent>
+  <ng-content></ng-content>
+</ng-template>
