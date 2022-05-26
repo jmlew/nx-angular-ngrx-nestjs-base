@@ -24,7 +24,7 @@ export class WorkitemDataService {
 
   constructor(private data: BaseDataService, private sseData: BaseSseDataService) {}
 
-  getAllWorkitemsStream(): SseStream<Workitem[]> {
+  getWorkitemsStream(): SseStream<Workitem[]> {
     const url = `${this.baseUrl}/${ApiEndpoint.SseStream}`;
     const sse: SseStream<GetWorkitemsResponse> =
       this.sseData.getStream<GetWorkitemsResponse>(url);
@@ -35,7 +35,7 @@ export class WorkitemDataService {
     };
   }
 
-  getAllWorkitems(): Observable<Workitem[]> {
+  getWorkitems(): Observable<Workitem[]> {
     return this.data
       .get<GetWorkitemsResponse>(this.baseUrl)
       .pipe(map((response: GetWorkitemsResponse) => response.data));

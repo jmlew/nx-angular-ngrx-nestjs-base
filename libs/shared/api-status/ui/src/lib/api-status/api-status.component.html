@@ -3,14 +3,14 @@
     <ng-container *ngTemplateOutlet="success || allContent"></ng-container>
   </ng-container>
   <ng-container *ngSwitchCase="ApiStatus.Failed">
-    <ng-container *ngTemplateOutlet="failed || defaultError"></ng-container>
+    <ng-container *ngTemplateOutlet="failed || defaultFailed"></ng-container>
   </ng-container>
   <ng-container *ngSwitchCase="ApiStatus.Pending">
     <ng-container *ngTemplateOutlet="pending || defaultPending"></ng-container>
   </ng-container>
 </ng-container>
 
-<ng-template #defaultError>
+<ng-template #defaultFailed>
   <div
     fxLayout="row"
     fxLayoutAlign="center center"

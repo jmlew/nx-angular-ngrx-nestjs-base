@@ -24,7 +24,7 @@ export class UsersStore extends ComponentStore<UsersState> {
     (state: UsersState) => state.selectedId
   );
 
-  constructor(private manageProfiles: ManageUserProfilesFacade) {
+  constructor(private manageProfilesFacade: ManageUserProfilesFacade) {
     super({
       users: [],
       selectedId: null,
@@ -36,7 +36,7 @@ export class UsersStore extends ComponentStore<UsersState> {
     pipe(
       tap(() => this.patchState(fromApiStatus.getApiStatusPending())),
       switchMap(() =>
-        this.manageProfiles.getAllUsers().pipe(
+        this.manageProfilesFacade.getAllUsers().pipe(
           tap({
             next: (users: User[]) =>
               this.patchState({ users, ...fromApiStatus.getApiStatusSuccess() }),

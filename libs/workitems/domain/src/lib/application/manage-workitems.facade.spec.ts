@@ -5,21 +5,26 @@ import { Store, StoreModule } from '@ngrx/store';
 import { NxModule } from '@nrwl/angular';
 import { readFirst } from '@nrwl/angular/testing';
 
-import { User } from '../../entities/user.model';
-import * as UsersActions from './users.actions';
-import { UsersEffects } from './users.effects';
-import { UsersFacade } from './users.facade';
-import * as UsersSelectors from './users.selectors';
-import { State, USERS_FEATURE_KEY, initialState, reducer } from './users.reducer';
+import * as WorkitemsActions from '../+state/workitems/workitems.actions';
+import { WorkitemsEffects } from '../+state/workitems/workitems.effects';
+import { WorkitemsFacade } from '../+state/workitems/workitems.facade';
+import {
+  WORKITEMS_FEATURE_KEY,
+  WorkitemsState,
+  initialState,
+  reducer,
+} from '../+state/workitems/workitems.reducer';
+import * as WorkitemsSelectors from '../+state/workitems/workitems.selectors';
+import { Workitem } from '../entities/workitem.model';
 
 interface TestSchema {
-  users: State;
+  workitems: WorkitemsState;
 }
 
-describe('UsersFacade', () => {
-  let facade: UsersFacade;
+describe('WorkitemsFacade', () => {
+  let facade: WorkitemsFacade;
   let store: Store<TestSchema>;
-  const createUser = (id: number, name = ''): User => ({
+  const createWorkitem = (id: number, name = ''): Workitem => ({
     id,
     name: name || `name-${id}`,
   });
@@ -28,10 +33,10 @@ describe('UsersFacade', () => {
     beforeEach(() => {
       @NgModule({
         imports: [
-          StoreModule.forFeature(USERS_FEATURE_KEY, reducer),
-          EffectsModule.forFeature([UsersEffects]),
+          StoreModule.forFeature(WORKITEMS_FEATURE_KEY, reducer),
+          EffectsModule.forFeature([WorkitemsEffects]),
         ],
-        providers: [UsersFacade],
+        providers: [WorkitemsFacade],
       })
       class CustomFeatureModule {}
 
@@ -47,22 +52,22 @@ describe('UsersFacade', () => {
       TestBed.configureTestingModule({ imports: [RootModule] });
 
       store = TestBed.inject(Store);
-      facade = TestBed.inject(UsersFacade);
+      facade = TestBed.inject(WorkitemsFacade);
     });
 
     /**
      * The initially generated facade::loadAll() returns empty array
      */
     it('loadAll() should return empty list with loaded == true', async () => {
-      let list = await readFirst(facade.allUsers$);
+      let list = await readFirst(facade.allWorkitems$);
       let isLoaded = await readFirst(facade.loaded$);
 
       expect(list.length).toBe(0);
       expect(isLoaded).toBe(false);
 
-      facade.init();
+      facade.dispatch(WorkitemsActions.loadWorkitems);
 
-      list = await readFirst(facade.allUsers$);
+      list = await readFirst(facade.allWorkitems$);
       isLoaded = await readFirst(facade.loaded$);
 
       expect(list.length).toBe(0);
@@ -70,22 +75,22 @@ describe('UsersFacade', () => {
     });
 
     /**
-     * Use `loadUsersSuccess` to manually update list
+     * Use `loadWorkitemsSuccess` to manually update list
      */
-    it('allUsers$ should return the loaded list; and loaded flag == true', async () => {
-      let list = await readFirst(facade.allUsers$);
+    it('allWorkitems$ should return the loaded list; and loaded flag == true', async () => {
+      let list = await readFirst(facade.allWorkitems$);
       let isLoaded = await readFirst(facade.loaded$);
 
       expect(list.length).toBe(0);
       expect(isLoaded).toBe(false);
 
-      store.dispatch(
-        UsersActions.loadUsersSuccess({
-          users: [createUser(2), createUser(3)],
+      facade.dispatch(
+        WorkitemsActions.loadWorkitemsSuccess({
+          workitems: [createWorkitem(1), createWorkitem(2)],
         })
       );
 
-      list = await readFirst(facade.allUsers$);
+      list = await readFirst(facade.allWorkitems$);
       isLoaded = await readFirst(facade.loaded$);
 
       expect(list.length).toBe(2);

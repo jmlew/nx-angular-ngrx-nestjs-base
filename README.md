@@ -47,7 +47,7 @@ _Example: `nx g @angular-architects/ddd:api --directory dynamicform --shared --t
 
 ### Adding NgRX
 
-`nx g @nrwl/angular:ngrx <some-domain> --directory +state/<some-state-category> --module=<some-domain-module-path> --syntax creators --facade --no-interactive --dry-run`
+`nx g @nrwl/angular:ngrx <some-domain> --module=<some-domain-module-path> --directory +state/<some-state-category> --facade --useDataPersistence --no-interactive --dry-run`
 
 > NB: Uses the NRWL CLI (this is preferable to the DDD plugin NgRX schematics).
 

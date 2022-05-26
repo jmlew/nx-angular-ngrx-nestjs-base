@@ -6,9 +6,7 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/libs/core/domain"
-      ],
+      "outputs": ["coverage/libs/core/domain"],
       "options": {
         "jestConfig": "libs/core/domain/jest.config.ts",
         "passWithNoTests": true
@@ -17,15 +15,9 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": [
-          "libs/core/domain/**/*.ts",
-          "libs/core/domain/**/*.html"
-        ]
+        "lintFilePatterns": ["libs/core/domain/**/*.ts", "libs/core/domain/**/*.html"]
       }
     }
   },
-  "tags": [
-    "type:domain-logic",
-    "domain:core"
-  ]
+  "tags": ["type:domain-logic", "domain:core"]
 }

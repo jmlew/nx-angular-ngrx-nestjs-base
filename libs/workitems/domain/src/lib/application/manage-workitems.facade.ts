@@ -1,28 +1,51 @@
 import { Observable } from 'rxjs';
 
 import { Injectable } from '@angular/core';
+import { ApiRequestState } from '@app/shared/api-status/util';
 import { SseStream } from '@app/shared/util-common';
+import { Store, select } from '@ngrx/store';
 
-import {
-  CreateWorkitemResponse,
-  UpdateWorkitemResponse,
-} from '../entities/workitem-api.model';
-// import { Store, select } from '@ngrx/store';
-// import { loadWorkitem } from '../+state/workitem/workitem.actions';
-// import * as fromWorkitem from '../+state/workitem/workitem.reducer';
-// import * as WorkitemSelectors from '../+state/workitem/workitem.selectors';
-import { Workitem, WorkitemParams } from '../entities/workitem.model';
+import * as WorkitemsActions from '../+state/workitems/workitems.actions';
+import * as WorkitemsFeature from '../+state/workitems/workitems.reducer';
+import * as WorkitemsSelectors from '../+state/workitems/workitems.selectors';
+import { Workitem } from '../entities/workitem.model';
 import { WorkitemDataService } from '../infrastructure/workitem.data.service';
 
-@Injectable({ providedIn: 'root' })
-export class ManageWorkitemsFacade {
-  constructor(private dataService: WorkitemDataService) {}
+/*
+   Application facade act as the main contact for a specific usecase (managing workitems)
+   with the rest of the domain and refereced in the optional domain api module if
+   applicable for cases where this domain needs to be shared with others.
 
-  getAllWorkitemsStream(): SseStream<Workitem[]> {
-    return this.dataService.getAllWorkitemsStream();
+   Abstracts NgRX state management and infrastructure methods which are not hooked into
+   NgRX.
+*/
+
+@Injectable()
+export class ManageWorkitemsFacade {
+  constructor(
+    private dataService: WorkitemDataService,
+    private readonly store: Store<WorkitemsFeature.WorkitemsState>
+  ) {}
+
+  workitemsRequestState$: Observable<ApiRequestState> = this.store.pipe(
+    select(WorkitemsSelectors.selectWorkitemsRequestState)
+  );
+  allWorkitems$: Observable<Workitem[]> = this.store.pipe(
+    select(WorkitemsSelectors.selectAllWorkitems)
+  );
+  selectedWorkitem$: Observable<Workitem | undefined> = this.store.pipe(
+    select(WorkitemsSelectors.selectSelectedWorkitem)
+  );
+
+  getWorkitemsStream(): SseStream<Workitem[]> {
+    return this.dataService.getWorkitemsStream();
   }
 
-  getAllWorkitems(): Observable<Workitem[]> {
+  loadWorkitems() {
+    this.store.dispatch(WorkitemsActions.loadWorkitems());
+  }
+
+  /* getAllWorkitems(): Observable<Workitem[]> {
     return this.dataService.getAllWorkitems();
   }
 
@@ -40,15 +63,5 @@ export class ManageWorkitemsFacade {
 
   deleteWorkitem(id: number): Observable<number> {
     return this.dataService.deleteWorkitem(id);
-  }
-
-  /* loaded$ = this.store.pipe(select(WorkitemSelectors.getWorkitemLoaded));
-  workitemList$ = this.store.pipe(select(WorkitemSelectors.getAllWorkitem));
-  selectedWorkitem$ = this.store.pipe(select(WorkitemSelectors.getSelected));
-
-  constructor(private store: Store<fromWorkitem.WorkitemPartialState>) {}
-
-  load(): void {
-    this.store.dispatch(loadWorkitem());
   } */
 }

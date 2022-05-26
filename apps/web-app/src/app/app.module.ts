@@ -9,20 +9,17 @@ import { SharedExternalLibrariesModule } from '@app/shared-external-libraries';
 import { AppRoutingModule } from './app-routing.module';
 import { AppRootComponent } from './components/app-root/app-root.component';
 
-const appModules = [
-  CoreDomainModule,
-  AppLayoutFeatureHeaderModule,
-  AppLayoutFeatureSidebarModule,
-];
 const sharedModules = [SharedExternalLibrariesModule];
+const appModules = [AppLayoutFeatureHeaderModule, AppLayoutFeatureSidebarModule];
 
 @NgModule({
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    CoreDomainModule,
+    AppRoutingModule,
     ...sharedModules,
     ...appModules,
-    AppRoutingModule,
   ],
   declarations: [AppRootComponent],
   bootstrap: [AppRootComponent],

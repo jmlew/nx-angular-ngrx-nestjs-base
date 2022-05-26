@@ -1,5 +1,6 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
@@ -24,7 +25,22 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
+  imports: [
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+    StoreRouterConnectingModule.forRoot(),
+  ],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule {
+  constructor(
+    @Optional()
+    @SkipSelf()
+    parentModule: AppRoutingModule
+  ) {
+    if (parentModule) {
+      throw new Error(
+        'AppRoutingModule is already imported. Import into AppModule only.'
+      );
+    }
+  }
+}

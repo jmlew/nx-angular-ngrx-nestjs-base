@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs';
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ApiRequestState, ApiStatus } from '@app/shared/api-status/util';
 import { SseStream } from '@app/shared/util-common';
 import { ManageWorkitemsFacade, Workitem } from '@app/workitems/domain';
 
@@ -10,15 +11,23 @@ import { ManageWorkitemsFacade, Workitem } from '@app/workitems/domain';
   styleUrls: ['./manage.component.scss'],
 })
 export class ManageComponent implements OnInit, OnDestroy {
-  // TODO: convert into BeahviourSubject stream on facade.
-  workitems$: Observable<Workitem[]>;
+  readonly ApiStatus = ApiStatus;
+  readonly allWorkitems$: Observable<Workitem[]> = this.manageFacade.allWorkitems$;
+  readonly workitemsRequestState$: Observable<ApiRequestState> =
+    this.manageFacade.workitemsRequestState$;
+
+  workitemsStreamData$: Observable<Workitem[]>;
   private workitemsStream: SseStream<Workitem[]>;
 
   constructor(private manageFacade: ManageWorkitemsFacade) {}
 
   ngOnInit() {
-    this.workitemsStream = this.manageFacade.getAllWorkitemsStream();
-    this.workitems$ = this.workitemsStream.data;
+    // As a collection in reponse to an HHTP call using NgRX.
+    this.manageFacade.loadWorkitems();
+
+    // As a SSE stream.
+    this.workitemsStream = this.manageFacade.getWorkitemsStream();
+    this.workitemsStreamData$ = this.workitemsStream.data;
   }
 
   ngOnDestroy() {

@@ -57,6 +57,7 @@ export class WorkitemsController {
 
   @Get()
   getWorkitems(): Observable<GetWorkitemsResponse> {
+    // throw new BadRequestException(ErrorMessage.NoWorkitemMatch);
     return this.toStream(this.userService.getAllWorkitems(), 1000);
   }
 
