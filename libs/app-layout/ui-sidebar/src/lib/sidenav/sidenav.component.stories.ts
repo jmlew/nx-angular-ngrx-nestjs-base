@@ -18,7 +18,7 @@ const routeItems: RouteItem[] = [
 ];
 
 export default {
-  title: 'SidenavComponent',
+  title: 'Layout/Sidenav',
   component: SidenavComponent,
   decorators: [
     moduleMetadata({

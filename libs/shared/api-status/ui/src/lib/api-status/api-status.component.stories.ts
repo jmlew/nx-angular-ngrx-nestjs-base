@@ -7,7 +7,7 @@ import { ApiStatusComponent } from './api-status.component';
 const sharedModules = [SharedUiCommonModule];
 
 export default {
-  title: 'ApiStatusComponent',
+  title: 'Shared/ApiStatus',
   component: ApiStatusComponent,
   decorators: [
     moduleMetadata({

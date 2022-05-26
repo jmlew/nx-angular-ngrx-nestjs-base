@@ -13,10 +13,6 @@
             "allow": [],
             "depConstraints": [
               {
-                "sourceTag": "storybook",
-                "onlyDependOnLibsWithTags": ["*"]
-              },
-              {
                 "sourceTag": "type:app",
                 "onlyDependOnLibsWithTags": [
                   "type:domain-logic",

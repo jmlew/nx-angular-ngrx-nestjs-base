@@ -25,7 +25,7 @@ const sampleUsers: User[] = [
 ];
 
 export default {
-  title: 'UsersListComponent',
+  title: 'Users/UsersList',
   component: UsersListComponent,
   decorators: [
     moduleMetadata({

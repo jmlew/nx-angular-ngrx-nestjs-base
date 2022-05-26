@@ -6,7 +6,7 @@ import { AppHeaderLayoutComponent } from './header-layout.component';
 const sharedModules = [SharedExternalLibrariesModule];
 
 export default {
-  title: 'AppHeaderLayoutComponent',
+  title: 'Layout/AppHeaderLayout',
   component: AppHeaderLayoutComponent,
   decorators: [
     moduleMetadata({
