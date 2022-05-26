@@ -18,7 +18,8 @@
                   "type:domain-logic",
                   "type:shell",
                   "type:feature",
-                  "type:ui"
+                  "type:ui",
+                  "type:env"
                 ]
               },
               {
@@ -59,7 +60,7 @@
               },
               {
                 "sourceTag": "type:domain-logic",
-                "onlyDependOnLibsWithTags": ["type:util"]
+                "onlyDependOnLibsWithTags": ["type:util", "type:env"]
               },
               {
                 "sourceTag": "type:util",
@@ -67,7 +68,7 @@
               },
               {
                 "sourceTag": "domain:core",
-                "onlyDependOnLibsWithTags": ["domain:core"]
+                "onlyDependOnLibsWithTags": ["domain:core", "domain:shared"]
               },
               {
                 "sourceTag": "domain:shared",
