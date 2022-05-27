@@ -3,13 +3,29 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'manage',
+    path: 'profiles',
     loadChildren: () =>
-      import('@app/users/feature-manage').then((m) => m.UsersFeatureManageModule),
+      import('@app/users/feature/manage-user-profiles').then(
+        (m) => m.UsersFeatureManageUserProfilesModule
+      ),
+  },
+  {
+    path: 'roles',
+    loadChildren: () =>
+      import('@app/users/feature/manage-user-roles').then(
+        (module) => module.UsersFeatureManageUserRolesModule
+      ),
+  },
+  {
+    path: 'permissions',
+    loadChildren: () =>
+      import('@app/users/feature/manage-user-permissions').then(
+        (module) => module.UsersFeatureManageUserPermissionsModule
+      ),
   },
   {
     path: '',
-    redirectTo: 'manage',
+    redirectTo: 'profiles',
     pathMatch: 'full',
   },
 ];

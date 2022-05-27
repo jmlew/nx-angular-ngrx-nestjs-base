@@ -14,17 +14,10 @@ export interface EntitySelectors<T, K> {
   selectTotal: (entities: Entity<T>) => number;
 }
 
-export interface UpdateEntityStr<T> {
-  id: string;
+export declare type UpdateEntity<T, K> = {
+  id: K;
   changes: Partial<T>;
-}
-
-export interface UpdateEntityNum<T> {
-  id: number;
-  changes: Partial<T>;
-}
-
-export declare type UpdateEntity<T> = UpdateEntityStr<T> | UpdateEntityNum<T>;
+};
 
 export interface EntityAdapter<T, K> {
   createEntities(items: T[], selectId: keyof T): Entity<T>;
@@ -32,6 +25,6 @@ export interface EntityAdapter<T, K> {
   addMany(items: T[], entities: Entity<T>): Entity<T>;
   removeOne(id: K, entities: Entity<T>): Entity<T>;
   removeMany(ids: K[], entities: Entity<T>): Entity<T>;
-  updateOne(update: UpdateEntity<T>, entities: Entity<T>): Entity<T>;
+  updateOne(update: UpdateEntity<T, K>, entities: Entity<T>): Entity<T>;
   upsertOne(item: T, entities: Entity<T>): Entity<T>;
 }

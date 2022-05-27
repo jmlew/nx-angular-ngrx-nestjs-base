@@ -3,10 +3,10 @@ import { NgModule } from '@angular/core';
 import { SharedUtilHttpModule } from '@app/shared/util-http';
 
 import { ManageUserProfilesFacade } from './application/manage-user-profiles.facade';
-import { UserDataService } from './infrastructure/user.data.service';
+import { UsersDataService } from './infrastructure/users.data.service';
 
 @NgModule({
   imports: [CommonModule, SharedUtilHttpModule],
-  providers: [ManageUserProfilesFacade, UserDataService],
+  providers: [ManageUserProfilesFacade, UsersDataService],
 })
 export class UsersDomainModule {}

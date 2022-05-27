@@ -1,81 +1,74 @@
-import {
-  CreateUserResponse,
-  GetUserResponse,
-  GetUsersResponse,
-  UpdateUserResponse,
-  User,
-  UserParams,
-} from '@app/users/api-model';
+import { EditUserProfileResponse, UserProfile } from '@app/users/api-model';
 import { Injectable } from '@nestjs/common';
 
-import * as usersDb from '../../../assets/db/users.json';
+import * as usersDb from '../../../assets/db/user-profiles.json';
 import { EntitiesApiBaseService } from '../../shared/services';
 
 @Injectable()
-export class UsersService extends EntitiesApiBaseService<User, number> {
+export class UsersService extends EntitiesApiBaseService<UserProfile, string> {
   constructor() {
-    const primaryId: keyof User = 'id';
+    const primaryId: keyof UserProfile = 'emailId';
     super(primaryId);
     this.initDb();
   }
 
   initDb() {
-    const db = { ...usersDb }.data as User[];
+    const db = { ...usersDb }.data as UserProfile[];
     this.createEntities(db);
   }
 
-  getAllUsers(): GetUsersResponse {
-    const users: User[] = this.selectAll();
-    const response: GetUsersResponse = { data: users };
-    return response;
+  getAllUsers(): UserProfile[] {
+    return this.selectAll();
   }
 
-  getUserById(id: number): GetUserResponse {
-    const user: User = this.selectOne(id);
-    const response: GetUserResponse = { data: user };
-    return response;
+  getUserById(id: string): UserProfile {
+    return this.selectOne(id);
   }
 
-  createUser(params: UserParams): CreateUserResponse {
-    const user: CreateUserResponse = this.normaliseNewUser(params);
+  createUser(user: UserProfile): EditUserProfileResponse {
     this.addEntity(user);
-    return user;
+    return this.getNewUserResponse(user);
   }
 
-  updateUser(id: number, params: UserParams): UpdateUserResponse {
-    this.updateEntity(id, this.normaliseEditedUser(params));
-    return this.selectOne(id) as UpdateUserResponse;
+  updateUser(id: string, user: UserProfile): EditUserProfileResponse {
+    this.updateEntity(id, user);
+    return this.getEditedUserResponse(user);
   }
 
-  deleteUser(id: number): number {
+  deleteUser(id: string): string {
     this.removeEntity(id);
     return id;
   }
 
-  deleteUsers(ids: number[]): number[] {
+  deleteUsers(ids: string[]): string[] {
     this.removeEntities(ids);
     return ids;
   }
 
-  doesUserExist(id: number): boolean {
+  doesUserExist(id: string): boolean {
     return this.doesEntityExist(id);
   }
 
-  isUserDuplicate(user: UserParams, ignoreUserId: number = null): boolean {
-    const users: User[] = this.selectAll();
+  isUserDuplicate(user: UserProfile, ignoreUserId: string = null): boolean {
+    const users: UserProfile[] = this.selectAll();
     return users
-      .filter((item: User) => ignoreUserId === null || item.id !== ignoreUserId)
-      .some((item: User) => item.email === user.email);
+      .filter(
+        (item: UserProfile) => ignoreUserId === null || item.emailId !== ignoreUserId
+      )
+      .some((item: UserProfile) => item.emailId === user.emailId);
   }
 
-  private normaliseNewUser(params: UserParams): CreateUserResponse {
-    const ids: number[] = this.selectIds() as number[];
-    const id: number = Math.max(...ids) + 1;
-    return { ...params, id, createdAt: this.timestamp() };
+  private getNewUserResponse(user: UserProfile): EditUserProfileResponse {
+    // const ids: number[] = this.selectIds() as number[];
+    // const id: number = Math.max(...ids) + 1;
+    // return { ...user, createdAt: this.timestamp() };
+    const { userId } = user;
+    return { userId, status: 'active' };
   }
 
-  private normaliseEditedUser(user: Partial<User>) {
-    return { ...user, updatedAt: this.timestamp() };
+  private getEditedUserResponse(user: Partial<UserProfile>) {
+    const { userId } = user;
+    return { userId, status: 'active' };
   }
 
   private timestamp(): string {

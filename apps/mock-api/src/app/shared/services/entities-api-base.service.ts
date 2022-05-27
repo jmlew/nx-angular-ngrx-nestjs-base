@@ -20,7 +20,7 @@ export class EntitiesApiBaseService<T, K extends string | number> {
     return this.entities[id] !== undefined;
   }
 
-  protected updateEntity(id: number, changes: Partial<T>) {
+  protected updateEntity(id: K, changes: Partial<T>) {
     this.entities = this.entityService.updateOne({ id, changes }, this.entities);
   }
 

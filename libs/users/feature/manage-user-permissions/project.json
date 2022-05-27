@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/users/feature/manage-user-permissions",
+  "sourceRoot": "libs/users/feature/manage-user-permissions/src",
+  "prefix": "app",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/users/feature/manage-user-permissions"],
+      "options": {
+        "jestConfig": "libs/users/feature/manage-user-permissions/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/users/feature/manage-user-permissions/**/*.ts",
+          "libs/users/feature/manage-user-permissions/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["domain:users", "type:feature"]
+}

@@ -1,9 +1,0 @@
-<h1>Manage Users</h1>
-
-<app-dynamicform-generator></app-dynamicform-generator>
-
-<h3>Users List</h3>
-
-<app-api-status [requestState]="usersRequestState$ | async">
-  <users-list [users]="allUsers$ | async"></users-list>
-</app-api-status>

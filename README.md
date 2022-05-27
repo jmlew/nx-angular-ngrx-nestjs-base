@@ -53,11 +53,17 @@ _Example: `nx g @angular-architects/ddd:api --directory dynamicform --shared --t
 
 _Example: `nx g @nrwl/angular:ngrx users --directory +state/users --module=libs/users/domain/src/lib/users-domain.module.ts --syntax creators --facade`_
 
+### Generate a feature library without DDD plugin
+
+`nx g lib --name=<some-lib> --directory=<some-domain>feature --tags='type:feature, domain:<some-domain>' --dry-run --routing --lazy --parentModule=<path-to-domain-shell-module>`
+
+_Example: `manage-user-profiles --directory=users/feature --tags='type:feature, domain:users' --routing --lazy --parentModule=libs/users/shell/src/lib/users-shell.module.ts`_
+
 ### Generate a basic Angular library (ui / utils / api)
 
 > NB: feature libraries are generated using the DDD schematics
 
-`nx g lib --name=<lib-type>-<some-lib> --directory=<some-domain> --tags='type:<lib-type>, domain:<some-domain>' --dry-run`
+`nx g lib --name=<some-lib> --directory=<some-domain>/<lib-type> --tags='type:<lib-type>, domain:<some-domain>' --dry-run`
 
 Generates an Angular library without autogenerating DDD scaffolding.
 

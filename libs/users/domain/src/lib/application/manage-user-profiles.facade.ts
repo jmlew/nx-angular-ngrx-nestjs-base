@@ -2,37 +2,33 @@ import { Observable } from 'rxjs';
 
 import { Injectable } from '@angular/core';
 
-import {
-  CreateUserResponse,
-  UpdateUserResponse,
-  User,
-  UserParams,
-} from '../entities/user-api.model';
-import { UserDataService } from '../infrastructure/user.data.service';
+import { EditUserProfileResponse } from '../entities/api/user-profile-api.model';
+import { UserProfile, UserProfileParams } from '../entities/user-profile.model';
+import { UsersDataService } from '../infrastructure/users.data.service';
 
-/* Facade to provides an API to expose functionality for the usecase of managing users. */
-
+// TODO: Convert to state management facade, similar to that of Workitems.
+//
 @Injectable()
 export class ManageUserProfilesFacade {
-  constructor(private userDataService: UserDataService) {}
+  constructor(private userProfilesData: UsersDataService) {}
 
-  getAllUsers(): Observable<User[]> {
-    return this.userDataService.getAllUsers();
+  getUserProfiles(): Observable<UserProfile[]> {
+    return this.userProfilesData.getProfiless();
   }
 
-  getUserById(id: number): Observable<User> {
-    return this.userDataService.getUserById(id);
+  getUserProfile(emailId: string): Observable<UserProfile> {
+    return this.userProfilesData.getProfile(emailId);
   }
 
-  createUser(user: UserParams): Observable<CreateUserResponse> {
-    return this.userDataService.createUser(user);
+  createUserProfile(user: UserProfileParams): Observable<EditUserProfileResponse> {
+    return this.userProfilesData.createProfile(user);
   }
 
-  updateUser(user: User): Observable<UpdateUserResponse> {
-    return this.userDataService.updateUser(user);
+  updateUserProfile(user: UserProfile): Observable<EditUserProfileResponse> {
+    return this.userProfilesData.updateProfile(user);
   }
 
-  deleteUser(id: number): Observable<number> {
-    return this.userDataService.deleteUser(id);
+  deleteUserProfile(emailId: string): Observable<string> {
+    return this.userProfilesData.deleteProfile(emailId);
   }
 }

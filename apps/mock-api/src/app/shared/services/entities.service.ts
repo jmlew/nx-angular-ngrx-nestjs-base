@@ -44,7 +44,7 @@ export class EntitiesService<T, K extends string | number>
     );
   }
 
-  updateOne(update: UpdateEntity<T>, entities: Entity<T>): Entity<T> {
+  updateOne(update: UpdateEntity<T, K>, entities: Entity<T>): Entity<T> {
     const { id, changes } = update;
     if (entities[id]) {
       const entity: T = entities[id] as T;

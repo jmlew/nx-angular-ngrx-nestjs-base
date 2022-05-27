@@ -1,0 +1,26 @@
+<mat-card>
+  <mat-list>
+    <mat-list-item *ngFor="let user of users; index as idx">
+      <mat-icon mat-list-icon>{{ IconMat.Person }}</mat-icon>
+      <h3 mat-line>
+        {{ user.userName }} : {{ user.emailId }}
+      </h3>
+      <p mat-line>{{ user.createdAt | date }}</p>
+      <mat-divider *ngIf="idx < users.length - 1"></mat-divider>
+      <button
+        mat-icon-button
+        color="primary"
+        class="btn-hover"
+        (click)="edit.emit(user)">
+        <mat-icon aria-label="Edit">{{ IconMat.Edit }}</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        color="warn"
+        class="btn-hover"
+        (click)="remove.emit(user.emailId)">
+        <mat-icon aria-label="Edit">{{ IconMat.Delete }}</mat-icon>
+      </button>
+    </mat-list-item>
+  </mat-list>
+</mat-card>

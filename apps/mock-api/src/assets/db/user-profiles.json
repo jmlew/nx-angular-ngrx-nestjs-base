@@ -1,0 +1,26 @@
+{
+  "data": [
+    {
+      "userId": "foo",
+      "userName": "Jason",
+      "emailId": "jason@localhost",
+      "password": "samplejasonpassword",
+      "isLocked": "Y",
+      "isInactive": "Y",
+      "userRoles": [""],
+      "lastLoginDatetime": "2018-07-16T07:32:20.421Z",
+      "createdAt": "2018-07-16T07:32:20.421Z"
+    },
+    {
+      "userId": "bar",
+      "userName": "System",
+      "emailId": "system@localhost",
+      "password": "samplesystempassword",
+      "isLocked": "N",
+      "isInactive": "N",
+      "userRoles": [""],
+      "lastLoginDatetime": "2018-07-16T07:32:20.421Z",
+      "createdAt": "2018-07-16T07:32:20.421Z"
+    }
+  ]
+}
