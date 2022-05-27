@@ -19,7 +19,7 @@ enum ApiEndpoint {
 }
 
 @Injectable()
-export class WorkitemDataService {
+export class WorkitemsDataService {
   private baseUrl = `${ApiEndpoint.Base}/${ApiEndpoint.Workitems}`;
 
   constructor(private data: BaseDataService, private sseData: BaseSseDataService) {}

@@ -8,7 +8,7 @@ import { DataPersistence } from '@nrwl/angular';
 import { WorkitemsEffects } from './+state/workitems/workitems.effects';
 import * as fromWorkitems from './+state/workitems/workitems.reducer';
 import { ManageWorkitemsFacade } from './application/manage-workitems.facade';
-import { WorkitemDataService } from './infrastructure/workitem.data.service';
+import { WorkitemsDataService } from './infrastructure/workitems.data.service';
 
 @NgModule({
   imports: [
@@ -17,6 +17,6 @@ import { WorkitemDataService } from './infrastructure/workitem.data.service';
     StoreModule.forFeature(fromWorkitems.WORKITEMS_FEATURE_KEY, fromWorkitems.reducer),
     EffectsModule.forFeature([WorkitemsEffects]),
   ],
-  providers: [ManageWorkitemsFacade, WorkitemDataService, DataPersistence],
+  providers: [ManageWorkitemsFacade, WorkitemsDataService, DataPersistence],
 })
 export class WorkitemsDomainModule {}

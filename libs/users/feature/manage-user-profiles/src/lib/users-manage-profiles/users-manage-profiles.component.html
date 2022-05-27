@@ -1,5 +1,5 @@
 <h3>Manage User Profiles</h3>
 
-<app-api-status [requestState]="usersRequestState$ | async">
-  <users-list [users]="allUsers$ | async"></users-list>
+<app-api-status [requestState]="userProfilesRequestState$ | async">
+  <users-list [users]="userProfiles$ | async"></users-list>
 </app-api-status>

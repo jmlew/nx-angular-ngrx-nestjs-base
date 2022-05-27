@@ -22,7 +22,7 @@ export class UsersDataService {
 
   constructor(private data: BaseDataService) {}
 
-  getProfiless(): Observable<UserProfile[]> {
+  getProfiles(): Observable<UserProfile[]> {
     return this.data.get<UserProfile[]>(this.baseUrlProfile);
   }
 

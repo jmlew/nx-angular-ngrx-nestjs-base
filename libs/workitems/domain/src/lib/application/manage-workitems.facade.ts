@@ -9,7 +9,7 @@ import * as WorkitemsActions from '../+state/workitems/workitems.actions';
 import * as WorkitemsFeature from '../+state/workitems/workitems.reducer';
 import * as WorkitemsSelectors from '../+state/workitems/workitems.selectors';
 import { Workitem } from '../entities/workitem.model';
-import { WorkitemDataService } from '../infrastructure/workitem.data.service';
+import { WorkitemsDataService } from '../infrastructure/workitems.data.service';
 
 /*
    Application facade act as the main contact for a specific usecase (managing workitems)
@@ -22,11 +22,6 @@ import { WorkitemDataService } from '../infrastructure/workitem.data.service';
 
 @Injectable()
 export class ManageWorkitemsFacade {
-  constructor(
-    private dataService: WorkitemDataService,
-    private readonly store: Store<WorkitemsFeature.WorkitemsState>
-  ) {}
-
   workitemsRequestState$: Observable<ApiRequestState> = this.store.pipe(
     select(WorkitemsSelectors.selectWorkitemsRequestState)
   );
@@ -37,8 +32,13 @@ export class ManageWorkitemsFacade {
     select(WorkitemsSelectors.selectSelectedWorkitem)
   );
 
+  constructor(
+    private workitemsData: WorkitemsDataService,
+    private readonly store: Store<WorkitemsFeature.WorkitemsState>
+  ) {}
+
   getWorkitemsStream(): SseStream<Workitem[]> {
-    return this.dataService.getWorkitemsStream();
+    return this.workitemsData.getWorkitemsStream();
   }
 
   loadWorkitems() {

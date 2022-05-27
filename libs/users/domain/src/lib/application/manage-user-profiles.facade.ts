@@ -1,19 +1,38 @@
 import { Observable } from 'rxjs';
 
 import { Injectable } from '@angular/core';
+import { ApiRequestState } from '@app/shared/api-status/util';
+import { Store, select } from '@ngrx/store';
 
-import { EditUserProfileResponse } from '../entities/api/user-profile-api.model';
-import { UserProfile, UserProfileParams } from '../entities/user-profile.model';
+import * as UserProfilesActions from '../+state/profiles/profiles.actions';
+import * as UserProfilesFeature from '../+state/profiles/profiles.reducer';
+import * as UserProfilesSelectors from '../+state/profiles/profiles.selectors';
+import { UserProfile } from '../entities/user-profile.model';
 import { UsersDataService } from '../infrastructure/users.data.service';
 
-// TODO: Convert to state management facade, similar to that of Workitems.
-//
 @Injectable()
 export class ManageUserProfilesFacade {
-  constructor(private userProfilesData: UsersDataService) {}
+  userProfilesRequestState$: Observable<ApiRequestState> = this.store.pipe(
+    select(UserProfilesSelectors.selectUserProfilesRequestState)
+  );
+  userProfiles$: Observable<UserProfile[]> = this.store.pipe(
+    select(UserProfilesSelectors.selectAllUserProfiles)
+  );
+  selectedUserProfile$: Observable<UserProfile | undefined> = this.store.pipe(
+    select(UserProfilesSelectors.selectSelectedUserProfile)
+  );
 
-  getUserProfiles(): Observable<UserProfile[]> {
-    return this.userProfilesData.getProfiless();
+  constructor(
+    private userProfilesData: UsersDataService,
+    private readonly store: Store<UserProfilesFeature.UserProfilesState>
+  ) {}
+
+  loadUserProfiles() {
+    this.store.dispatch(UserProfilesActions.loadUserProfiles());
+  }
+
+  /* getUserProfiles(): Observable<UserProfile[]> {
+    return this.userProfilesData.getProfiles();
   }
 
   getUserProfile(emailId: string): Observable<UserProfile> {
@@ -30,5 +49,5 @@ export class ManageUserProfilesFacade {
 
   deleteUserProfile(emailId: string): Observable<string> {
     return this.userProfilesData.deleteProfile(emailId);
-  }
+  } */
 }

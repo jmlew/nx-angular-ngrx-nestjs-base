@@ -5,7 +5,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { DataPersistence } from '@nrwl/angular';
 
 import { Workitem } from '../../entities/workitem.model';
-import { WorkitemDataService } from '../../infrastructure/workitem.data.service';
+import { WorkitemsDataService } from '../../infrastructure/workitems.data.service';
 import * as WorkitemsActions from './workitems.actions';
 import * as WorkitemsFeature from './workitems.reducer';
 
@@ -48,6 +48,6 @@ export class WorkitemsEffects {
   constructor(
     private readonly actions$: Actions,
     private readonly dataPersistence: DataPersistence<WorkitemsFeature.WorkitemsPartialState>,
-    private readonly dataService: WorkitemDataService
+    private readonly dataService: WorkitemsDataService
   ) {}
 }

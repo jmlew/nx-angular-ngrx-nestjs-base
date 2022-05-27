@@ -1,14 +1,8 @@
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import {
-  ApiRequestState,
-  ApiStatus,
-  getApiStatusSuccess,
-} from '@app/shared/api-status/util';
+import { ApiRequestState, ApiStatus } from '@app/shared/api-status/util';
 import { ManageUserProfilesFacade, UserProfile } from '@app/users/domain';
-
-// TODO: Add NgRX to Facade and handle in each feature controller.
 
 @Component({
   selector: 'users-manage-profiles',
@@ -17,9 +11,10 @@ import { ManageUserProfilesFacade, UserProfile } from '@app/users/domain';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UsersManageProfilesComponent implements OnInit {
-  readonly allUsers$: Observable<UserProfile[]> =
-    this.userProfilesFacade.getUserProfiles();
-  readonly usersRequestState$: Observable<ApiRequestState> = of(getApiStatusSuccess());
+  readonly userProfiles$: Observable<UserProfile[]> =
+    this.userProfilesFacade.userProfiles$;
+  readonly userProfilesRequestState$: Observable<ApiRequestState> =
+    this.userProfilesFacade.userProfilesRequestState$;
 
   readonly ApiStatus = ApiStatus;
 
@@ -29,8 +24,8 @@ export class UsersManageProfilesComponent implements OnInit {
     this.loadUsers();
   }
 
+  // TODO: move to router state handler and validate persistent state before API call.
   loadUsers(): void {
-    // TODO: Add NgRX and call load all users action.
-    // this.usersStore.loadAllUsers();
+    this.userProfilesFacade.loadUserProfiles();
   }
 }
