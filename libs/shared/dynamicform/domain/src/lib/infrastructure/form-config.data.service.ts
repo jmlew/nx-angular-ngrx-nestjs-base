@@ -1,7 +1,7 @@
 import { Observable, of } from 'rxjs';
 
 import { Injectable } from '@angular/core';
-import { BaseDataService } from '@app/shared/util-common';
+import { BaseDataService } from '@app/shared/util-http';
 
 import { FormConfig } from '../entities/form-config.model';
 

@@ -1,7 +1,7 @@
 import { Observable, of } from 'rxjs';
 
 import { Injectable } from '@angular/core';
-import { BaseDataService } from '@app/shared/util-common';
+import { BaseDataService } from '@app/shared/util-http';
 
 /* Data service to retrieve the route item names from the server which depend on the user
 permissions.

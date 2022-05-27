@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { SharedUtilCommonModule } from '@app/shared/util-common';
+import { SharedUtilHttpModule } from '@app/shared/util-http';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { DataPersistence } from '@nrwl/angular';
@@ -13,7 +13,7 @@ import { WorkitemDataService } from './infrastructure/workitem.data.service';
 @NgModule({
   imports: [
     CommonModule,
-    SharedUtilCommonModule,
+    SharedUtilHttpModule,
     StoreModule.forFeature(fromWorkitems.WORKITEMS_FEATURE_KEY, fromWorkitems.reducer),
     EffectsModule.forFeature([WorkitemsEffects]),
   ],

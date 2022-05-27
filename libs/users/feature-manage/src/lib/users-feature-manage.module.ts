@@ -5,7 +5,7 @@ import { SharedDynamicformApiModule } from '@app/shared/dynamicform/api';
 import { UsersDomainModule } from '@app/users/domain';
 import { UsersUiManageModule } from '@app/users/ui-manage';
 
-import { UsersFeatureManageRoutingModule } from './users-feature-manage-routing.module';
+import { UsersFeatureManageRoutingModule } from './users-feature-manage.routing.module';
 import { UsersManageProfilesComponent } from './users-manage-profiles/users-manage-profiles.component';
 
 const sharedModules = [SharedApiStatusUiModule, SharedDynamicformApiModule];

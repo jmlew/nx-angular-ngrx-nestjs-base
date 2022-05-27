@@ -8,4 +8,4 @@ import { BaseDataService } from './http/base.data.service';
   imports: [CommonModule],
   providers: [BaseDataService, BaseSseDataService],
 })
-export class SharedUtilCommonModule {}
+export class SharedUtilHttpModule {}

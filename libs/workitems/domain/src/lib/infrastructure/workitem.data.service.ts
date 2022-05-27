@@ -1,7 +1,7 @@
 import { Observable, map } from 'rxjs';
 
 import { Injectable } from '@angular/core';
-import { BaseDataService, BaseSseDataService, SseStream } from '@app/shared/util-common';
+import { BaseDataService, BaseSseDataService, SseStream } from '@app/shared/util-http';
 
 import {
   CreateWorkitemResponse,

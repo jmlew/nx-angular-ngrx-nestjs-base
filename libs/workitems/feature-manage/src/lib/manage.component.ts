@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ApiRequestState, ApiStatus } from '@app/shared/api-status/util';
-import { SseStream } from '@app/shared/util-common';
+import { SseStream } from '@app/shared/util-http';
 import { ManageWorkitemsFacade, Workitem } from '@app/workitems/domain';
 
 @Component({
@@ -16,8 +16,8 @@ export class ManageComponent implements OnInit, OnDestroy {
   readonly workitemsRequestState$: Observable<ApiRequestState> =
     this.manageFacade.workitemsRequestState$;
 
-  workitemsStreamData$: Observable<Workitem[]>;
   private workitemsStream: SseStream<Workitem[]>;
+  workitemsStreamData$: Observable<Workitem[]>;
 
   constructor(private manageFacade: ManageWorkitemsFacade) {}
 

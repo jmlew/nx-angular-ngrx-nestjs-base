@@ -50,7 +50,7 @@
         "libs/shared/navigation/domain/src/index.ts"
       ],
       "@app/shared/ui-common": ["libs/shared/ui-common/src/index.ts"],
-      "@app/shared/util-common": ["libs/shared/util-common/src/index.ts"],
+      "@app/shared/util-http": ["libs/shared/util-http/src/index.ts"],
       "@app/users/api-model": [
         "libs/users/domain/src/lib/entities/user-api.model.ts"
       ],

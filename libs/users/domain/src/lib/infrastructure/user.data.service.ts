@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Injectable } from '@angular/core';
-import { BaseDataService } from '@app/shared/util-common';
+import { BaseDataService } from '@app/shared/util-http';
 
 import {
   CreateUserResponse,

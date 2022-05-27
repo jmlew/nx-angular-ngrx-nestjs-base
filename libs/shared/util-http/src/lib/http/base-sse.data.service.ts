@@ -17,7 +17,9 @@ export class BaseSseDataService {
     const sse: SseStream<T> = this.createSseStream<T>(url);
     return {
       source: sse.source,
-      data: sse.data.pipe(catchError((error: unknown) => throwError(() => error))),
+      data: sse.data.pipe(
+        catchError((error: unknown) => throwError(() => error))
+      ),
     };
   }
 

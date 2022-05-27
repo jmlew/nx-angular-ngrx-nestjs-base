@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 
 import { Injectable } from '@angular/core';
 import { ApiRequestState } from '@app/shared/api-status/util';
-import { SseStream } from '@app/shared/util-common';
+import { SseStream } from '@app/shared/util-http';
 import { Store, select } from '@ngrx/store';
 
 import * as WorkitemsActions from '../+state/workitems/workitems.actions';
