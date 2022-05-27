@@ -1,0 +1,10 @@
+<mat-card>
+  <mat-list>
+    <mat-list-item *ngFor="let workitem of workitems; index as idx">
+      <h3 mat-line>{{workitem.id}} : {{workitem.name}}</h3>
+      <h4 mat-line>{{workitem.description}}</h4>
+      <p mat-line>{{workitem.createdAt | date}}</p>
+      <mat-divider *ngIf="idx < workitems.length - 1"></mat-divider>
+    </mat-list-item>
+  </mat-list>
+</mat-card>

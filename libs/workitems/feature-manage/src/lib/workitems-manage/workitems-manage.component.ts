@@ -1,16 +1,17 @@
 import { Observable } from 'rxjs';
 
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { ApiRequestState, ApiStatus } from '@app/shared/api-status/util';
 import { SseStream } from '@app/shared/util-http';
 import { ManageWorkitemsFacade, Workitem } from '@app/workitems/domain';
 
 @Component({
   selector: 'app-workitems-manage',
-  templateUrl: './manage.component.html',
-  styleUrls: ['./manage.component.scss'],
+  templateUrl: './workitems-manage.component.html',
+  styleUrls: ['./workitems-manage.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ManageComponent implements OnInit, OnDestroy {
+export class WorkitemsManageComponent implements OnInit, OnDestroy {
   readonly ApiStatus = ApiStatus;
   readonly allWorkitems$: Observable<Workitem[]> = this.manageFacade.allWorkitems$;
   readonly workitemsRequestState$: Observable<ApiRequestState> =

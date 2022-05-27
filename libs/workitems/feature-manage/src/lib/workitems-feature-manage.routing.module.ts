@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ManageComponent } from './manage.component';
+import { WorkitemsManageComponent } from './workitems-manage/workitems-manage.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ManageComponent,
+    component: WorkitemsManageComponent,
   },
   {
     path: '/:id',
-    component: ManageComponent,
+    component: WorkitemsManageComponent,
   },
 ];
 

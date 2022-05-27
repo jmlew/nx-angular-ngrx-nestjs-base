@@ -65,7 +65,8 @@
       "@app/workitems/feature-manage": [
         "libs/workitems/feature-manage/src/index.ts"
       ],
-      "@app/workitems/shell": ["libs/workitems/shell/src/index.ts"]
+      "@app/workitems/shell": ["libs/workitems/shell/src/index.ts"],
+      "@app/workitems/ui-manage": ["libs/workitems/ui-manage/src/index.ts"]
     }
   },
   "angularCompilerOptions": {

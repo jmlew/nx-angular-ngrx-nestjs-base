@@ -3,12 +3,13 @@ import { NgModule } from '@angular/core';
 import { SharedExternalLibrariesModule } from '@app/shared-external-libraries';
 import { SharedApiStatusUiModule } from '@app/shared/api-status/ui';
 import { WorkitemsDomainModule } from '@app/workitems/domain';
+import { WorkitemsUiManageModule } from '@app/workitems/ui-manage';
 
-import { ManageComponent } from './manage.component';
 import { UsersFeatureManageRoutingModule } from './workitems-feature-manage.routing.module';
+import { WorkitemsManageComponent } from './workitems-manage/workitems-manage.component';
 
 const sharedModules = [SharedApiStatusUiModule, SharedExternalLibrariesModule];
-const domainModules = [WorkitemsDomainModule];
+const domainModules = [WorkitemsDomainModule, WorkitemsUiManageModule];
 
 @NgModule({
   imports: [
@@ -17,7 +18,7 @@ const domainModules = [WorkitemsDomainModule];
     ...domainModules,
     UsersFeatureManageRoutingModule,
   ],
-  declarations: [ManageComponent],
-  exports: [ManageComponent],
+  declarations: [WorkitemsManageComponent],
+  exports: [],
 })
 export class WorkitemsFeatureManageModule {}

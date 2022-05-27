@@ -1,0 +1,9 @@
+<h2>Workitems SSE stream:</h2>
+
+<app-workitems-list [workitems]="workitemsStreamData$ | async"></app-workitems-list>
+
+<h2>Workitems without SSE stream:</h2>
+
+<app-api-status [requestState]="workitemsRequestState$ | async">
+  <app-workitems-list [workitems]="allWorkitems$ | async"></app-workitems-list>
+</app-api-status>
