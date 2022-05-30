@@ -1,18 +1,17 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {
     path: 'users',
-    data: { sample: 'foo' },
+    data: { sample: 'sample users data' },
     loadChildren: () => import('@app/users/shell').then((m) => m.UsersShellModule),
   },
   {
     path: 'workitems',
-    data: { sample: 'bar' },
+    data: { sample: 'sample workitems data' },
     loadChildren: () =>
       import('@app/workitems/shell').then((m) => m.WorkitemsShellModule),
   },
@@ -25,10 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
-    StoreRouterConnectingModule.forRoot(),
-  ],
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {

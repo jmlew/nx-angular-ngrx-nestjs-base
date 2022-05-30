@@ -5,8 +5,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { DataPersistence } from '@nrwl/angular';
 
-import { UserProfilesEffects } from './+state/profiles/profiles.effects';
-import * as fromUserProfiles from './+state/profiles/profiles.reducer';
+import * as fromUsers from './+state';
 import { ManageUserProfilesFacade } from './application/manage-user-profiles.facade';
 import { UsersDataService } from './infrastructure/users.data.service';
 
@@ -14,11 +13,8 @@ import { UsersDataService } from './infrastructure/users.data.service';
   imports: [
     CommonModule,
     SharedUtilHttpModule,
-    StoreModule.forFeature(
-      fromUserProfiles.USER_PROFILES_FEATURE_KEY,
-      fromUserProfiles.reducer
-    ),
-    EffectsModule.forFeature([UserProfilesEffects]),
+    StoreModule.forFeature(fromUsers.USER_FEATURE_KEY, fromUsers.usersReducers),
+    EffectsModule.forFeature(fromUsers.usersEffects),
   ],
   providers: [ManageUserProfilesFacade, UsersDataService, DataPersistence],
 })

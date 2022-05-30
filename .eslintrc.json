@@ -33,12 +33,7 @@
               },
               {
                 "sourceTag": "type:feature",
-                "onlyDependOnLibsWithTags": [
-                  "type:domain-logic",
-                  "type:util",
-                  "type:ui",
-                  "type:api"
-                ]
+                "onlyDependOnLibsWithTags": ["type:domain-logic", "type:util", "type:ui"]
               },
               {
                 "sourceTag": "type:shell",
@@ -60,7 +55,7 @@
               },
               {
                 "sourceTag": "type:domain-logic",
-                "onlyDependOnLibsWithTags": ["type:util", "type:env"]
+                "onlyDependOnLibsWithTags": ["type:domain-logic", "type:util", "type:env"]
               },
               {
                 "sourceTag": "type:util",
@@ -77,10 +72,6 @@
               {
                 "sourceTag": "domain:users",
                 "onlyDependOnLibsWithTags": ["domain:users", "domain:shared"]
-              },
-              {
-                "sourceTag": "domain:navigation",
-                "onlyDependOnLibsWithTags": ["domain:navigation", "domain:shared"]
               },
               {
                 "sourceTag": "domain:workitems",

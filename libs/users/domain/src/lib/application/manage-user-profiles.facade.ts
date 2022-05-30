@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 
 import { Injectable } from '@angular/core';
 import { ApiRequestState } from '@app/shared/api-status/util';
+import * as RouterSelectors from '@app/shared/navigation/domain';
 import { Store, select } from '@ngrx/store';
 
 import * as UserProfilesActions from '../+state/profiles/profiles.actions';
@@ -19,12 +20,12 @@ export class ManageUserProfilesFacade {
     select(UserProfilesSelectors.selectAllUserProfiles)
   );
   selectedUserProfile$: Observable<UserProfile | undefined> = this.store.pipe(
-    select(UserProfilesSelectors.selectSelectedUserProfile)
+    select(UserProfilesSelectors.selectCurrentUserProfile)
   );
 
   constructor(
-    private userProfilesData: UsersDataService,
-    private readonly store: Store<UserProfilesFeature.UserProfilesState>
+    private readonly store: Store<UserProfilesFeature.UserProfilesState>,
+    private dataService: UsersDataService
   ) {}
 
   loadUserProfiles() {
@@ -32,22 +33,22 @@ export class ManageUserProfilesFacade {
   }
 
   /* getUserProfiles(): Observable<UserProfile[]> {
-    return this.userProfilesData.getProfiles();
+    return this.dataService.getProfiles();
   }
 
   getUserProfile(emailId: string): Observable<UserProfile> {
-    return this.userProfilesData.getProfile(emailId);
+    return this.dataService.getProfile(emailId);
   }
 
   createUserProfile(user: UserProfileParams): Observable<EditUserProfileResponse> {
-    return this.userProfilesData.createProfile(user);
+    return this.dataService.createProfile(user);
   }
 
   updateUserProfile(user: UserProfile): Observable<EditUserProfileResponse> {
-    return this.userProfilesData.updateProfile(user);
+    return this.dataService.updateProfile(user);
   }
 
   deleteUserProfile(emailId: string): Observable<string> {
-    return this.userProfilesData.deleteProfile(emailId);
+    return this.dataService.deleteProfile(emailId);
   } */
 }

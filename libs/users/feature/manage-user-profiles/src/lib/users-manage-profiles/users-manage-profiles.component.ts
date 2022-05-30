@@ -11,12 +11,11 @@ import { ManageUserProfilesFacade, UserProfile } from '@app/users/domain';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UsersManageProfilesComponent implements OnInit {
+  readonly ApiStatus = ApiStatus;
   readonly userProfiles$: Observable<UserProfile[]> =
     this.userProfilesFacade.userProfiles$;
   readonly userProfilesRequestState$: Observable<ApiRequestState> =
     this.userProfilesFacade.userProfilesRequestState$;
-
-  readonly ApiStatus = ApiStatus;
 
   constructor(private userProfilesFacade: ManageUserProfilesFacade) {}
 

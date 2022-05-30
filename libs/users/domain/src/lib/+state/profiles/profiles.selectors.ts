@@ -1,15 +1,21 @@
+import { Params } from '@angular/router';
 import * as fromApiStatus from '@app/shared/api-status/util';
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import * as RouterSelectors from '@app/shared/navigation/domain';
+import { createSelector } from '@ngrx/store';
 
 import { UserProfile } from '../../entities/user-profile.model';
+import { UsersRouteParam } from '../../entities/user-routes.enum';
+import { UsersPartialState, selectUsersState } from './../index';
 import {
   USER_PROFILES_FEATURE_KEY,
+  UserProfileEntities,
   UserProfilesState,
-  profilesAdapter,
+  userProfilesAdapter,
 } from './profiles.reducer';
 
-export const getUserProfilesState = createFeatureSelector<UserProfilesState>(
-  USER_PROFILES_FEATURE_KEY
+export const selectUserProfilesState = createSelector(
+  selectUsersState,
+  (state: UsersPartialState) => state[USER_PROFILES_FEATURE_KEY]
 );
 
 export const {
@@ -17,10 +23,10 @@ export const {
   selectEntities: selectUserProfileEntities,
   selectIds: selectUserProfileIds,
   selectTotal: selectUserProfilesTotal,
-} = profilesAdapter.getSelectors(getUserProfilesState);
+} = userProfilesAdapter.getSelectors(selectUserProfilesState);
 
 export const selectUserProfilesRequestState = createSelector(
-  getUserProfilesState,
+  selectUserProfilesState,
   (state: UserProfilesState): fromApiStatus.ApiRequestState =>
     fromApiStatus.getApiRequestState(state)
 );
@@ -35,14 +41,11 @@ export const selectUserProfilesApiStatus = createSelector(
   (state: fromApiStatus.ApiRequestState): fromApiStatus.ApiStatus => state.status
 );
 
-export const selectSelectedId = createSelector(
-  getUserProfilesState,
-  (state: UserProfilesState): number | null => state.selectedId
-);
-
-export const selectSelectedUserProfile = createSelector(
+export const selectCurrentUserProfile = createSelector(
   selectUserProfileEntities,
-  selectSelectedId,
-  (entities, selectedId): UserProfile | undefined =>
-    selectedId ? entities[selectedId] : undefined
+  RouterSelectors.selectRouteParams,
+  (entities: UserProfileEntities, params: Params): UserProfile | undefined => {
+    const id: string = params[UsersRouteParam.ProfileId];
+    return entities[id];
+  }
 );

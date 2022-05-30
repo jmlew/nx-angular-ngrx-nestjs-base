@@ -5,26 +5,26 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { httpInterceptorProviders } from './infrastructure/interceptors';
 import { environment } from '@app/shared/environments';
 import { EffectsModule } from '@ngrx/effects';
-import { routerReducer } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { rootMetaReducers, rootReducers, rootRuntimeChecks } from './+state';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { CustomRouteSerializer, selectRouterState } from '@app/shared/navigation/domain';
 
 @NgModule({
   imports: [
     BrowserModule,
     HttpClientModule,
-    StoreModule.forRoot(
-      { router: routerReducer },
-      {
-        metaReducers: environment.production ? [] : [],
-        runtimeChecks: {
-          strictActionImmutability: true,
-          strictStateImmutability: true,
-        },
-      }
-    ),
+    StoreModule.forRoot(rootReducers, {
+      metaReducers: rootMetaReducers,
+      runtimeChecks: rootRuntimeChecks,
+    }),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    StoreRouterConnectingModule.forRoot({
+      stateKey: selectRouterState,
+      serializer: CustomRouteSerializer,
+    }),
   ],
   exports: [HttpClientModule],
   providers: [httpInterceptorProviders],

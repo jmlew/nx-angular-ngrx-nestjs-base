@@ -1,4 +1,5 @@
 export * from './lib/users-domain.module';
+export * from './lib/entities/user-routes.enum';
 
 /* Domain: only export models and facades along with the module. */
 

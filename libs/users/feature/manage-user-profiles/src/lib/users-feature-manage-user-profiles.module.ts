@@ -5,6 +5,7 @@ import { UsersDomainModule } from '@app/users/domain';
 import { UsersUiModule } from '@app/users/ui';
 
 import { ManageUserProfilesRoutingModule } from './manage-user-profiles.routing.module';
+import { UsersCreateProfileComponent } from './users-create-profile/users-create-profile.component';
 import { UsersEditProfileComponent } from './users-edit-profile/users-edit-profile.component';
 import { UsersManageProfilesComponent } from './users-manage-profiles/users-manage-profiles.component';
 
@@ -18,7 +19,11 @@ const domainModules = [UsersDomainModule, UsersUiModule];
     ...domainModules,
     ManageUserProfilesRoutingModule,
   ],
-  declarations: [UsersManageProfilesComponent, UsersEditProfileComponent],
+  declarations: [
+    UsersManageProfilesComponent,
+    UsersEditProfileComponent,
+    UsersCreateProfileComponent,
+  ],
   exports: [UsersManageProfilesComponent, UsersEditProfileComponent],
 })
 export class UsersFeatureManageUserProfilesModule {}

@@ -2,7 +2,7 @@ import { UserProfile } from '../../entities/user-profile.model';
 import {
   UserProfilesPartialState,
   initialState,
-  profilesAdapter,
+  userProfilesAdapter,
 } from './profiles.reducer';
 import * as UserProfilesSelectors from './profiles.selectors';
 
@@ -19,7 +19,7 @@ describe('UserProfiles Selectors', () => {
 
   beforeEach(() => {
     state = {
-      profiles: profilesAdapter.setAll(
+      profiles: userProfilesAdapter.setAll(
         [createUserProfile(1), createUserProfile(2), createUserProfile(3)],
         {
           ...initialState,
