@@ -1,12 +1,20 @@
-import { ActivatedRouteSnapshot, Params, RouterStateSnapshot } from '@angular/router';
+import { Type } from '@angular/core';
+import {
+  ActivatedRouteSnapshot,
+  Data,
+  Params,
+  RouterStateSnapshot,
+} from '@angular/router';
 import { RouterStateSerializer } from '@ngrx/router-store';
 
-export const ROUTER_FEATURE_KEY = 'router';
+export const ROUTER_FEATURE_KEY = 'routerReducer';
 
 export interface RouterStateUrl {
   url: string;
   params: Params;
   queryParams: Params;
+  // component: Type<any> | string | null;
+  data: Data;
 }
 
 /**
@@ -25,8 +33,13 @@ export class CustomRouteSerializer implements RouterStateSerializer<RouterStateU
       state = state.firstChild;
     }
 
-    const { params } = state;
+    const { params, data } = state;
 
-    return { url, params, queryParams };
+    return {
+      url,
+      params,
+      queryParams,
+      data,
+    };
   }
 }

@@ -1,4 +1,4 @@
-import { EditUserProfileResponse, UserProfile } from '@app/users/api-model';
+import { UpdateUserProfileResponse, UserProfile } from '@app/users/api-model';
 import { Injectable } from '@nestjs/common';
 
 import * as usersDb from '../../../assets/db/user-profiles.json';
@@ -25,12 +25,12 @@ export class UsersService extends EntitiesApiBaseService<UserProfile, string> {
     return this.selectOne(id);
   }
 
-  createUser(user: UserProfile): EditUserProfileResponse {
+  createUser(user: UserProfile): UpdateUserProfileResponse {
     this.addEntity(user);
     return this.getNewUserResponse(user);
   }
 
-  updateUser(id: string, user: UserProfile): EditUserProfileResponse {
+  updateUser(id: string, user: UserProfile): UpdateUserProfileResponse {
     this.updateEntity(id, user);
     return this.getEditedUserResponse(user);
   }
@@ -58,7 +58,7 @@ export class UsersService extends EntitiesApiBaseService<UserProfile, string> {
       .some((item: UserProfile) => item.emailId === user.emailId);
   }
 
-  private getNewUserResponse(user: UserProfile): EditUserProfileResponse {
+  private getNewUserResponse(user: UserProfile): UpdateUserProfileResponse {
     // const ids: number[] = this.selectIds() as number[];
     // const id: number = Math.max(...ids) + 1;
     // return { ...user, createdAt: this.timestamp() };

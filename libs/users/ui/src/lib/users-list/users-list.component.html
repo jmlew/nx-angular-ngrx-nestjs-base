@@ -18,9 +18,11 @@
         mat-icon-button
         color="warn"
         class="btn-hover"
-        (click)="remove.emit(user.emailId)">
+        (click)="remove.emit(user)">
         <mat-icon aria-label="Edit">{{ IconMat.Delete }}</mat-icon>
       </button>
     </mat-list-item>
   </mat-list>
 </mat-card>
+
+<!-- (click)="edit.emit(user)" -->

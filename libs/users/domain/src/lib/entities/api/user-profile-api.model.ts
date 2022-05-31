@@ -5,12 +5,12 @@
 import { UserProfile, UserProfileParams } from '../user-profile.model';
 export { UserProfile, UserProfileParams };
 
-export interface EditUserProfileResponse {
+export interface UpdateUserProfileResponse {
   userId: string;
   status: string; // To be converted into an ID referencing the Messages API map.
 }
 
-export interface EditUserProfileFailedResponse {
+export interface UpdateUserProfileFailedResponse {
   userId: string;
   errorMessages: string[];
 }

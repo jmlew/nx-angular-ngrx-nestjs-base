@@ -13,7 +13,7 @@ import { toStreamWithDelay } from '../../shared/utils';
 import { UsersService } from './users.service';
 import { Observable } from 'rxjs';
 import {
-  EditUserProfileResponse,
+  UpdateUserProfileResponse,
   UserProfile,
   UserProfileParams,
 } from '@app/users/api-model';
@@ -47,7 +47,7 @@ export class UserProfilesController {
   }
 
   @Post()
-  createUser(@Body() params: UserProfileParams): Observable<EditUserProfileResponse> {
+  createUser(@Body() params: UserProfileParams): Observable<UpdateUserProfileResponse> {
     if (this.userService.isUserDuplicate(params)) {
       throw new BadRequestException(ErrorMessage.DuplicateEmail);
     }
@@ -58,7 +58,7 @@ export class UserProfilesController {
   updateUser(
     @Param('id') emailId: string,
     @Body() params: UserProfile
-  ): Observable<EditUserProfileResponse> {
+  ): Observable<UpdateUserProfileResponse> {
     if (!this.userService.doesUserExist(emailId)) {
       throw new BadRequestException(ErrorMessage.NoUserMatch);
     }

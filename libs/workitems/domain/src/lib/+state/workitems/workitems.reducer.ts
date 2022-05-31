@@ -24,17 +24,17 @@ export const workitemsAdapter: EntityAdapter<Workitem> = createEntityAdapter<Wor
 
 export const initialState: WorkitemsState = workitemsAdapter.getInitialState({
   selectedId: null,
-  ...fromApiStatus.getApiStatusInit(),
+  ...fromApiStatus.getApiInitState(),
 });
 
 const workitemsReducer = createReducer(
   initialState,
-  on(WorkitemsActions.loadWorkitems, (state) => fromApiStatus.onApiStatusPending(state)),
+  on(WorkitemsActions.loadWorkitems, (state) => fromApiStatus.onApiStatePending(state)),
   on(WorkitemsActions.loadWorkitemsSuccess, (state, { workitems }) =>
-    workitemsAdapter.setAll(workitems, fromApiStatus.onApiStatusSuccess(state))
+    workitemsAdapter.setAll(workitems, fromApiStatus.onApiStateSuccess(state))
   ),
   on(WorkitemsActions.loadWorkitemsFailure, (state, { error }) =>
-    fromApiStatus.onApiStatusError(state, error)
+    fromApiStatus.onApiStateFailed(state, error)
   )
 );
 

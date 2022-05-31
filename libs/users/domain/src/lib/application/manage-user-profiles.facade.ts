@@ -2,7 +2,6 @@ import { Observable } from 'rxjs';
 
 import { Injectable } from '@angular/core';
 import { ApiRequestState } from '@app/shared/api-status/util';
-import * as RouterSelectors from '@app/shared/navigation/domain';
 import { Store, select } from '@ngrx/store';
 
 import * as UserProfilesActions from '../+state/profiles/profiles.actions';
@@ -22,6 +21,9 @@ export class ManageUserProfilesFacade {
   selectedUserProfile$: Observable<UserProfile | undefined> = this.store.pipe(
     select(UserProfilesSelectors.selectCurrentUserProfile)
   );
+  selectAllUserProfilesLoadded$: Observable<boolean> = this.store.pipe(
+    select(UserProfilesSelectors.selectAllUserProfilesLoadded)
+  );
 
   constructor(
     private readonly store: Store<UserProfilesFeature.UserProfilesState>,
@@ -30,6 +32,10 @@ export class ManageUserProfilesFacade {
 
   loadUserProfiles() {
     this.store.dispatch(UserProfilesActions.loadUserProfiles());
+  }
+
+  deleteUserProfile(id: string) {
+    this.store.dispatch(UserProfilesActions.deleteUserProfile({ id }));
   }
 
   /* getUserProfiles(): Observable<UserProfile[]> {

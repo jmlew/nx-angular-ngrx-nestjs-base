@@ -20,18 +20,17 @@ export const {
 
 export const selectWorkitemsRequestState = createSelector(
   getWorkitemsState,
-  (state: WorkitemsState): fromApiStatus.ApiRequestState =>
-    fromApiStatus.getApiRequestState(state)
+  fromApiStatus.getApiRequestState
 );
 
 export const selectWorkitemsError = createSelector(
   selectWorkitemsRequestState,
-  (state: fromApiStatus.ApiRequestState): string | null => state.error
+  fromApiStatus.getApiRequestError
 );
 
 export const selectWorkitemsApiStatus = createSelector(
   selectWorkitemsRequestState,
-  (state: fromApiStatus.ApiRequestState): fromApiStatus.ApiStatus => state.status
+  fromApiStatus.getApiRequestStatus
 );
 
 export const selectSelectedId = createSelector(

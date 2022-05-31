@@ -17,7 +17,8 @@ export type UserProfileEntities = Dictionary<UserProfile>;
 export interface UserProfilesState
   extends EntityState<UserProfile>,
     fromApiStatus.ApiRequestState {
-  selectedId: number | null;
+  // Flag to indicate whether the full collection has loaded (use with ApiRequestState)
+  allLoaded: boolean;
 }
 
 export const userProfilesAdapter: EntityAdapter<UserProfile> =
@@ -28,19 +29,44 @@ export const userProfilesAdapter: EntityAdapter<UserProfile> =
   });
 
 export const initialState: UserProfilesState = userProfilesAdapter.getInitialState({
-  selectedId: null,
-  ...fromApiStatus.getApiStatusInit(),
+  allLoaded: false,
+  ...fromApiStatus.getApiInitState(),
 });
 
 export const userProfilesReducer = createReducer(
   initialState,
-  on(UserProfilesActions.loadUserProfiles, (state) =>
-    fromApiStatus.onApiStatusPending(state)
+  on(
+    UserProfilesActions.loadUserProfiles,
+    UserProfilesActions.loadUserProfile,
+    UserProfilesActions.createUserProfile,
+    UserProfilesActions.updateUserProfile,
+    UserProfilesActions.deleteUserProfile,
+    (state) => fromApiStatus.onApiStatePending(state)
+  ),
+  on(
+    UserProfilesActions.loadUserProfilesFailure,
+    UserProfilesActions.loadUserProfileFailure,
+    UserProfilesActions.createUserProfileFailure,
+    UserProfilesActions.updateUserProfileFailure,
+    UserProfilesActions.deleteUserProfileFailure,
+    (state, { error }) => fromApiStatus.onApiStateFailed(state, error)
   ),
   on(UserProfilesActions.loadUserProfilesSuccess, (state, { profiles }) =>
-    userProfilesAdapter.setAll(profiles, fromApiStatus.onApiStatusSuccess(state))
+    userProfilesAdapter.setAll(profiles, {
+      ...fromApiStatus.onApiStateSuccess(state),
+      allLoaded: true,
+    })
   ),
-  on(UserProfilesActions.loadUserProfilesFailure, (state, { error }) =>
-    fromApiStatus.onApiStatusError(state, error)
+  on(UserProfilesActions.loadUserProfileSuccess, (state, { profile }) =>
+    userProfilesAdapter.setOne(profile, fromApiStatus.onApiStateSuccess(state))
+  ),
+  on(UserProfilesActions.createUserProfileSuccess, (state, { profile }) =>
+    userProfilesAdapter.addOne(profile, fromApiStatus.onApiStateSuccess(state))
+  ),
+  on(UserProfilesActions.updateUserProfileSuccess, (state, { profile }) =>
+    userProfilesAdapter.updateOne(profile, fromApiStatus.onApiStateSuccess(state))
+  ),
+  on(UserProfilesActions.deleteUserProfileSuccess, (state, { id }) =>
+    userProfilesAdapter.removeOne(id, fromApiStatus.onApiStateSuccess(state))
   )
 );

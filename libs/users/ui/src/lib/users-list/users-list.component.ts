@@ -19,5 +19,5 @@ export class UsersListComponent {
 
   @Input() users: UserProfile[];
   @Output() edit = new EventEmitter<UserProfile>();
-  @Output() remove = new EventEmitter<string>();
+  @Output() remove = new EventEmitter<UserProfile>();
 }

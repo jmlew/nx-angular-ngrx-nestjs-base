@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { BaseDataService } from '@app/shared/util-http';
 
-import { EditUserProfileResponse } from '../entities/api/user-profile-api.model';
+import { UpdateUserProfileResponse } from '../entities/api/user-profile-api.model';
 import { UserProfile, UserProfileParams } from '../entities/user-profile.model';
 
 enum ApiEndpoint {
@@ -30,12 +30,12 @@ export class UsersDataService {
     return this.data.get<UserProfile>(`${this.baseUrlProfile}/${id}`);
   }
 
-  createProfile(user: UserProfileParams): Observable<EditUserProfileResponse> {
-    return this.data.post<EditUserProfileResponse>(this.baseUrlProfile, user);
+  createProfile(user: UserProfileParams): Observable<UpdateUserProfileResponse> {
+    return this.data.post<UpdateUserProfileResponse>(this.baseUrlProfile, user);
   }
 
-  updateProfile(user: UserProfile): Observable<EditUserProfileResponse> {
-    return this.data.put<EditUserProfileResponse>(
+  updateProfile(user: UserProfile): Observable<UpdateUserProfileResponse> {
+    return this.data.put<UpdateUserProfileResponse>(
       `${this.baseUrlProfile}/${user.userId}`,
       user
     );

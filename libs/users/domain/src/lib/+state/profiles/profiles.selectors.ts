@@ -15,7 +15,7 @@ import {
 
 export const selectUserProfilesState = createSelector(
   selectUsersState,
-  (state: UsersPartialState) => state[USER_PROFILES_FEATURE_KEY]
+  (state: UsersPartialState): UserProfilesState => state[USER_PROFILES_FEATURE_KEY]
 );
 
 export const {
@@ -27,18 +27,22 @@ export const {
 
 export const selectUserProfilesRequestState = createSelector(
   selectUserProfilesState,
-  (state: UserProfilesState): fromApiStatus.ApiRequestState =>
-    fromApiStatus.getApiRequestState(state)
+  fromApiStatus.getApiRequestState
 );
 
 export const selectUserProfilesError = createSelector(
   selectUserProfilesRequestState,
-  (state: fromApiStatus.ApiRequestState): string | null => state.error
+  fromApiStatus.getApiRequestError
 );
 
 export const selectUserProfilesApiStatus = createSelector(
   selectUserProfilesRequestState,
-  (state: fromApiStatus.ApiRequestState): fromApiStatus.ApiStatus => state.status
+  fromApiStatus.getApiRequestStatus
+);
+
+export const selectAllUserProfilesLoadded = createSelector(
+  selectUserProfilesState,
+  (state: UserProfilesState): boolean => state.allLoaded
 );
 
 export const selectCurrentUserProfile = createSelector(
