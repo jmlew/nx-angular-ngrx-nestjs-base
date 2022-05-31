@@ -1,16 +1,25 @@
-import { Params } from '@angular/router';
-import { RouterReducerState } from '@ngrx/router-store';
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { RouterReducerState, getSelectors } from '@ngrx/router-store';
+import { createFeatureSelector } from '@ngrx/store';
 
-import { ROUTER_FEATURE_KEY, RouterStateUrl } from '.';
+import { ROUTER_FEATURE_KEY } from '.';
 
-export const selectRouterState =
-  createFeatureSelector<RouterReducerState<RouterStateUrl>>(ROUTER_FEATURE_KEY);
+export const selectRouter = createFeatureSelector<RouterReducerState>(ROUTER_FEATURE_KEY);
 
-export const selectRouteParams = createSelector(
+/* export const selectRouteParams = createSelector(
   selectRouterState,
   (router: RouterReducerState<RouterStateUrl>): Params => {
     const state: RouterStateUrl = router.state;
     return state.params;
   }
-);
+); */
+
+export const {
+  selectCurrentRoute,
+  selectFragment,
+  selectQueryParams,
+  selectQueryParam,
+  selectRouteParams,
+  selectRouteParam,
+  selectRouteData,
+  selectUrl,
+} = getSelectors(selectRouter);

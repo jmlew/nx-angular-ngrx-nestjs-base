@@ -9,7 +9,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { rootMetaReducers, rootReducers, rootRuntimeChecks } from './+state';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import { CustomRouteSerializer, selectRouterState } from '@app/shared/navigation/domain';
+import { ROUTER_FEATURE_KEY } from '@app/shared/navigation/domain';
 
 @NgModule({
   imports: [
@@ -22,8 +22,8 @@ import { CustomRouteSerializer, selectRouterState } from '@app/shared/navigation
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     StoreRouterConnectingModule.forRoot({
-      stateKey: selectRouterState,
-      serializer: CustomRouteSerializer,
+      stateKey: ROUTER_FEATURE_KEY,
+      // serializer: CustomRouteSerializer,
     }),
   ],
   exports: [HttpClientModule],

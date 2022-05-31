@@ -24,6 +24,12 @@ const domainModules = [UsersDomainModule, UsersUiModule];
     UsersEditProfileComponent,
     UsersCreateProfileComponent,
   ],
-  exports: [UsersManageProfilesComponent, UsersEditProfileComponent],
+  exports: [
+    UsersManageProfilesComponent,
+    UsersEditProfileComponent,
+    UsersCreateProfileComponent,
+  ],
+  // Provide components for the injector tokens referenced in Effects.
+  // providers: [{ provide: USERS_MANAGE_PROFILES, useValue: UsersManageProfilesComponent }],
 })
 export class UsersFeatureManageUserProfilesModule {}

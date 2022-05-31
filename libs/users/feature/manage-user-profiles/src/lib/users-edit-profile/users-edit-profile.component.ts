@@ -20,5 +20,8 @@ export class UsersEditProfileComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('ngOnInit');
+    this.selectedUserProfile$.subscribe((profile: UserProfile | undefined) => {
+      console.log('selected profile', profile);
+    });
   }
 }
