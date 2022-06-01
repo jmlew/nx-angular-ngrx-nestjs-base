@@ -5,7 +5,7 @@ import {
   EntityState,
   createEntityAdapter,
 } from '@ngrx/entity';
-import { createReducer, on } from '@ngrx/store';
+import { Action, createReducer, on } from '@ngrx/store';
 
 import { UserProfile } from '../../entities/user-profile.model';
 import * as UserProfilesActions from './profiles.actions';
@@ -33,7 +33,7 @@ export const initialState: UserProfilesState = userProfilesAdapter.getInitialSta
   ...fromApiStatus.getApiInitState(),
 });
 
-export const userProfilesReducer = createReducer(
+const reducer = createReducer(
   initialState,
   on(
     UserProfilesActions.loadUserProfiles,
@@ -70,3 +70,9 @@ export const userProfilesReducer = createReducer(
     userProfilesAdapter.removeOne(id, fromApiStatus.onApiStateSuccess(state))
   )
 );
+export function userProfilesReducer(
+  state: UserProfilesState | undefined,
+  action: Action
+) {
+  return reducer(state, action);
+}

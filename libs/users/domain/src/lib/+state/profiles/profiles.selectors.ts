@@ -1,6 +1,6 @@
 import { Params } from '@angular/router';
 import * as fromApiStatus from '@app/shared/api-status/util';
-import * as RouterSelectors from '@app/shared/navigation/domain';
+import { selectRouteParams } from '@app/shared/navigation/domain';
 import { createSelector } from '@ngrx/store';
 
 import { UserProfile } from '../../entities/user-profile.model';
@@ -45,11 +45,22 @@ export const selectAllUserProfilesLoadded = createSelector(
   (state: UserProfilesState): boolean => state.allLoaded
 );
 
+export const selectCurrentUserProfileId = createSelector(
+  selectRouteParams,
+  (params: Params): string | undefined => params[UsersRouteParam.ProfileId]
+);
+
 export const selectCurrentUserProfile = createSelector(
   selectUserProfileEntities,
-  RouterSelectors.selectRouteParams,
-  (entities: UserProfileEntities, params: Params): UserProfile | undefined => {
-    const id: string = params[UsersRouteParam.ProfileId];
-    return entities[id];
-  }
+  selectCurrentUserProfileId,
+  (entities: UserProfileEntities, id: string | undefined): UserProfile | undefined =>
+    (id && entities[id]) || undefined
 );
+
+/* export const selectRouteParams = createSelector(
+  selectRouterState,
+  (router: RouterReducerState<RouterStateUrl>): Params => {
+    const state: RouterStateUrl = router.state;
+    return state.params;
+  }
+); */

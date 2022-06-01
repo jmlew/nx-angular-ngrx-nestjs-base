@@ -1,2 +1,13 @@
-<p>users-edit-profile works!</p>
-<!-- <div *ngIf="selectedUserProfile$ | async as userProfile">{{userProfile.userName}}</div> -->
+<h3>Edit User Profile</h3>
+<app-api-status [requestState]="userProfilesRequestState$ | async">
+  <ul *ngIf="selectedUserProfile$ | async as userProfile">
+    <li>User Id: {{userProfile.userId}}</li>
+    <li>User Name: {{userProfile.userName}}</li>
+    <li>Is Locked: {{userProfile.isLocked}}</li>
+    <li>Is Inactive: {{userProfile.isInactive}}</li>
+    <li>
+      Last Login Datetime: {{userProfile.lastLoginDatetime}}
+    </li>
+    <li>User Roles: {{userProfile.userRoles}}</li>
+  </ul>
+</app-api-status>

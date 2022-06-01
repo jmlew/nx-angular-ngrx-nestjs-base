@@ -7,6 +7,7 @@ import {
   UserProfilesState,
   userProfilesReducer,
 } from './profiles/profiles.reducer';
+import { UserRoutesEffects } from './routes.effects';
 
 export const USER_FEATURE_KEY = 'users';
 
@@ -18,7 +19,7 @@ export const usersReducers: ActionReducerMap<UsersPartialState> = {
   [USER_PROFILES_FEATURE_KEY]: userProfilesReducer,
 };
 
-export const usersEffects: Type<unknown>[] = [UserProfilesEffects];
+export const usersEffects: Type<unknown>[] = [UserRoutesEffects, UserProfilesEffects];
 
 export const selectUsersState =
   createFeatureSelector<UsersPartialState>(USER_FEATURE_KEY);

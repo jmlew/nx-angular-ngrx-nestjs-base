@@ -2,18 +2,18 @@ import { catchError, map, of, switchMap } from 'rxjs';
 
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { DataPersistence } from '@nrwl/angular';
+import { Store } from '@ngrx/store';
 
-import { UsersPartialState } from './../../../../../../../dist/libs/users/domain/lib/+state/users/users.reducer.d';
-// import { USERS_MANAGE_PROFILES } from '../../entities/injected-components';
 import { UserProfile } from '../../entities/user-profile.model';
 import { UsersDataService } from '../../infrastructure/users.data.service';
 import * as UserProfilesActions from './profiles.actions';
+// import * as UserProfilesSelectors from './profiles.selectors';
+import { UsersPartialState } from '..';
 
 @Injectable()
 export class UserProfilesEffects {
-  loadUserProfilesBasic$ = createEffect(() => {
-    return this.actions$.pipe(
+  loadUserProfiles$ = createEffect(() =>
+    this.actions$.pipe(
       ofType(UserProfilesActions.loadUserProfiles),
       switchMap(() =>
         this.dataService.getProfiles().pipe(
@@ -25,16 +25,65 @@ export class UserProfilesEffects {
           )
         )
       )
-    );
-  });
+    )
+  );
 
-  /* loadUserProfilesBasicRouting$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(ROUTER_NAVIGATION),
-      map((route: RouterRequestAction) => route.payload.routerState),
-      filter((routerState) => routerState.url.startsWith('/users/profiles')),
-      switchMap((routerState) => {
-        console.log('params', routerState['params']);
+  loadUserProfile$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserProfilesActions.loadUserProfile),
+      switchMap((action: { id: string }) =>
+        this.dataService.getProfile(action.id).pipe(
+          map((profile: UserProfile) =>
+            // TODO: Merge call to get newly created profile from server apply to action.
+            UserProfilesActions.loadUserProfileSuccess({ profile })
+          ),
+          catchError((error: any) =>
+            of(UserProfilesActions.loadUserProfileFailure({ error }))
+          )
+        )
+      )
+      /* optimisticUpdate({
+        run: a => {
+          return this.backend
+            .rateTalk(a.talkId, a.rating)
+            .pipe(switchMap(() => of<any>()));
+        },
+        undoAction: (a, e) => {
+          return TalksActions.unrate({ talkId: a.talkId, error: e });
+        }
+      }) */
+    )
+  );
+
+  /* loadUserProfilesNav$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ROUTER_NAVIGATED),
+      switchMap(() => this.store.select(selectUrl)),
+      filter((url: string) => {
+        console.log('url', url);
+        return !!url;
+      }),
+      switchMap(() =>
+        this.store.select(UserProfilesSelectors.selectAllUserProfilesLoadded)
+      ),
+      filter((allLoaded: boolean) => allLoaded !== true),
+      map(() => UserProfilesActions.loadUserProfiles())
+    )
+  ); */
+
+  /* loadUserProfilesBasicRouting$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ROUTER_NAVIGATED),
+      switchMap(() => this.store.select(selectUrl)),
+      filter((url: string) => url.startsWith('/users/profiles/')),
+      switchMap(() => this.store.select(selectRouteData)),
+      filter((data: Data) => {
+        console.log('data', data);
+        return data && data['component'] === 'UsersEditProfileComponent';
+      }),
+      switchMap(() => this.store.select(selectRouteParams)),
+      switchMap((params: Params) => {
+        console.log('profile params', params);
         return this.dataService.getProfiles().pipe(
           map((profiles: UserProfile[]) =>
             UserProfilesActions.loadUserProfilesSuccess({ profiles })
@@ -44,8 +93,9 @@ export class UserProfilesEffects {
           )
         );
       })
-    );
-  }); */
+    )
+  );
+ */
 
   /* loadUserProfiles$ = createEffect(() =>
     this.dataPersistence.optimisticUpdate(UserProfilesActions.loadUserProfiles, {
@@ -67,36 +117,9 @@ export class UserProfilesEffects {
     })
   ); */
 
-  /* loadUserProfile$ = createEffect(() =>
-    this.actions$.pipe(
-      // listens for the routerNavigation action from @ngrx/router-store
-      navigation(this.usersManageProfiles, {
-        run: (activatedRouteSnapshot: ActivatedRouteSnapshot) => {
-          console.log('activatedRouteSnapshot', activatedRouteSnapshot);
-          return this.dataService.getProfiles().pipe(
-            map((profiles: UserProfile[]) =>
-              UserProfilesActions.loadUserProfilesSuccess({ profiles })
-            ),
-            catchError((error: any) =>
-              of(UserProfilesActions.loadUserProfilesFailure({ error }))
-            )
-          );
-        },
-
-        onError: (activatedRouteSnapshot: ActivatedRouteSnapshot, error: any) => {
-          // we can log and error here and return null
-          // we can also navigate back
-          console.error('Navigation Error', error, activatedRouteSnapshot);
-          // throw error;
-          return null;
-        },
-      })
-    )
-  ); */
-
   constructor(
     private readonly actions$: Actions,
-    private readonly dataPersistence: DataPersistence<UsersPartialState>, // Check if needs UsersPartialState
-    private readonly dataService: UsersDataService // @Inject(USERS_MANAGE_PROFILES) private usersManageProfiles: Type<any>
+    private readonly store: Store<UsersPartialState>,
+    private readonly dataService: UsersDataService
   ) {}
 }

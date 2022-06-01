@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-users-manage-permissions',
   templateUrl: './users-manage-permissions.component.html',
   styleUrls: ['./users-manage-permissions.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

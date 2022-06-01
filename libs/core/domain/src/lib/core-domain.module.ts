@@ -8,13 +8,19 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { rootMetaReducers, rootReducers, rootRuntimeChecks } from './+state';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import {
+  DefaultRouterStateSerializer,
+  NavigationActionTiming,
+  StoreRouterConnectingModule,
+} from '@ngrx/router-store';
 import { ROUTER_FEATURE_KEY } from '@app/shared/navigation/domain';
+import { NxModule } from '@nrwl/angular';
 
 @NgModule({
   imports: [
     BrowserModule,
     HttpClientModule,
+    NxModule.forRoot(),
     StoreModule.forRoot(rootReducers, {
       metaReducers: rootMetaReducers,
       runtimeChecks: rootRuntimeChecks,
@@ -23,7 +29,11 @@ import { ROUTER_FEATURE_KEY } from '@app/shared/navigation/domain';
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     StoreRouterConnectingModule.forRoot({
       stateKey: ROUTER_FEATURE_KEY,
-      // serializer: CustomRouteSerializer,
+      navigationActionTiming: NavigationActionTiming.PostActivation,
+
+      // Important: the default serialiser must be used for the @nrwl/angular navigation
+      // library to respond to routing.
+      serializer: DefaultRouterStateSerializer,
     }),
   ],
   exports: [HttpClientModule],

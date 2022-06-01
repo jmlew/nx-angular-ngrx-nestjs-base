@@ -21,14 +21,14 @@ export class ManageUserProfilesFacade {
   selectedUserProfile$: Observable<UserProfile | undefined> = this.store.pipe(
     select(UserProfilesSelectors.selectCurrentUserProfile)
   );
+  selectedUserProfileId$: Observable<string | undefined> = this.store.pipe(
+    select(UserProfilesSelectors.selectCurrentUserProfileId)
+  );
   selectAllUserProfilesLoadded$: Observable<boolean> = this.store.pipe(
     select(UserProfilesSelectors.selectAllUserProfilesLoadded)
   );
 
-  constructor(
-    private readonly store: Store<UserProfilesFeature.UserProfilesState>,
-    private dataService: UsersDataService
-  ) {}
+  constructor(private readonly store: Store<UserProfilesFeature.UserProfilesState>) {}
 
   loadUserProfiles() {
     this.store.dispatch(UserProfilesActions.loadUserProfiles());

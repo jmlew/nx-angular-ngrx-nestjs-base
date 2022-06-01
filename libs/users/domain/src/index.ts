@@ -6,4 +6,6 @@ export * from './lib/entities/user-routes.enum';
 export * from './lib/application/manage-user-profiles.facade';
 export * from './lib/entities/user-profile.model';
 export * from './lib/entities/user-profile.util';
-export * from './lib/entities/injected-components';
+
+// Tokens to inject components used in Effects.
+export * from './lib/entities/route-components.token';

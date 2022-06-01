@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { SharedUtilHttpModule } from '@app/shared/util-http';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { DataPersistence } from '@nrwl/angular';
 
 import * as fromUsers from './+state';
 import { ManageUserProfilesFacade } from './application/manage-user-profiles.facade';
@@ -16,6 +15,7 @@ import { UsersDataService } from './infrastructure/users.data.service';
     StoreModule.forFeature(fromUsers.USER_FEATURE_KEY, fromUsers.usersReducers),
     EffectsModule.forFeature(fromUsers.usersEffects),
   ],
-  providers: [ManageUserProfilesFacade, UsersDataService, DataPersistence],
+  providers: [ManageUserProfilesFacade, UsersDataService],
+  exports: [],
 })
 export class UsersDomainModule {}

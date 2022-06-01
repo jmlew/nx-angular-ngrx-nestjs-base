@@ -1,12 +1,10 @@
 import { Observable } from 'rxjs';
 
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { ApiStatus } from '@app/shared/api-status/util';
-import { UserProfile } from '@app/users/api-model';
-import { ManageUserProfilesFacade } from '@app/users/domain';
+import { ApiRequestState, ApiStatus } from '@app/shared/api-status/util';
+import { ManageUserProfilesFacade, UserProfile } from '@app/users/domain';
 
 @Component({
-  selector: 'users-users-edit-profile',
   templateUrl: './users-edit-profile.component.html',
   styleUrls: ['./users-edit-profile.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -15,6 +13,10 @@ export class UsersEditProfileComponent implements OnInit {
   readonly ApiStatus = ApiStatus;
   selectedUserProfile$: Observable<UserProfile | undefined> =
     this.userProfilesFacade.selectedUserProfile$;
+  selectedUserProfileId$: Observable<string | undefined> =
+    this.userProfilesFacade.selectedUserProfileId$;
+  readonly userProfilesRequestState$: Observable<ApiRequestState> =
+    this.userProfilesFacade.userProfilesRequestState$;
 
   constructor(private userProfilesFacade: ManageUserProfilesFacade) {}
 
@@ -22,6 +24,9 @@ export class UsersEditProfileComponent implements OnInit {
     console.log('ngOnInit');
     this.selectedUserProfile$.subscribe((profile: UserProfile | undefined) => {
       console.log('selected profile', profile);
+    });
+    this.selectedUserProfileId$.subscribe((id: string | undefined) => {
+      console.log('selected profile ID', id);
     });
   }
 }

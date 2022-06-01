@@ -5,14 +5,6 @@ import { ROUTER_FEATURE_KEY } from '.';
 
 export const selectRouter = createFeatureSelector<RouterReducerState>(ROUTER_FEATURE_KEY);
 
-/* export const selectRouteParams = createSelector(
-  selectRouterState,
-  (router: RouterReducerState<RouterStateUrl>): Params => {
-    const state: RouterStateUrl = router.state;
-    return state.params;
-  }
-); */
-
 export const {
   selectCurrentRoute,
   selectFragment,
