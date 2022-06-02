@@ -1,0 +1,30 @@
+<ng-container *ngrxLet="routeItemContext$ as context">
+  <h3>User Profile {{context}}</h3>
+
+  <ng-container [ngSwitch]="context">
+    <ng-container *ngSwitchCase="RouteItemContext.New">
+      <users-user-profile-form
+        [context]="context"
+        (formSubmit)="onCreate($event)"></users-user-profile-form>
+    </ng-container>
+    <ng-container *ngSwitchCase="RouteItemContext.Edit">
+      <app-api-status [requestState]="requestState$ | async">
+        <ng-template #success>
+          <users-user-profile-form
+            [userProfile]="userProfile$ | async"
+            [context]="context"
+            (formSubmit)="onEdit($event)"></users-user-profile-form>
+        </ng-template>
+      </app-api-status>
+    </ng-container>
+    <ng-container *ngSwitchCase="RouteItemContext.View">
+      <app-api-status [requestState]="requestState$ | async">
+        <ng-template #success>
+          <users-user-profile-form
+            [userProfile]="userProfile$ | async"
+            [context]="context"></users-user-profile-form>
+        </ng-template>
+      </app-api-status>
+    </ng-container>
+  </ng-container>
+</ng-container>

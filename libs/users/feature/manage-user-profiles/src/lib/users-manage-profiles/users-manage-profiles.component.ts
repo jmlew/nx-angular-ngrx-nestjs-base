@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiRequestState, ApiStatus } from '@app/shared/api-status/util';
 import {
   ManageUserProfilesFacade,
+  RouteItemPath,
   UserProfile,
   getUserProfileId,
 } from '@app/users/domain';
@@ -17,11 +18,9 @@ import {
 export class UsersManageProfilesComponent {
   readonly ApiStatus = ApiStatus;
   readonly userProfiles$: Observable<UserProfile[]> =
-    this.userProfilesFacade.userProfiles$;
-  readonly userProfilesRequestState$: Observable<ApiRequestState> =
+    this.userProfilesFacade.allUserProfiles$;
+  readonly requestState$: Observable<ApiRequestState> =
     this.userProfilesFacade.userProfilesRequestState$;
-  readonly selectAllUserProfilesLoadded$: Observable<boolean> =
-    this.userProfilesFacade.selectAllUserProfilesLoadded$;
 
   constructor(
     private router: Router,
@@ -29,13 +28,22 @@ export class UsersManageProfilesComponent {
     private userProfilesFacade: ManageUserProfilesFacade
   ) {}
 
-  onEdit(item: UserProfile) {
-    const id: string = getUserProfileId(item);
-    this.router.navigate([id], { relativeTo: this.route });
+  onEdit(profile: UserProfile) {
+    const id: string = getUserProfileId(profile);
+    this.router.navigate([RouteItemPath.Edit, id], {
+      relativeTo: this.route,
+    });
   }
 
-  onRemove(item: UserProfile) {
-    const id: string = getUserProfileId(item);
-    console.log('Remove User Profile', id);
+  onView(profile: UserProfile) {
+    const id: string = getUserProfileId(profile);
+    this.router.navigate([RouteItemPath.View, id], {
+      relativeTo: this.route,
+    });
+  }
+
+  onRemove(profile: UserProfile) {
+    const id: string = getUserProfileId(profile);
+    this.userProfilesFacade.deleteUserProfile(id);
   }
 }

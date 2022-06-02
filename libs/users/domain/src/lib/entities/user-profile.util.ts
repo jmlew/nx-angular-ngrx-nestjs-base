@@ -5,6 +5,9 @@
 
 import { UserProfile } from './user-profile.model';
 
+/**
+ * Return the ID which acts as the primary key from the user profile.
+ */
 export function getUserProfileId(item: UserProfile): string {
   return item.emailId;
 }

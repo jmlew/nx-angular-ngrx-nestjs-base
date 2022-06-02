@@ -11,6 +11,13 @@
         mat-icon-button
         color="primary"
         class="btn-hover"
+        (click)="view.emit(user)">
+        <mat-icon aria-label="View">{{ IconMat.View }}</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        color="primary"
+        class="btn-hover"
         (click)="edit.emit(user)">
         <mat-icon aria-label="Edit">{{ IconMat.Edit }}</mat-icon>
       </button>

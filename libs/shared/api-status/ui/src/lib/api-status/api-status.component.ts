@@ -13,9 +13,9 @@ import * as fromApiStatus from '@app/shared/api-status/util';
   just add content to be rendered via the ng-content directive if the default failed and
   pending content can be displayed.
 
-  <ng-template #success>success content here</ng-template
-  <ng-template #failed>failed content here</ng-template
-  <ng-template #pending>pending content here</ng-template
+  <ng-template #success>success content here</ng-template>
+  <ng-template #failed>failed content here</ng-template>
+  <ng-template #pending>pending content here</ng-template>
 */
 
 @Component({

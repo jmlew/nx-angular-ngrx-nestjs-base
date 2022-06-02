@@ -30,4 +30,5 @@ export enum IconMat {
   Users = 'group',
   PersonOutline = 'person_outline',
   Refresh = 'refresh',
+  View = 'visibility',
 }

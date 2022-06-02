@@ -56,31 +56,26 @@ export class UserProfilesController {
 
   @Put(':id')
   updateUser(
-    @Param('id') emailId: string,
+    @Param('id') id: string,
     @Body() params: UserProfile
   ): Observable<UpdateUserProfileResponse> {
-    if (!this.userService.doesUserExist(emailId)) {
+    if (!this.userService.doesUserExist(id)) {
       throw new BadRequestException(ErrorMessage.NoUserMatch);
     }
-    if (this.userService.isUserDuplicate(params, emailId)) {
+    if (this.userService.isUserDuplicate(params, id)) {
       throw new BadRequestException(ErrorMessage.DuplicateEmail);
     }
-    return this.toStream(this.userService.updateUser(emailId, params));
+    return this.toStream(this.userService.updateUser(id, params));
   }
 
   @Delete(':id')
-  deleteUser(@Param('id') emailId: string): Observable<string> {
-    if (!this.userService.doesUserExist(emailId)) {
+  deleteUser(@Param('id') id: string): Observable<string> {
+    console.log('deleteUser', id);
+    if (!this.userService.doesUserExist(id)) {
       throw new BadRequestException(ErrorMessage.NoUserMatch);
     }
-    return this.toStream(this.userService.deleteUser(emailId));
+    return this.toStream(this.userService.deleteUser(id));
   }
-
-  /* @Delete()
-  deleteUsers(@Body() ids: string[]): Observable<number[]> {
-    const emailIds: number[] = ids.map((id: string) => parseInt(id, 10));
-    return this.toStream(this.userService.deleteUsers(emailIds));
-  } */
 
   private toStream<T>(data: T, delay = 500) {
     return toStreamWithDelay(data, delay);

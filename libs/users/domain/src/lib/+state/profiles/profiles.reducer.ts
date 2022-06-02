@@ -3,6 +3,7 @@ import {
   Dictionary,
   EntityAdapter,
   EntityState,
+  Update,
   createEntityAdapter,
 } from '@ngrx/entity';
 import { Action, createReducer, on } from '@ngrx/store';
@@ -18,7 +19,7 @@ export interface UserProfilesState
   extends EntityState<UserProfile>,
     fromApiStatus.ApiRequestState {
   // Flag to indicate whether the full collection has loaded (use with ApiRequestState)
-  allLoaded: boolean;
+  areAllLoaded: boolean;
 }
 
 export const userProfilesAdapter: EntityAdapter<UserProfile> =
@@ -29,7 +30,7 @@ export const userProfilesAdapter: EntityAdapter<UserProfile> =
   });
 
 export const initialState: UserProfilesState = userProfilesAdapter.getInitialState({
-  allLoaded: false,
+  areAllLoaded: false,
   ...fromApiStatus.getApiInitState(),
 });
 
@@ -51,21 +52,22 @@ const reducer = createReducer<UserProfilesState>(
     UserProfilesActions.deleteUserProfileFailure,
     (state, { error }) => fromApiStatus.onApiStateFailed(state, error)
   ),
-  on(UserProfilesActions.loadUserProfilesSuccess, (state, { profiles }) =>
-    userProfilesAdapter.setAll(profiles, {
+  on(UserProfilesActions.loadUserProfilesSuccess, (state, { items }) =>
+    userProfilesAdapter.setAll(items, {
       ...fromApiStatus.onApiStateSuccess(state),
-      allLoaded: true,
+      areAllLoaded: true,
     })
   ),
-  on(UserProfilesActions.loadUserProfileSuccess, (state, { profile }) =>
-    userProfilesAdapter.setOne(profile, fromApiStatus.onApiStateSuccess(state))
+  on(UserProfilesActions.loadUserProfileSuccess, (state, { item }) =>
+    userProfilesAdapter.setOne(item, fromApiStatus.onApiStateSuccess(state))
   ),
-  on(UserProfilesActions.createUserProfileSuccess, (state, { profile }) =>
-    userProfilesAdapter.addOne(profile, fromApiStatus.onApiStateSuccess(state))
+  on(UserProfilesActions.createUserProfileSuccess, (state, { item }) =>
+    userProfilesAdapter.addOne(item, fromApiStatus.onApiStateSuccess(state))
   ),
-  on(UserProfilesActions.updateUserProfileSuccess, (state, { profile }) =>
-    userProfilesAdapter.updateOne(profile, fromApiStatus.onApiStateSuccess(state))
-  ),
+  on(UserProfilesActions.updateUserProfileSuccess, (state, { id, params }) => {
+    const update: Update<UserProfile> = { id, changes: params };
+    return userProfilesAdapter.updateOne(update, fromApiStatus.onApiStateSuccess(state));
+  }),
   on(UserProfilesActions.deleteUserProfileSuccess, (state, { id }) =>
     userProfilesAdapter.removeOne(id, fromApiStatus.onApiStateSuccess(state))
   )

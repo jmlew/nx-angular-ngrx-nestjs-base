@@ -15,9 +15,10 @@ import { UserProfile } from '@app/users/domain';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UsersListComponent {
-  IconMat = IconMat;
+  readonly IconMat = IconMat;
 
   @Input() users: UserProfile[];
   @Output() edit = new EventEmitter<UserProfile>();
+  @Output() view = new EventEmitter<UserProfile>();
   @Output() remove = new EventEmitter<UserProfile>();
 }

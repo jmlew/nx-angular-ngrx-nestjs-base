@@ -1,0 +1,24 @@
+<h2>{{context}} User profile</h2>
+
+<ul>
+  <li>User Id: {{userProfile.userId}}</li>
+  <li>User Name: {{userProfile.userName}}</li>
+  <li>Is Locked: {{userProfile.isLocked}}</li>
+  <li>Is Inactive: {{userProfile.isInactive}}</li>
+  <li>
+    Last Login Datetime: {{userProfile.lastLoginDatetime}}
+  </li>
+  <li>User Roles: {{userProfile.userRoles}}</li>
+</ul>
+<ng-container *ngIf="context !== RouteItemContext.View">
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="formSubmit.emit(userProfile)">
+    {{
+      context === RouteItemContext.Edit && 'Update Profile' ||
+      context === RouteItemContext.New && 'Create Profile' ||
+      'Submit'
+    }}
+  </button>
+</ng-container>

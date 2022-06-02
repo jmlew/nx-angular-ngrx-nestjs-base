@@ -1,10 +1,14 @@
-import { Params } from '@angular/router';
+import { Data, Params } from '@angular/router';
 import * as fromApiStatus from '@app/shared/api-status/util';
-import { selectRouteParams } from '@app/shared/navigation/domain';
+import * as fromRouter from '@app/shared/navigation/domain';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import { UserProfile } from '../../entities/user-profile.model';
-import { UsersRouteParam } from '../../entities/user-routes.enum';
+import {
+  RouteItemContext,
+  RouteItemDataKey,
+  UsersRouteParam,
+} from '../../entities/user-routes.enum';
 import {
   USER_PROFILES_KEY,
   UserProfileEntities,
@@ -42,13 +46,13 @@ export const selectUserProfilesApiStatus = createSelector(
   fromApiStatus.getApiRequestStatus
 );
 
-export const selectAllUserProfilesLoadded = createSelector(
+export const selectAreAllUserProfilesLoaded = createSelector(
   selectUserProfilesState,
-  (state: UserProfilesState): boolean => state.allLoaded
+  (state: UserProfilesState): boolean => state.areAllLoaded
 );
 
 export const selectCurrentUserProfileId = createSelector(
-  selectRouteParams,
+  fromRouter.selectRouteParams,
   (params: Params): string | undefined => params[UsersRouteParam.ProfileId]
 );
 
@@ -57,4 +61,17 @@ export const selectCurrentUserProfile = createSelector(
   selectCurrentUserProfileId,
   (entities: UserProfileEntities, id: string | undefined): UserProfile | undefined =>
     (id && entities[id]) || undefined
+);
+
+export const selectIsCurrentUserProfileLoaded = createSelector(
+  selectCurrentUserProfile,
+  (profile: UserProfile | undefined): boolean => profile != null
+);
+
+export const selectUserProfileRouteItemContext = createSelector(
+  fromRouter.selectRouteData,
+  (data: Data): RouteItemContext => {
+    const context: RouteItemContext = data[RouteItemDataKey.Context];
+    return context || RouteItemContext.None;
+  }
 );

@@ -1,13 +1,12 @@
-import { Update } from '@ngrx/entity';
 import { createAction, props } from '@ngrx/store';
 
-import { UserProfile } from '../../entities/user-profile.model';
+import { UserProfile, UserProfileParams } from '../../entities/user-profile.model';
 
 export const loadUserProfiles = createAction('[UserProfiles/API] Load UserProfiles');
 
 export const loadUserProfilesSuccess = createAction(
   '[UserProfiles/API] Load UserProfiles Success',
-  props<{ profiles: UserProfile[] }>()
+  props<{ items: UserProfile[] }>()
 );
 
 export const loadUserProfilesFailure = createAction(
@@ -22,7 +21,7 @@ export const loadUserProfile = createAction(
 
 export const loadUserProfileSuccess = createAction(
   '[UserProfiles/API] Load UserProfile Success',
-  props<{ profile: UserProfile }>()
+  props<{ item: UserProfile }>()
 );
 
 export const loadUserProfileFailure = createAction(
@@ -32,13 +31,13 @@ export const loadUserProfileFailure = createAction(
 
 export const updateUserProfile = createAction(
   '[UserProfiles/API] Update UserProfile',
-  props<{ profile: UserProfile }>()
+  props<{ id: string; params: Partial<UserProfile> }>()
 );
 
 // Convert UpdateUserProfileResponse to new User Profile via the effect.
 export const updateUserProfileSuccess = createAction(
   '[UserProfiles/API] Update UserProfile Success',
-  props<{ profile: Update<UserProfile> }>()
+  props<{ id: string; params: Partial<UserProfile> }>()
 );
 
 export const updateUserProfileFailure = createAction(
@@ -48,13 +47,13 @@ export const updateUserProfileFailure = createAction(
 
 export const createUserProfile = createAction(
   '[UserProfiles/API] Create UserProfile',
-  props<{ profile: UserProfile }>()
+  props<{ params: UserProfileParams }>()
 );
 
 // Convert UpdateUserProfileResponse to new User Profile via the effect.
 export const createUserProfileSuccess = createAction(
   '[UserProfiles/API] Create UserProfile Success',
-  props<{ profile: UserProfile }>()
+  props<{ item: UserProfile }>()
 );
 
 export const createUserProfileFailure = createAction(

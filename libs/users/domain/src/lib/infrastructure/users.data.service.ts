@@ -30,15 +30,15 @@ export class UsersDataService {
     return this.data.get<UserProfile>(`${this.baseUrlProfile}/${id}`);
   }
 
-  createProfile(user: UserProfileParams): Observable<UpdateUserProfileResponse> {
-    return this.data.post<UpdateUserProfileResponse>(this.baseUrlProfile, user);
+  createProfile(item: UserProfileParams): Observable<UpdateUserProfileResponse> {
+    return this.data.post<UpdateUserProfileResponse>(this.baseUrlProfile, item);
   }
 
-  updateProfile(user: UserProfile): Observable<UpdateUserProfileResponse> {
-    return this.data.put<UpdateUserProfileResponse>(
-      `${this.baseUrlProfile}/${user.userId}`,
-      user
-    );
+  updateProfile(
+    id: string,
+    item: Partial<UserProfile>
+  ): Observable<UpdateUserProfileResponse> {
+    return this.data.put<UpdateUserProfileResponse>(`${this.baseUrlProfile}/${id}`, item);
   }
 
   deleteProfile(id: string): Observable<string> {

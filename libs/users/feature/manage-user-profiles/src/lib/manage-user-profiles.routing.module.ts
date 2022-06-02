@@ -1,30 +1,36 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {
-  ROUTE_COMP_USER_PROFILES_ADD,
-  ROUTE_COMP_USER_PROFILES_EDIT,
-  ROUTE_COMP_USER_PROFILES_MAIN,
+  ROUTE_COMP_USER_PROFILE,
+  ROUTE_COMP_USER_PROFILES,
+  RouteItemContext,
+  RouteItemDataKey,
+  RouteItemPath,
   UsersRouteParam,
 } from '@app/users/domain';
 
-import { UsersCreateProfileComponent } from './users-create-profile/users-create-profile.component';
-import { UsersEditProfileComponent } from './users-edit-profile/users-edit-profile.component';
 import { UsersManageProfilesComponent } from './users-manage-profiles/users-manage-profiles.component';
+import { UsersUserProfileComponent } from './users-user-profile/users-user-profile.component';
 
 const routes: Routes = [
   {
     path: '',
     component: UsersManageProfilesComponent,
-    // data: { component: UsersManageProfilesComponent.name },
   },
   {
-    path: 'add',
-    component: UsersCreateProfileComponent,
+    path: RouteItemPath.New,
+    data: { [RouteItemDataKey.Context]: RouteItemContext.New },
+    component: UsersUserProfileComponent,
   },
   {
-    path: `:${UsersRouteParam.ProfileId}`,
-    component: UsersEditProfileComponent,
-    // data: { component: UsersEditProfileComponent.name },
+    path: `${RouteItemPath.Edit}/:${UsersRouteParam.ProfileId}`,
+    data: { [RouteItemDataKey.Context]: RouteItemContext.Edit },
+    component: UsersUserProfileComponent,
+  },
+  {
+    path: `${RouteItemPath.View}/:${UsersRouteParam.ProfileId}`,
+    data: { [RouteItemDataKey.Context]: RouteItemContext.View },
+    component: UsersUserProfileComponent,
   },
 ];
 
@@ -33,9 +39,8 @@ const routes: Routes = [
   exports: [RouterModule],
   // Provide the components to map to each route for the router Effects to reference.
   providers: [
-    { provide: ROUTE_COMP_USER_PROFILES_MAIN, useValue: UsersManageProfilesComponent },
-    { provide: ROUTE_COMP_USER_PROFILES_ADD, useValue: UsersCreateProfileComponent },
-    { provide: ROUTE_COMP_USER_PROFILES_EDIT, useValue: UsersEditProfileComponent },
+    { provide: ROUTE_COMP_USER_PROFILES, useValue: UsersManageProfilesComponent },
+    { provide: ROUTE_COMP_USER_PROFILE, useValue: UsersUserProfileComponent },
   ],
 })
 export class ManageUserProfilesRoutingModule {}
