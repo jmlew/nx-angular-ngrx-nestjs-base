@@ -10,7 +10,7 @@ import { Action, createReducer, on } from '@ngrx/store';
 import { UserProfile } from '../../entities/user-profile.model';
 import * as UserProfilesActions from './profiles.actions';
 
-export const USER_PROFILES_FEATURE_KEY = 'user-profiles';
+export const USER_PROFILES_KEY = 'userProfiles';
 
 export type UserProfileEntities = Dictionary<UserProfile>;
 
@@ -33,7 +33,7 @@ export const initialState: UserProfilesState = userProfilesAdapter.getInitialSta
   ...fromApiStatus.getApiInitState(),
 });
 
-const reducer = createReducer(
+const reducer = createReducer<UserProfilesState>(
   initialState,
   on(
     UserProfilesActions.loadUserProfiles,

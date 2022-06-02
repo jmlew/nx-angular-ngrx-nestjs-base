@@ -26,9 +26,11 @@ import { NxModule } from '@nrwl/angular';
       runtimeChecks: rootRuntimeChecks,
     }),
     EffectsModule.forRoot([]),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 25 }) : [],
     StoreRouterConnectingModule.forRoot({
       stateKey: ROUTER_FEATURE_KEY,
+      // Ensures the router navigation action fires after route resolvers and guard are
+      // executed.
       navigationActionTiming: NavigationActionTiming.PostActivation,
 
       // Important: the default serialiser must be used for the @nrwl/angular navigation

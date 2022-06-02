@@ -1,9 +1,9 @@
 import { Type } from '@angular/core';
-import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
+import { ActionReducerMap } from '@ngrx/store';
 
 import { UserProfilesEffects } from './profiles/profiles.effects';
 import {
-  USER_PROFILES_FEATURE_KEY,
+  USER_PROFILES_KEY,
   UserProfilesState,
   userProfilesReducer,
 } from './profiles/profiles.reducer';
@@ -11,15 +11,20 @@ import { UserRoutesEffects } from './routes.effects';
 
 export const USER_FEATURE_KEY = 'users';
 
-export interface UsersPartialState {
-  [USER_PROFILES_FEATURE_KEY]: UserProfilesState;
+export interface UsersFeatureState {
+  [USER_PROFILES_KEY]: UserProfilesState;
 }
 
-export const usersReducers: ActionReducerMap<UsersPartialState> = {
-  [USER_PROFILES_FEATURE_KEY]: userProfilesReducer,
+export const usersReducers: ActionReducerMap<UsersFeatureState> = {
+  [USER_PROFILES_KEY]: userProfilesReducer,
 };
 
 export const usersEffects: Type<unknown>[] = [UserRoutesEffects, UserProfilesEffects];
 
-export const selectUsersState =
-  createFeatureSelector<UsersPartialState>(USER_FEATURE_KEY);
+/**
+ * !Important: Do not add feature selector here. Doing so creates an uncaught circular
+ * dependancy which results in the 'ReferenceError: Cannot access [stateName] before
+ * initialization.' error.
+ */
+
+// export const selectUsersFeatureState = createFeatureSelector<UsersFeatureState>(USER_FEATURE_KEY);

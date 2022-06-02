@@ -7,8 +7,8 @@ import { Store } from '@ngrx/store';
 import { UserProfile } from '../../entities/user-profile.model';
 import { UsersDataService } from '../../infrastructure/users.data.service';
 import * as UserProfilesActions from './profiles.actions';
-// import * as UserProfilesSelectors from './profiles.selectors';
-import { UsersPartialState } from '..';
+import { UserProfilesState } from './profiles.reducer';
+import * as UserProfilesSelectors from './profiles.selectors';
 
 @Injectable()
 export class UserProfilesEffects {
@@ -55,48 +55,6 @@ export class UserProfilesEffects {
     )
   );
 
-  /* loadUserProfilesNav$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(ROUTER_NAVIGATED),
-      switchMap(() => this.store.select(selectUrl)),
-      filter((url: string) => {
-        console.log('url', url);
-        return !!url;
-      }),
-      switchMap(() =>
-        this.store.select(UserProfilesSelectors.selectAllUserProfilesLoadded)
-      ),
-      filter((allLoaded: boolean) => allLoaded !== true),
-      map(() => UserProfilesActions.loadUserProfiles())
-    )
-  ); */
-
-  /* loadUserProfilesBasicRouting$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(ROUTER_NAVIGATED),
-      switchMap(() => this.store.select(selectUrl)),
-      filter((url: string) => url.startsWith('/users/profiles/')),
-      switchMap(() => this.store.select(selectRouteData)),
-      filter((data: Data) => {
-        console.log('data', data);
-        return data && data['component'] === 'UsersEditProfileComponent';
-      }),
-      switchMap(() => this.store.select(selectRouteParams)),
-      switchMap((params: Params) => {
-        console.log('profile params', params);
-        return this.dataService.getProfiles().pipe(
-          map((profiles: UserProfile[]) =>
-            UserProfilesActions.loadUserProfilesSuccess({ profiles })
-          ),
-          catchError((error: any) =>
-            of(UserProfilesActions.loadUserProfilesFailure({ error }))
-          )
-        );
-      })
-    )
-  );
- */
-
   /* loadUserProfiles$ = createEffect(() =>
     this.dataPersistence.optimisticUpdate(UserProfilesActions.loadUserProfiles, {
       run: (
@@ -119,7 +77,7 @@ export class UserProfilesEffects {
 
   constructor(
     private readonly actions$: Actions,
-    private readonly store: Store<UsersPartialState>,
+    private readonly store: Store<UserProfilesState>,
     private readonly dataService: UsersDataService
   ) {}
 }

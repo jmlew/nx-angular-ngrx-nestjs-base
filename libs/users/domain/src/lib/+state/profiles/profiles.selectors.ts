@@ -1,21 +1,23 @@
 import { Params } from '@angular/router';
 import * as fromApiStatus from '@app/shared/api-status/util';
 import { selectRouteParams } from '@app/shared/navigation/domain';
-import { createSelector } from '@ngrx/store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import { UserProfile } from '../../entities/user-profile.model';
 import { UsersRouteParam } from '../../entities/user-routes.enum';
-import { UsersPartialState, selectUsersState } from './../index';
 import {
-  USER_PROFILES_FEATURE_KEY,
+  USER_PROFILES_KEY,
   UserProfileEntities,
   UserProfilesState,
   userProfilesAdapter,
 } from './profiles.reducer';
+import { UsersFeatureState } from '..';
+
+const selectUsersFeatureState = createFeatureSelector<UsersFeatureState>('users');
 
 export const selectUserProfilesState = createSelector(
-  selectUsersState,
-  (state: UsersPartialState): UserProfilesState => state[USER_PROFILES_FEATURE_KEY]
+  selectUsersFeatureState,
+  (state: UsersFeatureState): UserProfilesState => state[USER_PROFILES_KEY]
 );
 
 export const {
@@ -56,11 +58,3 @@ export const selectCurrentUserProfile = createSelector(
   (entities: UserProfileEntities, id: string | undefined): UserProfile | undefined =>
     (id && entities[id]) || undefined
 );
-
-/* export const selectRouteParams = createSelector(
-  selectRouterState,
-  (router: RouterReducerState<RouterStateUrl>): Params => {
-    const state: RouterStateUrl = router.state;
-    return state.params;
-  }
-); */
