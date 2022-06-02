@@ -1,24 +1,95 @@
-<h2>{{context}} User profile</h2>
+<mat-card>
 
-<ul>
-  <li>User Id: {{userProfile.userId}}</li>
-  <li>User Name: {{userProfile.userName}}</li>
-  <li>Is Locked: {{userProfile.isLocked}}</li>
-  <li>Is Inactive: {{userProfile.isInactive}}</li>
-  <li>
-    Last Login Datetime: {{userProfile.lastLoginDatetime}}
-  </li>
-  <li>User Roles: {{userProfile.userRoles}}</li>
-</ul>
-<ng-container *ngIf="context !== RouteItemContext.View">
-  <button
-    mat-flat-button
-    color="primary"
-    (click)="formSubmit.emit(userProfile)">
-    {{
-      context === RouteItemContext.Edit && 'Update Profile' ||
-      context === RouteItemContext.New && 'Create Profile' ||
-      'Submit'
-    }}
-  </button>
-</ng-container>
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()">
+    <div
+      fxLayout="column"
+      fxLayoutGap="1em"
+      class="w-100 p-3">
+      <div
+        fxLayout="column"
+        fxLayoutGap="1em">
+        <mat-form-field *ngIf="context === RouteItemContext.New">
+          <input
+            matInput
+            type="text"
+            [formControlName]="ParamKey.UserId"
+            placeholder="User ID">
+          <!-- <mat-error
+            *ngIf="isControlError(ParamKey.UserId)"
+            class="alert alert-danger">
+            <div *ngIf="getControl(ParamKey.UserName).errors?.required">Name is required.</div>
+          </mat-error> -->
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            type="text"
+            [formControlName]="ParamKey.UserName"
+            placeholder="Name">
+          <!-- <mat-error
+            *ngIf="isControlError(ParamKey.UserName)"
+            class="alert alert-danger">
+            <div *ngIf="getControl(ParamKey.UserName).errors?.required">Name is required.</div>
+          </mat-error> -->
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            type="text"
+            [formControlName]="ParamKey.EmailId"
+            placeholder="Email">
+          <mat-hint align="end">(Can use 'admin@localhost' for demo)</mat-hint>
+          <!-- <mat-error
+            *ngIf="isControlError(ParamKey.EmailId)"
+            class="alert alert-danger">
+            <div *ngIf="getControl(ParamKey.EmailId).errors?.required">Email is required.</div>
+          </mat-error> -->
+        </mat-form-field>
+        <mat-form-field hintLabel="Minimum 4 characters">
+          <input
+            matInput
+            type="password"
+            [formControlName]="ParamKey.Password"
+            placeholder="Password">
+          <mat-hint align="end">(Can use 'admin' for demo)</mat-hint>
+          <mat-error
+            *ngIf="isControlError(ParamKey.Password)"
+            class="alert alert-danger">
+            <!-- <div *ngIf="getControl(ParamKey.Password).errors?.required">Password is required.</div> -->
+            <!-- <div *ngIf="getControl(ParamKey.Password).errors?.minlength">Must be at least 4 characters long.</div> -->
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="mt-6 mb-4">
+        <mat-divider></mat-divider>
+      </div>
+    </div>
+    <div
+      *ngIf="context !== RouteItemContext.View"
+      fxLayout="row"
+      fxLayoutAlign="end center"
+      fxLayoutGap="1em">
+      <button
+        mat-button
+        color="primary"
+        type="button"
+        (click)="onCancel()">
+        Cancel
+      </button>
+      <button
+        mat-flat-button
+        color="primary"
+        type="button"
+        (click)="onSubmit()">
+        {{
+          context === RouteItemContext.Edit && 'Update Profile' ||
+          context === RouteItemContext.New && 'Create Profile' ||
+          'Submit'
+        }}
+      </button>
+    </div>
+
+  </form>
+</mat-card>

@@ -74,6 +74,7 @@ export class UserProfilesEffects {
           map((response: UpdateUserProfileResponse) => {
             // TODO: Implement optimistic updates to update the store based with the
             // request.
+            // TODO: implement router navigation Effects.
             return UserProfilesActions.updateUserProfileSuccess({ id, params });
           }),
           catchError((error: any) =>

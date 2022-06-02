@@ -1,10 +1,12 @@
 import { Observable } from 'rxjs';
 
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiRequestState, ApiStatus } from '@app/shared/api-status/util';
 import {
   ManageUserProfilesFacade,
   RouteItemContext,
+  RouteItemPath,
   UserProfile,
   getUserProfileId,
 } from '@app/users/domain';
@@ -24,7 +26,11 @@ export class UsersUserProfileComponent {
   routeItemContext$: Observable<RouteItemContext> =
     this.userProfilesFacade.userProfileRouteItemContext$;
 
-  constructor(private userProfilesFacade: ManageUserProfilesFacade) {}
+  constructor(
+    private userProfilesFacade: ManageUserProfilesFacade,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   onCreate(profile: UserProfile) {
     this.userProfilesFacade.createUserProfile(profile);
@@ -33,5 +39,9 @@ export class UsersUserProfileComponent {
   onEdit(profile: UserProfile) {
     const id: string = getUserProfileId(profile);
     this.userProfilesFacade.updateUserProfile(id, profile);
+  }
+
+  onCancel() {
+    this.router.navigate(['../../'], { relativeTo: this.route });
   }
 }

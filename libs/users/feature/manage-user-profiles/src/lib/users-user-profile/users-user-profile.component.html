@@ -5,7 +5,9 @@
     <ng-container *ngSwitchCase="RouteItemContext.New">
       <users-user-profile-form
         [context]="context"
-        (formSubmit)="onCreate($event)"></users-user-profile-form>
+        (formSubmit)="onCreate($event)"
+        (formCancel)="onCancel()">
+      </users-user-profile-form>
     </ng-container>
     <ng-container *ngSwitchCase="RouteItemContext.Edit">
       <app-api-status [requestState]="requestState$ | async">
@@ -13,7 +15,9 @@
           <users-user-profile-form
             [userProfile]="userProfile$ | async"
             [context]="context"
-            (formSubmit)="onEdit($event)"></users-user-profile-form>
+            (formSubmit)="onEdit($event)"
+            (formCancel)="onCancel()">
+          </users-user-profile-form>
         </ng-template>
       </app-api-status>
     </ng-container>

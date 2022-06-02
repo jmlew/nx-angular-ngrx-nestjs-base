@@ -30,16 +30,12 @@ export class UsersManageProfilesComponent {
 
   onEdit(profile: UserProfile) {
     const id: string = getUserProfileId(profile);
-    this.router.navigate([RouteItemPath.Edit, id], {
-      relativeTo: this.route,
-    });
+    this.router.navigate([RouteItemPath.Edit, id], { relativeTo: this.route });
   }
 
   onView(profile: UserProfile) {
     const id: string = getUserProfileId(profile);
-    this.router.navigate([RouteItemPath.View, id], {
-      relativeTo: this.route,
-    });
+    this.router.navigate([RouteItemPath.View, id], { relativeTo: this.route });
   }
 
   onRemove(profile: UserProfile) {

@@ -1,7 +1,7 @@
 {
   "data": [
     {
-      "userId": "foo",
+      "userId": "user-foo",
       "userName": "Jason",
       "emailId": "jason@localhost",
       "password": "samplejasonpassword",
@@ -12,7 +12,7 @@
       "createdAt": "2018-07-16T07:32:20.421Z"
     },
     {
-      "userId": "bar",
+      "userId": "user-bar",
       "userName": "System",
       "emailId": "system@localhost",
       "password": "samplesystempassword",
