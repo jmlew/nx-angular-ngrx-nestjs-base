@@ -9,6 +9,7 @@ import {
 import { Action, createReducer, on } from '@ngrx/store';
 
 import { UserProfile } from '../../entities/user-profile.model';
+import { getUserProfileId } from '../../entities/user-profile.util';
 import * as UserProfilesActions from './profiles.actions';
 
 export const USER_PROFILES_KEY = 'userProfiles';
@@ -24,7 +25,7 @@ export interface UserProfilesState
 
 export const userProfilesAdapter: EntityAdapter<UserProfile> =
   createEntityAdapter<UserProfile>({
-    selectId: (item: UserProfile) => item.emailId,
+    selectId: (item: UserProfile) => getUserProfileId(item),
     sortComparer: (a: UserProfile, b: UserProfile) =>
       a.userName.localeCompare(b.userName),
   });

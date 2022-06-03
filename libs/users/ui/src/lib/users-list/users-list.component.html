@@ -30,6 +30,18 @@
       </button>
     </mat-list-item>
   </mat-list>
+  <mat-divider></mat-divider>
+  <div
+    fxLayoutAlign="end center"
+    class="p-4 pt-5">
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="add.emit()">
+      <span>New User</span>
+      <mat-icon class="ml-2">{{IconMat.AddCircle}}</mat-icon>
+    </button>
+  </div>
 </mat-card>
 
 <!-- (click)="edit.emit(user)" -->

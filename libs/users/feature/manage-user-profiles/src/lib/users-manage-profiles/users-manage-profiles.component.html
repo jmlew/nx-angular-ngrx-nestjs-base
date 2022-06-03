@@ -4,6 +4,7 @@
   <ng-template #success>
     <users-list
       [users]="userProfiles$ | async"
+      (add)="onAdd()"
       (edit)="onEdit($event)"
       (view)="onView($event)"
       (remove)="onRemove($event)"></users-list>

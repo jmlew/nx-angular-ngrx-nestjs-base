@@ -28,6 +28,10 @@ export class UsersManageProfilesComponent {
     private userProfilesFacade: ManageUserProfilesFacade
   ) {}
 
+  onAdd() {
+    this.router.navigate([RouteItemPath.New], { relativeTo: this.route });
+  }
+
   onEdit(profile: UserProfile) {
     const id: string = getUserProfileId(profile);
     this.router.navigate([RouteItemPath.Edit, id], { relativeTo: this.route });

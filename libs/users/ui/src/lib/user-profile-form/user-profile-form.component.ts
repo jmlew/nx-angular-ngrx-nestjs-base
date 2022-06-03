@@ -41,11 +41,15 @@ export class UserProfileFormComponent implements OnInit {
   readonly RouteItemContext = RouteItemContext;
   readonly ParamKey = ParamKey;
 
+  isNew: boolean;
+  isView: boolean;
   form: FormGroup;
 
   constructor(private readonly formBuilder: FormBuilder) {}
 
   ngOnInit() {
+    this.isNew = this.context === RouteItemContext.New;
+    this.isView = this.context === RouteItemContext.View;
     this.form = this.buildForm();
   }
 

@@ -19,6 +19,7 @@ export class UsersListComponent {
 
   @Input() users: UserProfile[];
   @Output() edit = new EventEmitter<UserProfile>();
+  @Output() add = new EventEmitter<UserProfile>();
   @Output() view = new EventEmitter<UserProfile>();
   @Output() remove = new EventEmitter<UserProfile>();
 }

@@ -10,7 +10,7 @@
       <div
         fxLayout="column"
         fxLayoutGap="1em">
-        <mat-form-field *ngIf="context === RouteItemContext.New">
+        <mat-form-field *ngIf="isNew">
           <input
             matInput
             type="text"
@@ -67,7 +67,7 @@
       </div>
     </div>
     <div
-      *ngIf="context !== RouteItemContext.View"
+      *ngIf="!isView"
       fxLayout="row"
       fxLayoutAlign="end center"
       fxLayoutGap="1em">
@@ -83,11 +83,7 @@
         color="primary"
         type="button"
         (click)="onSubmit()">
-        {{
-          context === RouteItemContext.Edit && 'Update Profile' ||
-          context === RouteItemContext.New && 'Create Profile' ||
-          'Submit'
-        }}
+        {{ isNew ? 'Create New Profile' : 'Update Profile' }}
       </button>
     </div>
 
