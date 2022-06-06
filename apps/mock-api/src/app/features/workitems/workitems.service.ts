@@ -14,8 +14,8 @@ import { EntitiesApiBaseService } from '../../shared/services';
 @Injectable()
 export class WorkitemsService extends EntitiesApiBaseService<Workitem, number> {
   constructor() {
-    const primaryId: keyof Workitem = 'id';
-    super(primaryId);
+    const primaryKey = 'id';
+    super(primaryKey);
     this.initDb();
   }
 

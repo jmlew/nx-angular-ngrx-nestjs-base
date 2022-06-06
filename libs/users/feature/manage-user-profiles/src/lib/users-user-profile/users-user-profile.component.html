@@ -3,6 +3,7 @@
 
   <ng-container [ngSwitch]="context">
     <ng-container *ngSwitchCase="RouteItemContext.New">
+      <app-api-status [requestState]="requestState$ | async"></app-api-status>
       <users-user-profile-form
         [context]="context"
         (formSubmit)="onCreate($event)"

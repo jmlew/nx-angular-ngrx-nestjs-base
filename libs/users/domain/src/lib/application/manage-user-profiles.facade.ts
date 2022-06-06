@@ -41,7 +41,10 @@ export class ManageUserProfilesFacade {
     select(UserProfilesSelectors.selectUserProfileRouteItemContext)
   );
 
-  constructor(private readonly store: Store<UserProfilesFeature.UserProfilesState>) {}
+  constructor(
+    private readonly store: Store<UserProfilesFeature.UserProfilesState>,
+    private dataService: UsersDataService
+  ) {}
 
   loadUserProfiles() {
     this.store.dispatch(UserProfilesActions.loadUserProfiles());
@@ -58,24 +61,4 @@ export class ManageUserProfilesFacade {
   deleteUserProfile(id: string) {
     this.store.dispatch(UserProfilesActions.deleteUserProfile({ id }));
   }
-
-  /* getUserProfiles(): Observable<UserProfile[]> {
-    return this.dataService.getProfiles();
-  }
-
-  getUserProfile(emailId: string): Observable<UserProfile> {
-    return this.dataService.getProfile(emailId);
-  }
-
-  createUserProfile(user: UserProfileParams): Observable<EditUserProfileResponse> {
-    return this.dataService.createProfile(user);
-  }
-
-  updateUserProfile(user: UserProfile): Observable<EditUserProfileResponse> {
-    return this.dataService.updateProfile(user);
-  }
-
-  deleteUserProfile(emailId: string): Observable<string> {
-    return this.dataService.deleteProfile(emailId);
-  } */
 }

@@ -13,7 +13,7 @@ import { toStreamWithDelay } from '../../shared/utils';
 import { UsersService } from './users.service';
 import { Observable } from 'rxjs';
 import {
-  UpdateUserProfileResponse,
+  GenericUserProfileResponse,
   UserProfile,
   UserProfileParams,
 } from '@app/users/api-model';
@@ -21,6 +21,7 @@ import {
 enum ErrorMessage {
   NoUserMatch = 'User does not exist in the Mock DB.',
   DuplicateEmail = 'Duplicate email in Mock CRM DB.',
+  DuplicatePrimaryId = 'Duplicate primary ID in Mock CRM DB.',
 }
 
 @Controller('admin/user_profile')
@@ -47,29 +48,32 @@ export class UserProfilesController {
   }
 
   @Post()
-  createUser(@Body() params: UserProfileParams): Observable<UpdateUserProfileResponse> {
-    if (this.userService.isUserDuplicate(params)) {
+  createUserProfile(
+    @Body() params: UserProfileParams
+  ): Observable<GenericUserProfileResponse> {
+    if (this.userService.isFieldDuplicate(params)) {
+      throw new BadRequestException(ErrorMessage.DuplicatePrimaryId);
+    }
+    if (this.userService.isFieldDuplicate(params, 'emailId', params['emailId'])) {
       throw new BadRequestException(ErrorMessage.DuplicateEmail);
     }
     return this.toStream(this.userService.createUser(params));
   }
 
   @Put(':id')
-  updateUser(
+  updateUserProfile(
     @Param('id') id: string,
     @Body() params: UserProfile
-  ): Observable<UpdateUserProfileResponse> {
-    if (!this.userService.doesUserExist(id)) {
-      throw new BadRequestException(ErrorMessage.NoUserMatch);
-    }
-    if (this.userService.isUserDuplicate(params, id)) {
+  ): Observable<GenericUserProfileResponse> {
+    if (this.userService.isFieldDuplicate(params, 'emailId', params['emailId'])) {
       throw new BadRequestException(ErrorMessage.DuplicateEmail);
     }
     return this.toStream(this.userService.updateUser(id, params));
   }
 
   @Delete(':id')
-  deleteUser(@Param('id') id: string): Observable<string> {
+  deleteUserProfile(@Param('id') id: string): Observable<GenericUserProfileResponse> {
+    // TODO: Investigate why this is being called twice.
     console.log('deleteUser', id);
     if (!this.userService.doesUserExist(id)) {
       throw new BadRequestException(ErrorMessage.NoUserMatch);

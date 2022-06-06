@@ -2,8 +2,9 @@ import { BehaviorSubject, Observable, map } from 'rxjs';
 
 import { Injectable } from '@angular/core';
 
-import { mapRouteNamesToRouteItems } from '../entities/normalise.util';
-import { orderedRouteNames } from '../entities/routes.constant';
+import * as fromUtils from '../entities/normalise.util';
+import { orderedRootRouteNames } from '../entities/routes.constant';
+import { RouteName } from '../entities/routes.enum';
 import { RouteItem } from '../entities/routes.model';
 import { NavigationDataService } from '../infrastructure/navigation.data.service';
 
@@ -20,7 +21,7 @@ export class NavigationFacade {
   loadRoutes(): void {
     this.dataService
       .getAllNavigationFeatureNames()
-      .pipe(map(mapRouteNamesToRouteItems))
+      .pipe(map(fromUtils.mapRouteNamesToRouteItems))
       .subscribe({
         next: (routeItems: RouteItem[]) => {
           this.routeItemsSubject.next(routeItems);
@@ -34,7 +35,11 @@ export class NavigationFacade {
   /**
    * Returns all available route items.
    */
-  getAllRouteItems(): RouteItem[] {
-    return mapRouteNamesToRouteItems(orderedRouteNames);
+  getAllRootRouteItems(): RouteItem[] {
+    return fromUtils.mapRouteNamesToRouteItems(orderedRootRouteNames);
+  }
+
+  getRootItem(routeName: RouteName): RouteItem {
+    return fromUtils.getRootItem(routeName);
   }
 }

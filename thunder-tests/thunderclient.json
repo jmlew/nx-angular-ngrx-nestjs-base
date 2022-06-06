@@ -1,0 +1,96 @@
+[
+  {
+    "_id": "741837c6-75df-4632-9624-b13e0a9a4774",
+    "colId": "56f8af57-d4a4-4f94-96e5-faf10066feb0",
+    "containerId": "",
+    "name": "UserProfiles getUserProfiles",
+    "url": "http://localhost:4200/api/admin/user_profile",
+    "method": "GET",
+    "sortNum": 10000,
+    "created": "2022-06-06T06:09:18.220Z",
+    "modified": "2022-06-06T06:09:49.679Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "ac2aaa29-b2d7-4843-9070-8c8cb4642868",
+    "colId": "56f8af57-d4a4-4f94-96e5-faf10066feb0",
+    "containerId": "",
+    "name": "UserProfiles getUserProfile",
+    "url": "http://localhost:4200/api/admin/user_profile/user-foo",
+    "method": "GET",
+    "sortNum": 20000,
+    "created": "2022-06-06T06:09:28.957Z",
+    "modified": "2022-06-06T06:09:28.957Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "b0fd67ba-2a00-4fe0-a41d-56b01df62037",
+    "colId": "56f8af57-d4a4-4f94-96e5-faf10066feb0",
+    "containerId": "",
+    "name": "UserProfiles createUserProfile",
+    "url": "http://localhost:4200/api/admin/user_profile",
+    "method": "POST",
+    "sortNum": 30000,
+    "created": "2022-06-06T06:10:04.313Z",
+    "modified": "2022-06-06T06:20:28.229Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n    \"userId\": \"sampleId4\",\n    \"userName\": \"Sample\",\n    \"emailId\": \"jm.lewis+4@gmail.com\",\n    \"password\": \"asdasdasd\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "baf3204d-11ec-4f6e-abaa-bc3727ef1da9",
+    "colId": "56f8af57-d4a4-4f94-96e5-faf10066feb0",
+    "containerId": "",
+    "name": "UserProfiles updateUserProfile",
+    "url": "http://localhost:4200/api/admin/user_profile/sampleId4",
+    "method": "PUT",
+    "sortNum": 40000,
+    "created": "2022-06-06T06:15:06.302Z",
+    "modified": "2022-06-06T06:20:54.153Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n    \"userName\": \"SampleUpdate\",\n    \"emailId\": \"jm.lewis+5@gmail.com\",\n    \"password\": \"asdasdasd\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "c501e8ae-cb92-4514-822e-3c9a2ae5ff0b",
+    "colId": "56f8af57-d4a4-4f94-96e5-faf10066feb0",
+    "containerId": "",
+    "name": "UserProfiles deleteUserProfile",
+    "url": "http://localhost:4200/api/admin/user_profile/sampleId4",
+    "method": "DELETE",
+    "sortNum": 50000,
+    "created": "2022-06-06T06:21:19.646Z",
+    "modified": "2022-06-06T06:25:51.008Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "a049b86c-8511-4fff-9113-69d280c9b93d",
+    "colId": "56f8af57-d4a4-4f94-96e5-faf10066feb0",
+    "containerId": "",
+    "name": "UserProfiles reset DB",
+    "url": "http://localhost:4200/api/admin/user_profile",
+    "method": "GET",
+    "sortNum": 5000,
+    "created": "2022-06-06T06:36:52.552Z",
+    "modified": "2022-06-06T06:37:14.357Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  }
+]

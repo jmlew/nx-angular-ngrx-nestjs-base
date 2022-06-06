@@ -6,7 +6,6 @@ import { ApiRequestState, ApiStatus } from '@app/shared/api-status/util';
 import {
   ManageUserProfilesFacade,
   RouteItemContext,
-  RouteItemPath,
   UserProfile,
   getUserProfileId,
 } from '@app/users/domain';

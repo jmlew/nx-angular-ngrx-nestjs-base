@@ -1,12 +1,13 @@
-import { catchError, map, of, switchMap } from 'rxjs';
+import { catchError, map, of, switchMap, tap } from 'rxjs';
 
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
-import { UpdateUserProfileResponse } from '../../entities/api/user-profile-api.model';
+import { GenericUserProfileResponse } from '../../entities/api/user-profile-api.model';
 import { UserProfile, UserProfileParams } from '../../entities/user-profile.model';
-import { UsersDataService } from '../../infrastructure/users.data.service';
+import { DataItemType, UsersDataService } from '../../infrastructure/users.data.service';
 import * as UserProfilesActions from './profiles.actions';
 import { UserProfilesState } from './profiles.reducer';
 import * as UserProfilesSelectors from './profiles.selectors';
@@ -17,7 +18,7 @@ export class UserProfilesEffects {
     this.actions$.pipe(
       ofType(UserProfilesActions.loadUserProfiles),
       switchMap(() =>
-        this.dataService.getProfiles().pipe(
+        this.dataService.getItems(DataItemType.Profile).pipe(
           map((items: UserProfile[]) =>
             UserProfilesActions.loadUserProfilesSuccess({ items })
           ),
@@ -33,7 +34,7 @@ export class UserProfilesEffects {
     this.actions$.pipe(
       ofType(UserProfilesActions.loadUserProfile),
       switchMap((action: { id: string }) =>
-        this.dataService.getProfile(action.id).pipe(
+        this.dataService.getItem(DataItemType.Profile, action.id).pipe(
           map((item: UserProfile) =>
             UserProfilesActions.loadUserProfileSuccess({ item })
           ),
@@ -50,8 +51,8 @@ export class UserProfilesEffects {
       ofType(UserProfilesActions.createUserProfile),
       switchMap((action: { params: UserProfileParams }) => {
         const { params } = action;
-        return this.dataService.createProfile(params).pipe(
-          map((response: UpdateUserProfileResponse) => {
+        return this.dataService.createItem(DataItemType.Profile, params).pipe(
+          map((response: GenericUserProfileResponse) => {
             // TODO: Implement optimistic updates.
             const item: UserProfile = { ...params, userId: response.userId };
             return UserProfilesActions.createUserProfileSuccess({ item });
@@ -70,11 +71,12 @@ export class UserProfilesEffects {
       switchMap((action: { id: string; params: Partial<UserProfile> }) => {
         // TODO: Implement optimistic updates.
         const { id, params } = action;
-        return this.dataService.updateProfile(id, params).pipe(
-          map((response: UpdateUserProfileResponse) => {
+        return this.dataService.updateItem(DataItemType.Profile, id, params).pipe(
+          map((response: GenericUserProfileResponse) => {
             // TODO: Implement optimistic updates to update the store based with the
             // request.
             // TODO: implement router navigation Effects.
+            // return UserProfilesActions.updateUserProfileSuccess({ id, params });
             return UserProfilesActions.updateUserProfileSuccess({ id, params });
           }),
           catchError((error: any) =>
@@ -91,8 +93,8 @@ export class UserProfilesEffects {
       switchMap((action: { id: string }) => {
         // TODO: Implement optimistic updates.
         const { id } = action;
-        return this.dataService.deleteProfile(id).pipe(
-          map((id: string) => {
+        return this.dataService.deleteItem(DataItemType.Profile, id).pipe(
+          map((response: GenericUserProfileResponse) => {
             console.log('deleteProfile', id);
             return UserProfilesActions.deleteUserProfileSuccess({ id });
           }),
@@ -101,6 +103,16 @@ export class UserProfilesEffects {
           )
         );
       })
+    )
+  );
+
+  returnToUserProfiles$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(
+        UserProfilesActions.updateUserProfileSuccess,
+        UserProfilesActions.createUserProfileSuccess
+      ),
+      map(() => UserProfilesActions.navToUserProfiles())
     )
   );
 

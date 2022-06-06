@@ -1,5 +1,5 @@
 export interface UserProfileId {
-  userId: string; // Free text string, editable upon user profiule creation.
+  userId: string; // Free text string, editable upon user profile creation.
 }
 
 interface DbItem {
@@ -8,8 +8,8 @@ interface DbItem {
 }
 
 export interface UserProfileParams extends UserProfileId {
-  emailId: string; // Primary key.
   userName: string; // Maps to LDAP user name.
+  emailId: string;
   password: string;
   isLocked: string;
   isInactive: string;

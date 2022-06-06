@@ -70,7 +70,7 @@ export class UserProfileFormComponent implements OnInit {
       ],
       [ParamKey.Password]: [
         params[ParamKey.Password],
-        Validators.compose([Validators.required, Validators.minLength(4)]),
+        Validators.compose([Validators.required, Validators.minLength(8)]),
       ],
     });
   }
@@ -92,9 +92,14 @@ export class UserProfileFormComponent implements OnInit {
     return this.form.get(key) as AbstractControl;
   }
 
-  isControlError(key: ParamKey): boolean {
+  isControlInvalid(key: ParamKey): boolean {
     const control: AbstractControl = this.getControl(key);
     return control.invalid && control.touched && control.dirty;
+  }
+
+  isControlError(key: ParamKey, errorType: string): boolean {
+    const control: AbstractControl = this.getControl(key);
+    return control?.errors?.[errorType];
   }
 
   onSubmit() {

@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { BaseDataService } from '@app/shared/util-http';
 
-import { UpdateUserProfileResponse } from '../entities/api/user-profile-api.model';
+import { GenericUserProfileResponse } from '../entities/api/user-profile-api.model';
 import { UserProfile, UserProfileParams } from '../entities/user-profile.model';
 
 enum ApiEndpoint {
@@ -14,34 +14,52 @@ enum ApiEndpoint {
   Permission = 'permission',
 }
 
+export enum DataItemType {
+  Profile,
+  Role,
+  Permission,
+}
+
 @Injectable()
 export class UsersDataService {
-  private baseUrlProfile = `${ApiEndpoint.Base}/${ApiEndpoint.Admin}/${ApiEndpoint.Profile}`;
-  private baseUrlRole = `${ApiEndpoint.Base}/${ApiEndpoint.Admin}/${ApiEndpoint.Role}`;
-  private baseUrlPermission = `${ApiEndpoint.Base}/${ApiEndpoint.Admin}/${ApiEndpoint.Permission}`;
-
   constructor(private data: BaseDataService) {}
 
-  getProfiles(): Observable<UserProfile[]> {
-    return this.data.get<UserProfile[]>(this.baseUrlProfile);
+  private baseUrl = `${ApiEndpoint.Base}/${ApiEndpoint.Admin}`;
+
+  private urlMap: Map<DataItemType, string> = new Map([
+    [DataItemType.Profile, `${this.baseUrl}/${ApiEndpoint.Profile}`],
+    [DataItemType.Role, `${this.baseUrl}/${ApiEndpoint.Role}`],
+    [DataItemType.Permission, `${this.baseUrl}/${ApiEndpoint.Permission}`],
+  ]);
+
+  private getUrl(type: DataItemType): string {
+    return this.urlMap.get(type) as string;
   }
 
-  getProfile(id: string): Observable<UserProfile> {
-    return this.data.get<UserProfile>(`${this.baseUrlProfile}/${id}`);
+  getItems(type: DataItemType): Observable<UserProfile[]> {
+    return this.data.get<UserProfile[]>(this.getUrl(type));
   }
 
-  createProfile(item: UserProfileParams): Observable<UpdateUserProfileResponse> {
-    return this.data.post<UpdateUserProfileResponse>(this.baseUrlProfile, item);
+  getItem(type: DataItemType, id: string): Observable<UserProfile> {
+    return this.data.get<UserProfile>(`${this.getUrl(type)}/${id}`);
   }
 
-  updateProfile(
+  createItem(
+    type: DataItemType,
+    item: UserProfileParams
+  ): Observable<GenericUserProfileResponse> {
+    return this.data.post<GenericUserProfileResponse>(this.getUrl(type), item);
+  }
+
+  updateItem(
+    type: DataItemType,
     id: string,
     item: Partial<UserProfile>
-  ): Observable<UpdateUserProfileResponse> {
-    return this.data.put<UpdateUserProfileResponse>(`${this.baseUrlProfile}/${id}`, item);
+  ): Observable<GenericUserProfileResponse> {
+    return this.data.put<GenericUserProfileResponse>(`${this.getUrl(type)}/${id}`, item);
   }
 
-  deleteProfile(id: string): Observable<string> {
-    return this.data.delete<string>(`${this.baseUrlProfile}/${id}`);
+  deleteItem(type: DataItemType, id: string): Observable<GenericUserProfileResponse> {
+    return this.data.delete<GenericUserProfileResponse>(`${this.getUrl(type)}/${id}`);
   }
 }

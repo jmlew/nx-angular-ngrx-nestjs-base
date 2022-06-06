@@ -8,7 +8,7 @@ import {
 export class EntitiesService<T, K extends string | number>
   implements EntityAdapter<T, K>, EntitySelectors<T, K>
 {
-  constructor(private selectId: string) {}
+  constructor(private selectIdKey: string) {}
 
   createEntities(items: T[]): Entity<T> {
     return items.reduce(
@@ -18,7 +18,7 @@ export class EntitiesService<T, K extends string | number>
   }
 
   createEntity(item: T): Entity<T> {
-    const id: K = item[this.selectId as string];
+    const id: K = item[this.selectIdKey as string];
     return { [id]: item };
   }
 
@@ -55,7 +55,7 @@ export class EntitiesService<T, K extends string | number>
   }
 
   upsertOne(item: T, entities: Entity<T>): Entity<T> {
-    const id: unknown = item[this.selectId as string];
+    const id: unknown = item[this.selectIdKey as string];
     return id ? { ...entities, [id as K]: item } : this.addOne(item, entities);
   }
 

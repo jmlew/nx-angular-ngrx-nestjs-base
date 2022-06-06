@@ -1,9 +1,9 @@
 import { navigation } from '@nrwl/angular';
 import { Store } from '@ngrx/store';
-import { filter, first, map } from 'rxjs';
+import { filter, first, map, tap } from 'rxjs';
 import { Inject, Injectable, Type } from '@angular/core';
-import { ActivatedRouteSnapshot } from '@angular/router';
-import { Actions, createEffect } from '@ngrx/effects';
+import { ActivatedRouteSnapshot, Router } from '@angular/router';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import * as UserProfilesActions from './profiles/profiles.actions';
 import * as UserProfilesSelectors from './profiles/profiles.selectors';
@@ -20,6 +20,7 @@ import {
 } from '../entities/user-routes.enum';
 
 import { UsersFeatureState } from '.';
+import { NavigationFacade, RouteItem, RouteName } from '@app/shared/navigation/domain';
 
 /**
  * Effects to manage the feature's routes by mapping the components which are applied to
@@ -27,7 +28,7 @@ import { UsersFeatureState } from '.';
  */
 @Injectable()
 export class UserRoutesEffects {
-  routeUserProfilesMain$ = createEffect(() =>
+  routedUserProfilesMain$ = createEffect(() =>
     this.actions$.pipe(
       navigation(this.userProfiles, {
         run: (route: ActivatedRouteSnapshot) => {
@@ -50,7 +51,7 @@ export class UserRoutesEffects {
     )
   );
 
-  routeUserProfile$ = createEffect(() =>
+  routedUserProfile$ = createEffect(() =>
     this.actions$.pipe(
       navigation(this.userProfile, {
         run: (route: ActivatedRouteSnapshot) => {
@@ -85,9 +86,26 @@ export class UserRoutesEffects {
       })
     )
   );
+
+  navToUserProfiles$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(UserProfilesActions.navToUserProfiles),
+        tap(() => {
+          const usersRouteItem: RouteItem = this.navigationFacade.getRootItem(
+            RouteName.Users
+          );
+          this.router.navigate([usersRouteItem.path]);
+        })
+      ),
+    { dispatch: false }
+  );
+
   constructor(
+    private readonly navigationFacade: NavigationFacade,
     private readonly actions$: Actions,
     private readonly store: Store<UsersFeatureState>,
+    private readonly router: Router,
     @Inject(ROUTE_COMP_USER_PROFILES) private userProfiles: Type<any>,
     @Inject(ROUTE_COMP_USER_PROFILE) private userProfile: Type<any>
   ) {}

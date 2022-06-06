@@ -7,9 +7,11 @@ import { EntitiesService } from '.';
 export class EntitiesApiBaseService<T, K extends string | number> {
   entityService: EntitiesService<T, K>;
   entities: Entity<T>;
+  protected primaryKey: string;
 
-  constructor(primaryId: string) {
-    this.entityService = new EntitiesService<T, K>(primaryId);
+  constructor(primaryKey: string) {
+    this.primaryKey = primaryKey;
+    this.entityService = new EntitiesService<T, K>(primaryKey);
   }
 
   protected createEntities(db: T[]) {

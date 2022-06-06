@@ -18,10 +18,10 @@ export class ErrorHttpInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
-      retry(1),
+      // retry(1),
       catchError((error: HttpErrorResponse) => {
         const errorMessage: string = this.getErrorMessage(error);
-        console.log('errorMessage', errorMessage);
+        console.log('ErrorHttpInterceptor errorMessage', errorMessage);
         // this.notification.error(errorMessage);
         return throwError(() => errorMessage);
       })

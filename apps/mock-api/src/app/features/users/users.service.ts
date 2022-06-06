@@ -1,4 +1,4 @@
-import { UpdateUserProfileResponse, UserProfile } from '@app/users/api-model';
+import { GenericUserProfileResponse, UserProfile } from '@app/users/api-model';
 import { Injectable } from '@nestjs/common';
 
 import * as usersDb from '../../../assets/db/user-profiles.json';
@@ -7,8 +7,8 @@ import { EntitiesApiBaseService } from '../../shared/services';
 @Injectable()
 export class UsersService extends EntitiesApiBaseService<UserProfile, string> {
   constructor() {
-    const primaryId: keyof UserProfile = 'userId';
-    super(primaryId);
+    const primaryKey = 'userId';
+    super(primaryKey);
     this.initDb();
   }
 
@@ -25,19 +25,20 @@ export class UsersService extends EntitiesApiBaseService<UserProfile, string> {
     return this.selectOne(id);
   }
 
-  createUser(user: UserProfile): UpdateUserProfileResponse {
+  createUser(user: UserProfile): GenericUserProfileResponse {
     this.addEntity(user);
-    return this.getNewUserResponse(user);
+    const { userId } = user;
+    return { userId, status: 'active' };
   }
 
-  updateUser(id: string, user: UserProfile): UpdateUserProfileResponse {
+  updateUser(id: string, user: UserProfile): GenericUserProfileResponse {
     this.updateEntity(id, user);
-    return this.getEditedUserResponse(user);
+    return { userId: id, status: 'active' };
   }
 
-  deleteUser(id: string): string {
+  deleteUser(id: string): GenericUserProfileResponse {
     this.removeEntity(id);
-    return id;
+    return { userId: id, status: 'removed' };
   }
 
   deleteUsers(ids: string[]): string[] {
@@ -49,26 +50,15 @@ export class UsersService extends EntitiesApiBaseService<UserProfile, string> {
     return this.doesEntityExist(id);
   }
 
-  isUserDuplicate(user: UserProfile, ignoreUserId: string = null): boolean {
+  isFieldDuplicate(
+    user: UserProfile,
+    field: string = this.primaryKey,
+    ignoreValue: any = null
+  ): boolean {
     const users: UserProfile[] = this.selectAll();
     return users
-      .filter(
-        (item: UserProfile) => ignoreUserId === null || item.emailId !== ignoreUserId
-      )
-      .some((item: UserProfile) => item.emailId === user.emailId);
-  }
-
-  private getNewUserResponse(user: UserProfile): UpdateUserProfileResponse {
-    // const ids: number[] = this.selectIds() as number[];
-    // const id: number = Math.max(...ids) + 1;
-    // return { ...user, createdAt: this.timestamp() };
-    const { userId } = user;
-    return { userId, status: 'active' };
-  }
-
-  private getEditedUserResponse(user: Partial<UserProfile>) {
-    const { userId } = user;
-    return { userId, status: 'active' };
+      .filter((item: UserProfile) => ignoreValue === null || item[field] !== ignoreValue)
+      .some((item: UserProfile) => item[field] === user[field]);
   }
 
   private timestamp(): string {

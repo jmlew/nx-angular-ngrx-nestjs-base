@@ -21,6 +21,8 @@ export interface UserProfilesState
     fromApiStatus.ApiRequestState {
   // Flag to indicate whether the full collection has loaded (use with ApiRequestState)
   areAllLoaded: boolean;
+  // !Important: try to avoid storing reference to selected entities which should rather
+  // be derived using selectors referencing the router params (eg. profileId).
 }
 
 export const userProfilesAdapter: EntityAdapter<UserProfile> =

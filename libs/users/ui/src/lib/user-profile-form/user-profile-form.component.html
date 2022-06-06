@@ -16,11 +16,11 @@
             type="text"
             [formControlName]="ParamKey.UserId"
             placeholder="User ID">
-          <!-- <mat-error
-            *ngIf="isControlError(ParamKey.UserId)"
+          <mat-error
+            *ngIf="isControlInvalid(ParamKey.UserId)"
             class="alert alert-danger">
-            <div *ngIf="getControl(ParamKey.UserName).errors?.required">Name is required.</div>
-          </mat-error> -->
+            <div *ngIf="isControlError(ParamKey.UserName, 'required')">Name is required.</div>
+          </mat-error>
         </mat-form-field>
         <mat-form-field>
           <input
@@ -28,11 +28,11 @@
             type="text"
             [formControlName]="ParamKey.UserName"
             placeholder="Name">
-          <!-- <mat-error
-            *ngIf="isControlError(ParamKey.UserName)"
+          <mat-error
+            *ngIf="isControlInvalid(ParamKey.UserName)"
             class="alert alert-danger">
-            <div *ngIf="getControl(ParamKey.UserName).errors?.required">Name is required.</div>
-          </mat-error> -->
+            <div *ngIf="isControlError(ParamKey.UserName, 'required')">Name is required.</div>
+          </mat-error>
         </mat-form-field>
         <mat-form-field>
           <input
@@ -41,11 +41,11 @@
             [formControlName]="ParamKey.EmailId"
             placeholder="Email">
           <mat-hint align="end">(Can use 'admin@localhost' for demo)</mat-hint>
-          <!-- <mat-error
-            *ngIf="isControlError(ParamKey.EmailId)"
+          <mat-error
+            *ngIf="isControlInvalid(ParamKey.EmailId)"
             class="alert alert-danger">
-            <div *ngIf="getControl(ParamKey.EmailId).errors?.required">Email is required.</div>
-          </mat-error> -->
+            <div *ngIf="isControlError(ParamKey.EmailId, 'required')">Email is required.</div>
+          </mat-error>
         </mat-form-field>
         <mat-form-field hintLabel="Minimum 4 characters">
           <input
@@ -55,10 +55,10 @@
             placeholder="Password">
           <mat-hint align="end">(Can use 'admin' for demo)</mat-hint>
           <mat-error
-            *ngIf="isControlError(ParamKey.Password)"
+            *ngIf="isControlInvalid(ParamKey.Password)"
             class="alert alert-danger">
-            <!-- <div *ngIf="getControl(ParamKey.Password).errors?.required">Password is required.</div> -->
-            <!-- <div *ngIf="getControl(ParamKey.Password).errors?.minlength">Must be at least 4 characters long.</div> -->
+            <div *ngIf="isControlError(ParamKey.Password, 'required')">Password is required.</div>
+            <div *ngIf="isControlError(ParamKey.Password, 'minlength')">Must be at least 8 characters long.</div>
           </mat-error>
         </mat-form-field>
       </div>

@@ -75,3 +75,7 @@ export const deleteUserProfileFailure = createAction(
   '[UserProfiles/API] Delete UserProfile Failure',
   props<{ error: string }>()
 );
+
+export const navToUserProfiles = createAction(
+  '[UserProfiles/Navigate] Go to User Profiles'
+);
