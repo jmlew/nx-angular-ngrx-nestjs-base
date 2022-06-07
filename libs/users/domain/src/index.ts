@@ -7,5 +7,5 @@ export * from './lib/application/manage-user-profiles.facade';
 export * from './lib/entities/user-profile.model';
 export * from './lib/entities/user-profile.util';
 
-// Tokens to inject components used in Effects.
+// Tokens to inject components used in Navigation Effects.
 export * from './lib/entities/route-components.token';

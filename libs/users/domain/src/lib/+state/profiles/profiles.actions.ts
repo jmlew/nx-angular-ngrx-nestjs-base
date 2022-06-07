@@ -26,7 +26,7 @@ export const loadUserProfileSuccess = createAction(
 
 export const loadUserProfileFailure = createAction(
   '[UserProfiles/API] Load UserProfile Failure',
-  props<{ error: string }>()
+  props<{ id: string; error: string }>()
 );
 
 export const updateUserProfile = createAction(
@@ -34,15 +34,20 @@ export const updateUserProfile = createAction(
   props<{ id: string; params: Partial<UserProfile> }>()
 );
 
-// Convert UpdateUserProfileResponse to new User Profile via the effect.
-export const updateUserProfileSuccess = createAction(
+export const updateUserProfileUndo = createAction(
+  '[UserProfiles/API] Update UserProfile Undo',
+  props<{ id: string; error: string }>()
+);
+
+// Optimistically update on main action and remove success action.
+/* export const updateUserProfileSuccess = createAction(
   '[UserProfiles/API] Update UserProfile Success',
   props<{ id: string; params: Partial<UserProfile> }>()
-);
+); */
 
 export const updateUserProfileFailure = createAction(
   '[UserProfiles/API] Update UserProfile Failure',
-  props<{ error: string }>()
+  props<{ id: string; error: string }>()
 );
 
 export const createUserProfile = createAction(
@@ -73,9 +78,14 @@ export const deleteUserProfileSuccess = createAction(
 
 export const deleteUserProfileFailure = createAction(
   '[UserProfiles/API] Delete UserProfile Failure',
-  props<{ error: string }>()
+  props<{ id: string; error: string }>()
 );
 
 export const navToUserProfiles = createAction(
   '[UserProfiles/Navigate] Go to User Profiles'
+);
+
+export const navToEditUserProfile = createAction(
+  '[UserProfiles/Navigate] Go to User Profile',
+  props<{ id: string }>()
 );

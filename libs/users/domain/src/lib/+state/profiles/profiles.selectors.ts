@@ -5,8 +5,8 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import { UserProfile } from '../../entities/user-profile.model';
 import {
+  RouteDataType,
   RouteItemContext,
-  RouteItemDataKey,
   UsersRouteParam,
 } from '../../entities/user-routes.enum';
 import {
@@ -71,7 +71,7 @@ export const selectIsCurrentUserProfileLoaded = createSelector(
 export const selectUserProfileRouteItemContext = createSelector(
   fromRouter.selectRouteData,
   (data: Data): RouteItemContext => {
-    const context: RouteItemContext = data[RouteItemDataKey.Context];
+    const context: RouteItemContext = data[RouteDataType.Context];
     return context || RouteItemContext.None;
   }
 );

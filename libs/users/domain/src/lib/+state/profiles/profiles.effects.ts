@@ -1,16 +1,14 @@
-import { catchError, map, of, switchMap, tap } from 'rxjs';
+import { catchError, map, of, switchMap } from 'rxjs';
 
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
+import { optimisticUpdate } from '@nrwl/angular';
 
-import { GenericUserProfileResponse } from '../../entities/api/user-profile-api.model';
+import { WriteUserProfileResponse } from '../../entities/api/user-profile-api.model';
 import { UserProfile, UserProfileParams } from '../../entities/user-profile.model';
 import { DataItemType, UsersDataService } from '../../infrastructure/users.data.service';
 import * as UserProfilesActions from './profiles.actions';
-import { UserProfilesState } from './profiles.reducer';
-import * as UserProfilesSelectors from './profiles.selectors';
+import * as UserProfilesFeature from './profiles.reducer';
 
 @Injectable()
 export class UserProfilesEffects {
@@ -33,16 +31,17 @@ export class UserProfilesEffects {
   loadUserProfile$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UserProfilesActions.loadUserProfile),
-      switchMap((action: { id: string }) =>
-        this.dataService.getItem(DataItemType.Profile, action.id).pipe(
+      switchMap((action: { id: string }) => {
+        const { id } = action;
+        return this.dataService.getItem(DataItemType.Profile, action.id).pipe(
           map((item: UserProfile) =>
             UserProfilesActions.loadUserProfileSuccess({ item })
           ),
           catchError((error: any) =>
-            of(UserProfilesActions.loadUserProfileFailure({ error }))
+            of(UserProfilesActions.loadUserProfileFailure({ id, error }))
           )
-        )
-      )
+        );
+      })
     )
   );
 
@@ -52,7 +51,7 @@ export class UserProfilesEffects {
       switchMap((action: { params: UserProfileParams }) => {
         const { params } = action;
         return this.dataService.createItem(DataItemType.Profile, params).pipe(
-          map((response: GenericUserProfileResponse) => {
+          map((response: WriteUserProfileResponse) => {
             // TODO: Implement optimistic updates.
             const item: UserProfile = { ...params, userId: response.userId };
             return UserProfilesActions.createUserProfileSuccess({ item });
@@ -65,25 +64,46 @@ export class UserProfilesEffects {
     )
   );
 
-  updateUserProfile$ = createEffect(() =>
+  /**
+   * Optimistically updates the store through the main action prior to retrieving the
+   * API response and ensures the undoAction handles errors by reverting state changes.
+   */
+  updateUserProfileOptimistic$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UserProfilesActions.updateUserProfile),
-      switchMap((action: { id: string; params: Partial<UserProfile> }) => {
-        // TODO: Implement optimistic updates.
-        const { id, params } = action;
-        return this.dataService.updateItem(DataItemType.Profile, id, params).pipe(
-          map((response: GenericUserProfileResponse) => {
-            // TODO: Implement optimistic updates to update the store based with the
-            // request.
-            // TODO: implement router navigation Effects.
-            // return UserProfilesActions.updateUserProfileSuccess({ id, params });
-            return UserProfilesActions.updateUserProfileSuccess({ id, params });
-          }),
-          catchError((error: any) =>
-            of(UserProfilesActions.updateUserProfileFailure({ error }))
-          )
-        );
+      optimisticUpdate({
+        run: (
+          action: ReturnType<typeof UserProfilesActions.updateUserProfile>,
+          state: UserProfilesFeature.UserProfilesState
+        ) =>
+          // Return an observable to ensure the data service method is executed by
+          // subscribing in the Effect. If the method does not return an observable, we
+          // can call it explicitly and add { dispatch: false } to this Effect.
+          this.dataService
+            .updateItem(DataItemType.Profile, action.id, action.params)
+            .pipe(switchMap(() => of())),
+        undoAction: (
+          action: ReturnType<typeof UserProfilesActions.updateUserProfile>,
+          error: any
+        ) => UserProfilesActions.updateUserProfileFailure({ id: action.id, error }),
       })
+    )
+  );
+
+  /**
+   * Undo a failed optimistic update by reloading the profile while showing an error
+   * message.
+   **/
+
+  // TODO: ensure the error remains on screen by separating the read vs write
+  // ApiStatus object on the state to differentiate failed loads with failed update /
+  // create / deletes.
+  updateUserProfileFailure$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserProfilesActions.updateUserProfileFailure),
+      map((action: { id: string; error: string }) =>
+        UserProfilesActions.loadUserProfile({ id: action.id })
+      )
     )
   );
 
@@ -94,51 +114,68 @@ export class UserProfilesEffects {
         // TODO: Implement optimistic updates.
         const { id } = action;
         return this.dataService.deleteItem(DataItemType.Profile, id).pipe(
-          map((response: GenericUserProfileResponse) => {
+          map((response: WriteUserProfileResponse) => {
             console.log('deleteProfile', id);
             return UserProfilesActions.deleteUserProfileSuccess({ id });
           }),
           catchError((error: any) =>
-            of(UserProfilesActions.deleteUserProfileFailure({ error }))
+            of(UserProfilesActions.deleteUserProfileFailure({ id, error }))
           )
         );
       })
     )
   );
 
+  /**
+   * Returns to the main items page upon state updates to items being written to.
+   */
   returnToUserProfiles$ = createEffect(() =>
     this.actions$.pipe(
       ofType(
-        UserProfilesActions.updateUserProfileSuccess,
+        UserProfilesActions.updateUserProfile,
         UserProfilesActions.createUserProfileSuccess
       ),
       map(() => UserProfilesActions.navToUserProfiles())
     )
   );
 
+  /**
+   * Returns to the item edit page upon failed write updates.
+   */
+  returnToUserProfile$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserProfilesActions.updateUserProfileFailure),
+      map((action: { id: string }) => {
+        const { id } = action;
+        return UserProfilesActions.navToEditUserProfile({ id });
+      })
+    )
+  );
+
+  /**
+   * An example of an Effect which handles the flow of writing changes to an item without
+   * using the data persistence library optimisticUpdate or pessimisticUpdate methods.
+   */
   /* updateUserProfile$ = createEffect(() =>
-    this.dataPersistence.optimisticUpdate(UserProfilesActions.updateUserProfile, {
-      run: (
-        action: ReturnType<typeof UserProfilesActions.updateUserProfile>,
-        state: UserProfilesFeature.UserProfilesPartialState
-      ) => {
-        this.dataService.getAllUserProfiles().pipe(
-          map((profiles: UserProfile[]) =>
-            UserProfilesActions.updateUserProfileSuccess({ items })
+    this.actions$.pipe(
+      ofType(UserProfilesActions.updateUserProfile),
+      switchMap((action: { id: string; params: Partial<UserProfile> }) => {
+        // TODO: Implement optimistic updates.
+        const { id, params } = action;
+        return this.dataService.updateItem(DataItemType.Profile, id, params).pipe(
+          map((response: GenericUserProfileResponse) =>
+            UserProfilesActions.updateUserProfileSuccess({ id, params })
           ),
-          catchError((error: any) => of(UserProfilesActions.updateUserProfileFailure({ error })))
+          catchError((error: any) =>
+            of(UserProfilesActions.updateUserProfileFailure({ id, error }))
+          )
         );
-      },
-      undoAction: (action: ReturnType<typeof UserProfilesActions.updateUserProfile>, error) => {
-        console.error('Error', error);
-        return UserProfilesActions.updateUserProfileFailure({ error });
-      },
-    })
+      })
+    )
   ); */
 
   constructor(
     private readonly actions$: Actions,
-    private readonly store: Store<UserProfilesState>,
-    private readonly dataService: UsersDataService
+    private readonly dataService: UsersDataService // private readonly store: Store<UserProfilesFeature.UserProfilesState>
   ) {}
 }

@@ -13,12 +13,13 @@ import { toStreamWithDelay } from '../../shared/utils';
 import { UsersService } from './users.service';
 import { Observable } from 'rxjs';
 import {
-  GenericUserProfileResponse,
+  WriteUserProfileResponse,
   UserProfile,
   UserProfileParams,
 } from '@app/users/api-model';
 
 enum ErrorMessage {
+  TestBadRequest = 'Sample response to simulate an invalid request.',
   NoUserMatch = 'User does not exist in the Mock DB.',
   DuplicateEmail = 'Duplicate email in Mock CRM DB.',
   DuplicatePrimaryId = 'Duplicate primary ID in Mock CRM DB.',
@@ -50,7 +51,7 @@ export class UserProfilesController {
   @Post()
   createUserProfile(
     @Body() params: UserProfileParams
-  ): Observable<GenericUserProfileResponse> {
+  ): Observable<WriteUserProfileResponse> {
     if (this.userService.isFieldDuplicate(params)) {
       throw new BadRequestException(ErrorMessage.DuplicatePrimaryId);
     }
@@ -64,15 +65,16 @@ export class UserProfilesController {
   updateUserProfile(
     @Param('id') id: string,
     @Body() params: UserProfile
-  ): Observable<GenericUserProfileResponse> {
+  ): Observable<WriteUserProfileResponse> {
+    // throw new BadRequestException(ErrorMessage.TestBadRequest);
     if (this.userService.isFieldDuplicate(params, 'emailId', params['emailId'])) {
       throw new BadRequestException(ErrorMessage.DuplicateEmail);
     }
-    return this.toStream(this.userService.updateUser(id, params));
+    return this.toStream(this.userService.updateUser(id, params), 3000);
   }
 
   @Delete(':id')
-  deleteUserProfile(@Param('id') id: string): Observable<GenericUserProfileResponse> {
+  deleteUserProfile(@Param('id') id: string): Observable<WriteUserProfileResponse> {
     // TODO: Investigate why this is being called twice.
     console.log('deleteUser', id);
     if (!this.userService.doesUserExist(id)) {

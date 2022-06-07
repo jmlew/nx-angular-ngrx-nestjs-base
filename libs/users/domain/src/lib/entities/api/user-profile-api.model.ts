@@ -8,12 +8,12 @@
 import { UserProfile, UserProfileParams } from '../user-profile.model';
 export { UserProfile, UserProfileParams };
 
-export interface GenericUserProfileResponse {
+export interface WriteUserProfileResponse {
   userId: string;
   status: string; // To be converted into an ID referencing the Messages API map.
 }
 
-export interface GenericUserProfileFailedResponse {
+export interface WriteUserProfileFailedResponse {
   userId: string;
   errorMessages: string[];
 }

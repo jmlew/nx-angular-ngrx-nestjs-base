@@ -26,7 +26,7 @@ import { NxModule } from '@nrwl/angular';
       runtimeChecks: rootRuntimeChecks,
     }),
     EffectsModule.forRoot([]),
-    !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 25 }) : [],
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreRouterConnectingModule.forRoot({
       stateKey: ROUTER_FEATURE_KEY,
       // Ensures the router navigation action fires after route resolvers and guard are

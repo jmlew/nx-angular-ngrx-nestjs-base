@@ -1,4 +1,4 @@
-import { GenericUserProfileResponse, UserProfile } from '@app/users/api-model';
+import { UserProfile, WriteUserProfileResponse } from '@app/users/api-model';
 import { Injectable } from '@nestjs/common';
 
 import * as usersDb from '../../../assets/db/user-profiles.json';
@@ -25,18 +25,18 @@ export class UsersService extends EntitiesApiBaseService<UserProfile, string> {
     return this.selectOne(id);
   }
 
-  createUser(user: UserProfile): GenericUserProfileResponse {
+  createUser(user: UserProfile): WriteUserProfileResponse {
     this.addEntity(user);
     const { userId } = user;
     return { userId, status: 'active' };
   }
 
-  updateUser(id: string, user: UserProfile): GenericUserProfileResponse {
+  updateUser(id: string, user: UserProfile): WriteUserProfileResponse {
     this.updateEntity(id, user);
     return { userId: id, status: 'active' };
   }
 
-  deleteUser(id: string): GenericUserProfileResponse {
+  deleteUser(id: string): WriteUserProfileResponse {
     this.removeEntity(id);
     return { userId: id, status: 'removed' };
   }

@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { BaseDataService } from '@app/shared/util-http';
 
-import { GenericUserProfileResponse } from '../entities/api/user-profile-api.model';
+import { WriteUserProfileResponse } from '../entities/api/user-profile-api.model';
 import { UserProfile, UserProfileParams } from '../entities/user-profile.model';
 
 enum ApiEndpoint {
@@ -47,19 +47,19 @@ export class UsersDataService {
   createItem(
     type: DataItemType,
     item: UserProfileParams
-  ): Observable<GenericUserProfileResponse> {
-    return this.data.post<GenericUserProfileResponse>(this.getUrl(type), item);
+  ): Observable<WriteUserProfileResponse> {
+    return this.data.post<WriteUserProfileResponse>(this.getUrl(type), item);
   }
 
   updateItem(
     type: DataItemType,
     id: string,
     item: Partial<UserProfile>
-  ): Observable<GenericUserProfileResponse> {
-    return this.data.put<GenericUserProfileResponse>(`${this.getUrl(type)}/${id}`, item);
+  ): Observable<WriteUserProfileResponse> {
+    return this.data.put<WriteUserProfileResponse>(`${this.getUrl(type)}/${id}`, item);
   }
 
-  deleteItem(type: DataItemType, id: string): Observable<GenericUserProfileResponse> {
-    return this.data.delete<GenericUserProfileResponse>(`${this.getUrl(type)}/${id}`);
+  deleteItem(type: DataItemType, id: string): Observable<WriteUserProfileResponse> {
+    return this.data.delete<WriteUserProfileResponse>(`${this.getUrl(type)}/${id}`);
   }
 }

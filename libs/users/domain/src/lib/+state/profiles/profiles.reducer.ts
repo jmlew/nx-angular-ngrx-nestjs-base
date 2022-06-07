@@ -43,7 +43,6 @@ const reducer = createReducer<UserProfilesState>(
     UserProfilesActions.loadUserProfiles,
     UserProfilesActions.loadUserProfile,
     UserProfilesActions.createUserProfile,
-    UserProfilesActions.updateUserProfile,
     UserProfilesActions.deleteUserProfile,
     (state) => fromApiStatus.onApiStatePending(state)
   ),
@@ -67,13 +66,18 @@ const reducer = createReducer<UserProfilesState>(
   on(UserProfilesActions.createUserProfileSuccess, (state, { item }) =>
     userProfilesAdapter.addOne(item, fromApiStatus.onApiStateSuccess(state))
   ),
-  on(UserProfilesActions.updateUserProfileSuccess, (state, { id, params }) => {
-    const update: Update<UserProfile> = { id, changes: params };
-    return userProfilesAdapter.updateOne(update, fromApiStatus.onApiStateSuccess(state));
-  }),
   on(UserProfilesActions.deleteUserProfileSuccess, (state, { id }) =>
     userProfilesAdapter.removeOne(id, fromApiStatus.onApiStateSuccess(state))
-  )
+  ),
+  // Optimistically update profile: updates on main action instead of on success.
+  on(UserProfilesActions.updateUserProfile, (state, { id, params }) => {
+    const update: Update<UserProfile> = { id, changes: params };
+    return userProfilesAdapter.updateOne(update, fromApiStatus.onApiStateSuccess(state));
+  })
+  /* on(UserProfilesActions.updateUserProfileSuccess, (state, { id, params }) => {
+    const update: Update<UserProfile> = { id, changes: params };
+    return userProfilesAdapter.updateOne(update, fromApiStatus.onApiStateSuccess(state));
+  }) */
 );
 export function userProfilesReducer(
   state: UserProfilesState | undefined,

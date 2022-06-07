@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { RouteDomainPath } from '@app/users/domain';
 
 import { UsersShellComponent } from './users-shell/users-shell.component';
 
@@ -9,21 +10,21 @@ const routes: Routes = [
     component: UsersShellComponent,
     children: [
       {
-        path: 'profiles',
+        path: RouteDomainPath.Profiles,
         loadChildren: () =>
           import('@app/users/feature/manage-user-profiles').then(
             (module) => module.UsersFeatureManageUserProfilesModule
           ),
       },
       {
-        path: 'roles',
+        path: RouteDomainPath.Roles,
         loadChildren: () =>
           import('@app/users/feature/manage-user-roles').then(
             (module) => module.UsersFeatureManageUserRolesModule
           ),
       },
       {
-        path: 'permissions',
+        path: RouteDomainPath.Permissions,
         loadChildren: () =>
           import('@app/users/feature/manage-user-permissions').then(
             (module) => module.UsersFeatureManageUserPermissionsModule

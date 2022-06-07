@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import {
   ROUTE_COMP_USER_PROFILE,
   ROUTE_COMP_USER_PROFILES,
+  RouteDataType,
   RouteItemContext,
-  RouteItemDataKey,
   RouteItemPath,
   UsersRouteParam,
 } from '@app/users/domain';
@@ -19,17 +19,17 @@ const routes: Routes = [
   },
   {
     path: RouteItemPath.New,
-    data: { [RouteItemDataKey.Context]: RouteItemContext.New },
+    data: { [RouteDataType.Context]: RouteItemContext.New },
     component: UsersUserProfileComponent,
   },
   {
     path: `${RouteItemPath.Edit}/:${UsersRouteParam.ProfileId}`,
-    data: { [RouteItemDataKey.Context]: RouteItemContext.Edit },
+    data: { [RouteDataType.Context]: RouteItemContext.Edit },
     component: UsersUserProfileComponent,
   },
   {
     path: `${RouteItemPath.View}/:${UsersRouteParam.ProfileId}`,
-    data: { [RouteItemDataKey.Context]: RouteItemContext.View },
+    data: { [RouteDataType.Context]: RouteItemContext.View },
     component: UsersUserProfileComponent,
   },
 ];

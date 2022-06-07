@@ -14,8 +14,10 @@ import {
 } from '../entities/route-components.token';
 
 import {
+  RouteDomainPath,
   RouteItemContext,
-  RouteItemDataKey,
+  RouteDataType,
+  RouteItemPath,
   UsersRouteParam,
 } from '../entities/user-routes.enum';
 
@@ -64,7 +66,7 @@ export class UserRoutesEffects {
             return;
           }
           const context: RouteItemContext =
-            route.data[RouteItemDataKey.Context] || RouteItemContext.None;
+            route.data[RouteDataType.Context] || RouteItemContext.None;
           if (context != RouteItemContext.Edit && context != RouteItemContext.View) {
             return;
           }
@@ -96,6 +98,21 @@ export class UserRoutesEffects {
             RouteName.Users
           );
           this.router.navigate([usersRouteItem.path]);
+        })
+      ),
+    { dispatch: false }
+  );
+
+  navToEditUserProfile$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(UserProfilesActions.navToEditUserProfile),
+        tap((action: { id: string }) => {
+          const usersRouteItem: RouteItem = this.navigationFacade.getRootItem(
+            RouteName.Users
+          );
+          const routePath = `${usersRouteItem.path}/${RouteDomainPath.Profiles}/${RouteItemPath.Edit}`;
+          this.router.navigate([routePath, action.id]);
         })
       ),
     { dispatch: false }
