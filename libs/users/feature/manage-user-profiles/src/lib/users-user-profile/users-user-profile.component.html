@@ -3,14 +3,20 @@
 
   <ng-container [ngSwitch]="context">
     <ng-container *ngSwitchCase="RouteItemContext.New">
-      <app-api-status [requestState]="requestState$ | async"></app-api-status>
-      <users-user-profile-form
-        [context]="context"
-        (formSubmit)="onCreate($event)"
-        (formCancel)="onCancel()">
-      </users-user-profile-form>
+      <app-api-status
+        [requestState]="requestState$ | async"
+        [displayType]="'inline'">
+        <ng-template #success>
+          <users-user-profile-form
+            [context]="context"
+            (formSubmit)="onCreate($event)"
+            (formCancel)="onCancel()">
+          </users-user-profile-form>
+        </ng-template>
+      </app-api-status>
     </ng-container>
     <ng-container *ngSwitchCase="RouteItemContext.Edit">
+      <app-api-status [requestState]="requestState$ | async"></app-api-status>
       <app-api-status [requestState]="requestState$ | async">
         <ng-template #success>
           <users-user-profile-form

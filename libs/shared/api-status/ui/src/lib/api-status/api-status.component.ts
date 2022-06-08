@@ -13,17 +13,23 @@ import * as fromApiStatus from '@app/shared/api-status/util';
   just add content to be rendered via the ng-content directive if the default failed and
   pending content can be displayed.
 
-  <ng-template #success>success content here</ng-template>
-  <ng-template #failed>failed content here</ng-template>
-  <ng-template #pending>pending content here</ng-template>
-  <ng-template #idle>idle content here</ng-template>
+  <app-api-status [displayType]="'replace'" [requestState]="requestState$ | async">
+    <ng-template #success>success content here</ng-template>
+    <ng-template #failed>failed content here</ng-template>
+    <ng-template #pending>pending content here</ng-template>
+    <ng-template #idle>idle content here</ng-template>
+  </app-api-status>
 */
 
-// TODO: Convert this to be used only for loading states in which the main ontent is
-// hidden on loading or errors. Use another version for use with update / create states,
-// in which the switch statememts allow for the main content to remain visible upon
-// pending and errors, allowing the consumer to show failed and pending states inline with
-// the content being updated / created (eg. forms ro grids)
+/**
+ * Determines the display type of the success content, where 'inline' shows it by default
+ * and below the other states and 'replace' shows it only when status is 'success'.
+ *
+ * Recommend using 'inline' for write status and 'replace' for read status to ensure the
+ * main content is not shown until the successful response when loading content and is
+ * shown while the other states are cycled through for updating or creating data.
+ */
+export type DisplayType = 'inline' | 'replace';
 
 @Component({
   selector: 'app-api-status',
@@ -33,10 +39,12 @@ import * as fromApiStatus from '@app/shared/api-status/util';
 })
 export class ApiStatusComponent {
   readonly ApiStatus = fromApiStatus.ApiStatus;
+
   @ContentChild('idle') idle: TemplateRef<unknown>;
   @ContentChild('success') success: TemplateRef<unknown>;
   @ContentChild('failed') failed: TemplateRef<unknown>;
   @ContentChild('pending') pending: TemplateRef<unknown>;
 
   @Input() requestState: fromApiStatus.ApiRequestState;
+  @Input() displayType: DisplayType = 'replace';
 }

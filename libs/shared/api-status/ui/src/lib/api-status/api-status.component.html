@@ -1,9 +1,11 @@
 <ng-container [ngSwitch]="requestState.status">
+  <ng-container *ngIf="displayType === 'replace'">
+    <ng-container *ngSwitchCase="ApiStatus.Succeeded">
+      <ng-container *ngTemplateOutlet="success"></ng-container>
+    </ng-container>
+  </ng-container>
   <ng-container *ngSwitchCase="ApiStatus.Idle">
     <ng-container *ngTemplateOutlet="idle"></ng-container>
-  </ng-container>
-  <ng-container *ngSwitchCase="ApiStatus.Succeeded">
-    <ng-container *ngTemplateOutlet="success || allContent"></ng-container>
   </ng-container>
   <ng-container *ngSwitchCase="ApiStatus.Failed">
     <ng-container *ngTemplateOutlet="failed || defaultFailed"></ng-container>
@@ -11,6 +13,10 @@
   <ng-container *ngSwitchCase="ApiStatus.Pending">
     <ng-container *ngTemplateOutlet="pending || defaultPending"></ng-container>
   </ng-container>
+</ng-container>
+
+<ng-container *ngIf="displayType === 'inline'">
+  <ng-container *ngTemplateOutlet="success"></ng-container>
 </ng-container>
 
 <ng-template #defaultFailed>
@@ -28,7 +34,4 @@
     class="status-loading">
     <mat-spinner diameter="60"></mat-spinner>
   </div>
-</ng-template>
-<ng-template #allContent>
-  <ng-content></ng-content>
 </ng-template>
