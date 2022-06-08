@@ -84,11 +84,11 @@
     "colId": "56f8af57-d4a4-4f94-96e5-faf10066feb0",
     "containerId": "",
     "name": "UserProfiles reset DB",
-    "url": "http://localhost:4200/api/admin/user_profile",
+    "url": "http://localhost:4200/api/admin/user_profile/reset",
     "method": "GET",
     "sortNum": 5000,
     "created": "2022-06-06T06:36:52.552Z",
-    "modified": "2022-06-06T06:37:14.357Z",
+    "modified": "2022-06-08T00:19:33.010Z",
     "headers": [],
     "params": [],
     "tests": []

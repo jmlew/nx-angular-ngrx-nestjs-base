@@ -39,12 +39,6 @@ export const updateUserProfileUndo = createAction(
   props<{ id: string; error: string }>()
 );
 
-// Optimistically update on main action and remove success action.
-/* export const updateUserProfileSuccess = createAction(
-  '[UserProfiles/API] Update UserProfile Success',
-  props<{ id: string; params: Partial<UserProfile> }>()
-); */
-
 export const updateUserProfileFailure = createAction(
   '[UserProfiles/API] Update UserProfile Failure',
   props<{ id: string; error: string }>()
@@ -55,7 +49,6 @@ export const createUserProfile = createAction(
   props<{ params: UserProfileParams }>()
 );
 
-// Convert UpdateUserProfileResponse to new User Profile via the effect.
 export const createUserProfileSuccess = createAction(
   '[UserProfiles/API] Create UserProfile Success',
   props<{ item: UserProfile }>()
@@ -68,11 +61,6 @@ export const createUserProfileFailure = createAction(
 
 export const deleteUserProfile = createAction(
   '[UserProfiles/API] Delete UserProfile',
-  props<{ id: string }>()
-);
-
-export const deleteUserProfileSuccess = createAction(
-  '[UserProfiles/API] Delete UserProfile Success',
   props<{ id: string }>()
 );
 
@@ -89,3 +77,15 @@ export const navToEditUserProfile = createAction(
   '[UserProfiles/Navigate] Go to User Profile',
   props<{ id: string }>()
 );
+
+// Optimistically write to item on main action and remove success action.
+/*
+export const deleteUserProfileSuccess = createAction(
+  '[UserProfiles/API] Delete UserProfile Success',
+  props<{ id: string }>()
+);
+export const updateUserProfileSuccess = createAction(
+  '[UserProfiles/API] Update UserProfile Success',
+  props<{ id: string; params: Partial<UserProfile> }>()
+);
+*/

@@ -75,8 +75,7 @@ export class UserProfilesController {
 
   @Delete(':id')
   deleteUserProfile(@Param('id') id: string): Observable<WriteUserProfileResponse> {
-    // TODO: Investigate why this is being called twice.
-    console.log('deleteUser', id);
+    // throw new BadRequestException(ErrorMessage.TestBadRequest);
     if (!this.userService.doesUserExist(id)) {
       throw new BadRequestException(ErrorMessage.NoUserMatch);
     }

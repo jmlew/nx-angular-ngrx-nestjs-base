@@ -52,7 +52,6 @@ export class UserProfilesEffects {
         const { params } = action;
         return this.dataService.createItem(DataItemType.Profile, params).pipe(
           map((response: WriteUserProfileResponse) => {
-            // TODO: Implement optimistic updates.
             const item: UserProfile = { ...params, userId: response.userId };
             return UserProfilesActions.createUserProfileSuccess({ item });
           }),
@@ -65,10 +64,14 @@ export class UserProfilesEffects {
   );
 
   /**
-   * Optimistically updates the store through the main action prior to retrieving the
-   * API response and ensures the undoAction handles errors by reverting state changes.
+   * Optimistically updates the store through the main action prior to retrieving the API
+   * response and ensures the undoAction handles errors by reverting state changes.
+   *
+   * Returns an observable to ensure the data service method is executed by subscribing in
+   * the Effect. If the method does not return an observable, we can call it explicitly
+   * and add { dispatch: false } to this Effect.
    */
-  updateUserProfileOptimistic$ = createEffect(() =>
+  updateUserProfile$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UserProfilesActions.updateUserProfile),
       optimisticUpdate({
@@ -76,9 +79,6 @@ export class UserProfilesEffects {
           action: ReturnType<typeof UserProfilesActions.updateUserProfile>,
           state: UserProfilesFeature.UserProfilesState
         ) =>
-          // Return an observable to ensure the data service method is executed by
-          // subscribing in the Effect. If the method does not return an observable, we
-          // can call it explicitly and add { dispatch: false } to this Effect.
           this.dataService
             .updateItem(DataItemType.Profile, action.id, action.params)
             .pipe(switchMap(() => of())),
@@ -90,8 +90,27 @@ export class UserProfilesEffects {
     )
   );
 
+  deleteUserProfile$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserProfilesActions.deleteUserProfile),
+      optimisticUpdate({
+        run: (
+          action: ReturnType<typeof UserProfilesActions.deleteUserProfile>,
+          state: UserProfilesFeature.UserProfilesState
+        ) =>
+          this.dataService
+            .deleteItem(DataItemType.Profile, action.id)
+            .pipe(switchMap(() => of())),
+        undoAction: (
+          action: ReturnType<typeof UserProfilesActions.deleteUserProfile>,
+          error: any
+        ) => UserProfilesActions.deleteUserProfileFailure({ id: action.id, error }),
+      })
+    )
+  );
+
   /**
-   * Undo a failed optimistic update by reloading the profile while showing an error
+   * Undo a failed optimistic update by reloading the server data while showing an error
    * message.
    **/
 
@@ -107,22 +126,12 @@ export class UserProfilesEffects {
     )
   );
 
-  deleteUserProfile$ = createEffect(() =>
+  deleteUserProfileFailure$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(UserProfilesActions.deleteUserProfile),
-      switchMap((action: { id: string }) => {
-        // TODO: Implement optimistic updates.
-        const { id } = action;
-        return this.dataService.deleteItem(DataItemType.Profile, id).pipe(
-          map((response: WriteUserProfileResponse) => {
-            console.log('deleteProfile', id);
-            return UserProfilesActions.deleteUserProfileSuccess({ id });
-          }),
-          catchError((error: any) =>
-            of(UserProfilesActions.deleteUserProfileFailure({ id, error }))
-          )
-        );
-      })
+      ofType(UserProfilesActions.deleteUserProfileFailure),
+      map((action: { id: string; error: string }) =>
+        UserProfilesActions.loadUserProfiles()
+      )
     )
   );
 
@@ -153,7 +162,7 @@ export class UserProfilesEffects {
   );
 
   /**
-   * An example of an Effect which handles the flow of writing changes to an item without
+   * Examples of Effects which handle the flow of writing changes to an item without
    * using the data persistence library optimisticUpdate or pessimisticUpdate methods.
    */
   /* updateUserProfile$ = createEffect(() =>
@@ -172,7 +181,29 @@ export class UserProfilesEffects {
         );
       })
     )
-  ); */
+  );
+
+  deleteUserProfile$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserProfilesActions.deleteUserProfile),
+      switchMap((action: { id: string }) => {
+        // TODO: Implement optimistic updates.
+        const { id } = action;
+        return this.dataService.deleteItem(DataItemType.Profile, id).pipe(
+          map((response: WriteUserProfileResponse) => {
+            console.log('deleteProfile', id);
+            return UserProfilesActions.deleteUserProfileSuccess({ id });
+          }),
+          catchError((error: any) =>
+            of(UserProfilesActions.deleteUserProfileFailure({ id, error }))
+          )
+        );
+      })
+    )
+  );
+
+
+  */
 
   constructor(
     private readonly actions$: Actions,
