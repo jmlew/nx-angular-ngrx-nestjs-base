@@ -47,4 +47,8 @@ export class ApiStatusComponent {
 
   @Input() requestState: fromApiStatus.ApiRequestState;
   @Input() displayType: DisplayType = 'replace';
+
+  // TODO: Create inut setter to merge stream of request states with a click event stream
+  // on a button which removes the error status message on click but reshows on the next
+  // iteration.
 }

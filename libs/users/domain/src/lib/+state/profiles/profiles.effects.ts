@@ -114,9 +114,6 @@ export class UserProfilesEffects {
    * message.
    **/
 
-  // TODO: ensure the error remains on screen by separating the read vs write
-  // ApiStatus object on the state to differentiate failed loads with failed update /
-  // create / deletes.
   updateUserProfileFailure$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UserProfilesActions.updateUserProfileFailure),

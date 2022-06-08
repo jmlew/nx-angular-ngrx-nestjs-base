@@ -28,8 +28,11 @@ import { UsersDataService } from '../infrastructure/users.data.service';
 
 @Injectable()
 export class ManageUserProfilesFacade {
-  userProfilesRequestState$: Observable<ApiRequestState> = this.store.pipe(
-    select(UserProfilesSelectors.selectUserProfilesRequestState)
+  userProfilesReadRequestState$: Observable<ApiRequestState> = this.store.pipe(
+    select(UserProfilesSelectors.selectUserProfilesReadRequestState)
+  );
+  userProfilesWriteRequestState$: Observable<ApiRequestState> = this.store.pipe(
+    select(UserProfilesSelectors.selectUserProfilesWriteRequestState)
   );
   allUserProfiles$: Observable<UserProfile[]> = this.store.pipe(
     select(UserProfilesSelectors.selectAllUserProfiles)

@@ -19,8 +19,10 @@ export class UsersManageProfilesComponent {
   readonly ApiStatus = ApiStatus;
   readonly userProfiles$: Observable<UserProfile[]> =
     this.userProfilesFacade.allUserProfiles$;
-  readonly requestState$: Observable<ApiRequestState> =
-    this.userProfilesFacade.userProfilesRequestState$;
+  readonly readRequestState$: Observable<ApiRequestState> =
+    this.userProfilesFacade.userProfilesReadRequestState$;
+  readonly writeRequestState$: Observable<ApiRequestState> =
+    this.userProfilesFacade.userProfilesWriteRequestState$;
 
   constructor(
     private router: Router,

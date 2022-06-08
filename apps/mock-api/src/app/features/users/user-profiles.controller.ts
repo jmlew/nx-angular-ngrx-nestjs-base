@@ -4,9 +4,13 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
+  HttpException,
+  HttpStatus,
   Param,
   Post,
   Put,
+  Res,
 } from '@nestjs/common';
 
 import { toStreamWithDelay } from '../../shared/utils';
@@ -48,6 +52,14 @@ export class UserProfilesController {
     return this.toStream(this.userService.getUserById(id));
   }
 
+  // Failed version, uncomment the method decorator above to enable and test this version.
+  @Get(':id')
+  @HttpCode(400)
+  getUserProfileFailed(@Param('id') id: string): Observable<HttpException> {
+    // throw new BadRequestException(ErrorMessage.TestBadRequest);
+    return this.toStream(new BadRequestException(ErrorMessage.TestBadRequest), 1000);
+  }
+
   @Post()
   createUserProfile(
     @Body() params: UserProfileParams
@@ -61,25 +73,48 @@ export class UserProfilesController {
     return this.toStream(this.userService.createUser(params));
   }
 
+  // Failed version, uncomment the method decorator above to enable and test this version.
+  @Post()
+  @HttpCode(400)
+  createUserProfileFailed(@Body() params: UserProfileParams): Observable<HttpException> {
+    // throw new BadRequestException(ErrorMessage.TestBadRequest);
+    return this.toStream(new BadRequestException(ErrorMessage.TestBadRequest), 1000);
+  }
+
   @Put(':id')
   updateUserProfile(
     @Param('id') id: string,
     @Body() params: UserProfile
   ): Observable<WriteUserProfileResponse> {
-    // throw new BadRequestException(ErrorMessage.TestBadRequest);
     if (this.userService.isFieldDuplicate(params, 'emailId', params['emailId'])) {
       throw new BadRequestException(ErrorMessage.DuplicateEmail);
     }
-    return this.toStream(this.userService.updateUser(id, params), 3000);
+    return this.toStream(this.userService.updateUser(id, params), 1000);
+  }
+
+  @Put(':id')
+  @HttpCode(400)
+  updateUserProfileFaile(
+    @Param('id') id: string,
+    @Body() params: UserProfile
+  ): Observable<HttpException> {
+    // throw new BadRequestException(ErrorMessage.TestBadRequest);
+    return this.toStream(new BadRequestException(ErrorMessage.TestBadRequest), 1000);
   }
 
   @Delete(':id')
   deleteUserProfile(@Param('id') id: string): Observable<WriteUserProfileResponse> {
-    // throw new BadRequestException(ErrorMessage.TestBadRequest);
     if (!this.userService.doesUserExist(id)) {
       throw new BadRequestException(ErrorMessage.NoUserMatch);
     }
     return this.toStream(this.userService.deleteUser(id));
+  }
+
+  @Delete(':id')
+  @HttpCode(400)
+  deleteUserProfileFailed(@Param('id') id: string): Observable<HttpException> {
+    // throw new BadRequestException(ErrorMessage.TestBadRequest);
+    return this.toStream(new BadRequestException(ErrorMessage.TestBadRequest), 1000);
   }
 
   private toStream<T>(data: T, delay = 500) {

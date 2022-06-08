@@ -31,18 +31,33 @@ export const {
   selectTotal: selectUserProfilesTotal,
 } = userProfilesAdapter.getSelectors(selectUserProfilesState);
 
-export const selectUserProfilesRequestState = createSelector(
+export const selectUserProfilesReadRequestState = createSelector(
   selectUserProfilesState,
-  fromApiStatus.getApiRequestState
+  (state: UserProfilesState): fromApiStatus.ApiRequestState => state.readState
 );
 
-export const selectUserProfilesError = createSelector(
-  selectUserProfilesRequestState,
+export const selectUserProfilesWriteRequestState = createSelector(
+  selectUserProfilesState,
+  (state: UserProfilesState): fromApiStatus.ApiRequestState => state.writeState
+);
+
+export const selectUserProfilesReadError = createSelector(
+  selectUserProfilesReadRequestState,
   fromApiStatus.getApiRequestError
 );
 
-export const selectUserProfilesApiStatus = createSelector(
-  selectUserProfilesRequestState,
+export const selectUserProfilesReadApiStatus = createSelector(
+  selectUserProfilesReadRequestState,
+  fromApiStatus.getApiRequestStatus
+);
+
+export const selectUserProfilesWriteError = createSelector(
+  selectUserProfilesWriteRequestState,
+  fromApiStatus.getApiRequestError
+);
+
+export const selectUserProfilesWriteApiStatus = createSelector(
+  selectUserProfilesWriteRequestState,
   fromApiStatus.getApiRequestStatus
 );
 

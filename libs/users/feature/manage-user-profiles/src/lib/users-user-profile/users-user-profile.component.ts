@@ -18,8 +18,10 @@ import {
 export class UsersUserProfileComponent {
   readonly ApiStatus = ApiStatus;
   readonly RouteItemContext = RouteItemContext;
-  readonly requestState$: Observable<ApiRequestState> =
-    this.userProfilesFacade.userProfilesRequestState$;
+  readonly readRequestState$: Observable<ApiRequestState> =
+    this.userProfilesFacade.userProfilesReadRequestState$;
+  readonly writeRequestState$: Observable<ApiRequestState> =
+    this.userProfilesFacade.userProfilesWriteRequestState$;
   userProfile$: Observable<UserProfile | undefined> =
     this.userProfilesFacade.currentUserProfile$;
   routeItemContext$: Observable<RouteItemContext> =
