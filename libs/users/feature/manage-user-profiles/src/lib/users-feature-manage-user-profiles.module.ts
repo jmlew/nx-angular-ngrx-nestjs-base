@@ -5,9 +5,11 @@ import { UsersDomainModule } from '@app/users/domain';
 import { UsersUiModule } from '@app/users/ui';
 import { ReactiveComponentModule } from '@ngrx/component';
 
+import { EditUserProfileComponent } from './edit-user-profile/edit-user-profile.component';
 import { ManageUserProfilesRoutingModule } from './manage-user-profiles.routing.module';
-import { UsersManageProfilesComponent } from './users-manage-profiles/users-manage-profiles.component';
-import { UsersUserProfileComponent } from './users-user-profile/users-user-profile.component';
+import { ManageUserProfilesComponent } from './manage-user-profiles/manage-user-profiles.component';
+import { NewUserProfileComponent } from './new-user-profile/new-user-profile.component';
+import { ViewUserProfileComponent } from './view-user-profile/view-user-profile.component';
 
 const sharedModules = [SharedApiStatusUiModule];
 const domainModules = [UsersDomainModule, UsersUiModule];
@@ -20,7 +22,17 @@ const domainModules = [UsersDomainModule, UsersUiModule];
     ...domainModules,
     ManageUserProfilesRoutingModule,
   ],
-  declarations: [UsersManageProfilesComponent, UsersUserProfileComponent],
-  exports: [UsersManageProfilesComponent, UsersUserProfileComponent],
+  declarations: [
+    NewUserProfileComponent,
+    EditUserProfileComponent,
+    ViewUserProfileComponent,
+    ManageUserProfilesComponent,
+  ],
+  exports: [
+    NewUserProfileComponent,
+    EditUserProfileComponent,
+    ViewUserProfileComponent,
+    ManageUserProfilesComponent,
+  ],
 })
 export class UsersFeatureManageUserProfilesModule {}

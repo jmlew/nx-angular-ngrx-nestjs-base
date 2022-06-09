@@ -6,11 +6,9 @@ import {
   Get,
   HttpCode,
   HttpException,
-  HttpStatus,
   Param,
   Post,
   Put,
-  Res,
 } from '@nestjs/common';
 
 import { toStreamWithDelay } from '../../shared/utils';
@@ -67,7 +65,7 @@ export class UserProfilesController {
     return this.toStream(new BadRequestException(ErrorMessage.TestBadRequest), 1000);
   }
 
-  // @Post()
+  @Post()
   createUserProfile(
     @Body() params: UserProfileParams
   ): Observable<WriteUserProfileResponse> {
@@ -88,7 +86,7 @@ export class UserProfilesController {
     return this.toStream(new BadRequestException(ErrorMessage.TestBadRequest), 1000);
   }
 
-  // @Put(':id')
+  @Put(':id')
   updateUserProfile(
     @Param('id') id: string,
     @Body() params: UserProfile
@@ -109,7 +107,7 @@ export class UserProfilesController {
     return this.toStream(new BadRequestException(ErrorMessage.TestBadRequest), 1000);
   }
 
-  // @Delete(':id')
+  @Delete(':id')
   deleteUserProfile(@Param('id') id: string): Observable<WriteUserProfileResponse> {
     if (!this.userService.doesUserExist(id)) {
       throw new BadRequestException(ErrorMessage.NoUserMatch);

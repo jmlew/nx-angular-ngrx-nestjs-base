@@ -1,0 +1,11 @@
+<users-header-title
+  title="View User Profile"
+  [isBackButton]="true"
+  (goBack)="onGoBack()"></users-header-title>
+<app-api-status [requestState]="readRequestState$ | async">
+  <ng-template #success>
+    <users-user-profile-form
+      [userProfile]="userProfile$ | async"
+      [context]="RouteItemContext.View"></users-user-profile-form>
+  </ng-template>
+</app-api-status>

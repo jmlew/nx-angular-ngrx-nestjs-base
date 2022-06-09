@@ -1,0 +1,13 @@
+<users-header-title title="Create New User Profile"></users-header-title>
+<app-api-status
+  [requestState]="writeRequestState$ | async"
+  [displayType]="'inline'"
+  (dismissError)="onDismissWriteError()">
+  <ng-template #success>
+    <users-user-profile-form
+      [context]="RouteItemContext.New"
+      (formSubmit)="onCreate($event)"
+      (formCancel)="onCancel()">
+    </users-user-profile-form>
+  </ng-template>
+</app-api-status>

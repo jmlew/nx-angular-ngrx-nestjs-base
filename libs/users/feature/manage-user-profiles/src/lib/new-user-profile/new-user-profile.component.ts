@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiRequestState, ApiStatus } from '@app/shared/api-status/util';
 import {
@@ -11,11 +11,11 @@ import {
 } from '@app/users/domain';
 
 @Component({
-  templateUrl: './users-user-profile.component.html',
-  styleUrls: ['./users-user-profile.component.scss'],
+  templateUrl: './new-user-profile.component.html',
+  styleUrls: ['./new-user-profile.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UsersUserProfileComponent {
+export class NewUserProfileComponent {
   readonly ApiStatus = ApiStatus;
   readonly RouteItemContext = RouteItemContext;
   readonly readRequestState$: Observable<ApiRequestState> =
@@ -24,8 +24,6 @@ export class UsersUserProfileComponent {
     this.userProfilesFacade.userProfilesWriteRequestState$;
   userProfile$: Observable<UserProfile | undefined> =
     this.userProfilesFacade.currentUserProfile$;
-  routeItemContext$: Observable<RouteItemContext> =
-    this.userProfilesFacade.userProfileRouteItemContext$;
 
   constructor(
     private userProfilesFacade: ManageUserProfilesFacade,
@@ -35,11 +33,6 @@ export class UsersUserProfileComponent {
 
   onCreate(profile: UserProfile) {
     this.userProfilesFacade.createUserProfile(profile);
-  }
-
-  onEdit(profile: UserProfile) {
-    const id: string = getUserProfileId(profile);
-    this.userProfilesFacade.updateUserProfile(id, profile);
   }
 
   onCancel() {

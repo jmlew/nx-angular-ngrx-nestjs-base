@@ -1,0 +1,14 @@
+<users-header-title title="Edit User Profile"></users-header-title>
+<app-api-status
+  [requestState]="writeRequestState$ | async"
+  (dismissError)="onDismissWriteError()"></app-api-status>
+<app-api-status [requestState]="readRequestState$ | async">
+  <ng-template #success>
+    <users-user-profile-form
+      [userProfile]="userProfile$ | async"
+      [context]="RouteItemContext.Edit"
+      (formSubmit)="onEdit($event)"
+      (formCancel)="onCancel()">
+    </users-user-profile-form>
+  </ng-template>
+</app-api-status>

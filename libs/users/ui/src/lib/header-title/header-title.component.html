@@ -1,0 +1,12 @@
+<div
+  fxLayout="row"
+  fxLayoutGap="10px"
+  fxLayoutAlign="start baseline">
+  <button
+    *ngIf="isBackButton"
+    mat-icon-button
+    (click)="onGoBack()">
+    <mat-icon>{{IconMat.ArrowBack}}</mat-icon>
+  </button>
+  <h3>{{title}}</h3>
+</div>

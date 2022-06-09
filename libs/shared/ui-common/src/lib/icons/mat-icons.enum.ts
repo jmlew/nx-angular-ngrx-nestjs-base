@@ -6,6 +6,7 @@ export enum IconMat {
   AddCircle = 'add_circle',
   Apps = 'apps',
   ArrowDown = 'arrow_downward',
+  ArrowBack = 'arrow_back',
   Calendar = 'perm_contact_calendar',
   CaretDown = 'keyboard_arrow_down',
   CaretUp = 'keyboard_arrow_up',

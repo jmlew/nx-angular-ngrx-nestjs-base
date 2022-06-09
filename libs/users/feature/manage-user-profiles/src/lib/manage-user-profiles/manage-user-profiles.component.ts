@@ -11,11 +11,11 @@ import {
 } from '@app/users/domain';
 
 @Component({
-  templateUrl: './users-manage-profiles.component.html',
-  styleUrls: ['./users-manage-profiles.component.scss'],
+  templateUrl: './manage-user-profiles.component.html',
+  styleUrls: ['./manage-user-profiles.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UsersManageProfilesComponent {
+export class ManageUserProfilesComponent {
   readonly ApiStatus = ApiStatus;
   readonly userProfiles$: Observable<UserProfile[]> =
     this.userProfilesFacade.allUserProfiles$;

@@ -1,6 +1,6 @@
 import { navigation } from '@nrwl/angular';
 import { Store } from '@ngrx/store';
-import { filter, first, map, tap } from 'rxjs';
+import { filter, first, map, Observable, of, tap } from 'rxjs';
 import { Inject, Injectable, Type } from '@angular/core';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
@@ -9,8 +9,10 @@ import * as UserProfilesActions from './profiles/profiles.actions';
 import * as UserProfilesSelectors from './profiles/profiles.selectors';
 
 import {
-  ROUTE_COMP_USER_PROFILE,
+  ROUTE_COMP_EDIT_USER_PROFILE,
+  ROUTE_COMP_NEW_USER_PROFILE,
   ROUTE_COMP_USER_PROFILES,
+  ROUTE_COMP_VIEW_USER_PROFILE,
 } from '../entities/route-components.token';
 
 import {
@@ -33,7 +35,7 @@ export class UserRoutesEffects {
   routedUserProfilesMain$ = createEffect(() =>
     this.actions$.pipe(
       navigation(this.userProfiles, {
-        run: (route: ActivatedRouteSnapshot) => {
+        run: () => {
           return this.store
             .select(UserProfilesSelectors.selectAreAllUserProfilesLoaded)
             .pipe(
@@ -53,30 +55,40 @@ export class UserRoutesEffects {
     )
   );
 
-  routedUserProfile$ = createEffect(() =>
+  routedEditUserProfile$ = createEffect(() =>
     this.actions$.pipe(
-      navigation(this.userProfile, {
+      navigation(this.editUserProfile, {
         run: (route: ActivatedRouteSnapshot) => {
-          /**
-           * Only load the current user profile if the route context is to Edit or View
-           * and the profile is not already loaded.
-           */
-          const profileId: string | undefined = route.params[UsersRouteParam.ProfileId];
-          if (profileId == null) {
+          const id: string | undefined = route.params[UsersRouteParam.ProfileId];
+          if (id == null) {
             return;
           }
-          const context: RouteItemContext =
-            route.data[RouteDataType.Context] || RouteItemContext.None;
-          if (context != RouteItemContext.Edit && context != RouteItemContext.View) {
+          return this.ifCurrentUserProfileNotLoaded().pipe(
+            map(() => UserProfilesActions.loadUserProfile({ id }))
+          );
+        },
+
+        onError: (route: ActivatedRouteSnapshot, error: any) => {
+          // TODO: Nagivate back and / or fire action to deal with routing error.
+          console.error('Navigation Error', error, route);
+          // throw error;
+          return null;
+        },
+      })
+    )
+  );
+
+  routedViewUserProfile$ = createEffect(() =>
+    this.actions$.pipe(
+      navigation(this.viewUserProfile, {
+        run: (route: ActivatedRouteSnapshot) => {
+          const id: string | undefined = route.params[UsersRouteParam.ProfileId];
+          if (id == null) {
             return;
           }
-          return this.store
-            .select(UserProfilesSelectors.selectIsCurrentUserProfileLoaded)
-            .pipe(
-              first(),
-              filter((isLoaded: boolean) => !isLoaded),
-              map(() => UserProfilesActions.loadUserProfile({ id: profileId }))
-            );
+          return this.ifCurrentUserProfileNotLoaded().pipe(
+            map(() => UserProfilesActions.loadUserProfile({ id }))
+          );
         },
 
         onError: (route: ActivatedRouteSnapshot, error: any) => {
@@ -118,12 +130,21 @@ export class UserRoutesEffects {
     { dispatch: false }
   );
 
+  private ifCurrentUserProfileNotLoaded(): Observable<boolean> {
+    return this.store.select(UserProfilesSelectors.selectIsCurrentUserProfileLoaded).pipe(
+      first(),
+      filter((isLoaded: boolean) => !isLoaded)
+    );
+  }
+
   constructor(
     private readonly navigationFacade: NavigationFacade,
     private readonly actions$: Actions,
     private readonly store: Store<UsersFeatureState>,
     private readonly router: Router,
     @Inject(ROUTE_COMP_USER_PROFILES) private userProfiles: Type<any>,
-    @Inject(ROUTE_COMP_USER_PROFILE) private userProfile: Type<any>
+    @Inject(ROUTE_COMP_NEW_USER_PROFILE) private newUserProfile: Type<any>,
+    @Inject(ROUTE_COMP_EDIT_USER_PROFILE) private editUserProfile: Type<any>,
+    @Inject(ROUTE_COMP_VIEW_USER_PROFILE) private viewUserProfile: Type<any>
   ) {}
 }
