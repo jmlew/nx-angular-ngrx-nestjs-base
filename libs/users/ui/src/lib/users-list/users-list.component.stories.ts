@@ -8,19 +8,34 @@ const sharedModules = [SharedExternalLibrariesModule];
 
 const sampleUsers: UserProfile[] = [
   {
-    userId: 1,
+    userId: `userId${1}`,
     userName: 'Jason',
     emailId: 'jason@localhost.com',
+    password: 'xxxx',
+    isLocked: 'Y',
+    isInactive: 'Y',
+    lastLoginDatetime: '2020-01-01T00:00:00.000Z',
+    userRoles: [],
   },
   {
-    userId: 2,
+    userId: `userId${2}`,
     userName: 'System',
     emailId: 'system@localhost.com',
+    password: 'xxxx',
+    isLocked: 'Y',
+    isInactive: 'Y',
+    lastLoginDatetime: '2020-02-01T00:00:00.000Z',
+    userRoles: [],
   },
   {
-    userId: 3,
+    userId: `userId${3}`,
     userName: 'Administrator',
     emailId: 'admin@localhost.com',
+    password: 'xxxx',
+    isLocked: 'Y',
+    isInactive: 'Y',
+    lastLoginDatetime: '2020-03-01T00:00:00.000Z',
+    userRoles: [],
   },
 ];
 

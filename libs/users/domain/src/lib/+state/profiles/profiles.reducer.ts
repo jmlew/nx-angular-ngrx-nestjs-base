@@ -40,6 +40,7 @@ export const initialState: UserProfilesState = userProfilesAdapter.getInitialSta
 
 const reducer = createReducer<UserProfilesState>(
   initialState,
+
   on(
     UserProfilesActions.loadUserProfiles,
     UserProfilesActions.loadUserProfile,
@@ -98,7 +99,15 @@ const reducer = createReducer<UserProfilesState>(
       ...state,
       writeState: fromApiStatus.getApiSuccessState(),
     })
-  )
+  ),
+  on(UserProfilesActions.resetUserProfilesReadState, (state) => ({
+    ...state,
+    readState: fromApiStatus.getApiInitState(),
+  })),
+  on(UserProfilesActions.resetUserProfilesWriteState, (state) => ({
+    ...state,
+    writeState: fromApiStatus.getApiInitState(),
+  }))
 );
 export function userProfilesReducer(
   state: UserProfilesState | undefined,

@@ -1,7 +1,11 @@
 <h3>Manage User Profiles</h3>
 
-<app-api-status [requestState]="writeRequestState$ | async"></app-api-status>
-<app-api-status [requestState]="readRequestState$ | async">
+<app-api-status
+  [requestState]="writeRequestState$ | async"
+  (dismissError)="onDismissWriteError()"></app-api-status>
+<app-api-status
+  [requestState]="readRequestState$ | async"
+  (dismissError)="onDismissReadError()">
   <ng-template #success>
     <users-list
       [users]="userProfiles$ | async"

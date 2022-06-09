@@ -69,6 +69,14 @@ export const deleteUserProfileFailure = createAction(
   props<{ id: string; error: string }>()
 );
 
+export const resetUserProfilesReadState = createAction(
+  '[UserProfiles/API] Reset Read State'
+);
+
+export const resetUserProfilesWriteState = createAction(
+  '[UserProfiles/API] Reset Write State'
+);
+
 export const navToUserProfiles = createAction(
   '[UserProfiles/Navigate] Go to User Profiles'
 );

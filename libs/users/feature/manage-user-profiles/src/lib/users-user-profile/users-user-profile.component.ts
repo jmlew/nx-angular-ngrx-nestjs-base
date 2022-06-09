@@ -45,4 +45,8 @@ export class UsersUserProfileComponent {
   onCancel() {
     this.router.navigate(['../../'], { relativeTo: this.route });
   }
+
+  onDismissWriteError() {
+    this.userProfilesFacade.resetUserProfilesWriteState();
+  }
 }

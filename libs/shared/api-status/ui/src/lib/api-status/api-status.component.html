@@ -1,4 +1,4 @@
-<ng-container [ngSwitch]="requestState.status">
+<ng-container [ngSwitch]="state.status">
   <ng-container *ngIf="displayType === 'replace'">
     <ng-container *ngSwitchCase="ApiStatus.Succeeded">
       <ng-container *ngTemplateOutlet="success"></ng-container>
@@ -21,10 +21,19 @@
 
 <ng-template #defaultFailed>
   <div
+    *ngIf="isErrorShown"
     fxLayout="row"
     fxLayoutAlign="center center"
+    fxLayoutGap="20px"
     class="status-error">
-    {{requestState.error || 'An error occured.'}}
+    <span>{{state.error || 'An error occured.'}}</span>
+    <button
+      mat-flat-button
+      color="primary"
+      class="btn-hover"
+      (click)="onDismissError()">
+      Dismiss
+    </button>
   </div>
 </ng-template>
 <ng-template #defaultPending>

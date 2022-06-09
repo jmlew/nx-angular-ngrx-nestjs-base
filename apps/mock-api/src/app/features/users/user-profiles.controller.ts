@@ -44,6 +44,13 @@ export class UserProfilesController {
     return this.toStream(this.userService.getAllUsers(), 1000);
   }
 
+  // Failed version, uncomment the method decorator above to enable and test this version.
+  @Get()
+  @HttpCode(400)
+  getUserProfilesFailed(): Observable<HttpException> {
+    return this.toStream(new BadRequestException(ErrorMessage.TestBadRequest), 1000);
+  }
+
   @Get(':id')
   getUserProfile(@Param('id') id: string): Observable<UserProfile> {
     if (!this.userService.doesUserExist(id)) {
@@ -60,7 +67,7 @@ export class UserProfilesController {
     return this.toStream(new BadRequestException(ErrorMessage.TestBadRequest), 1000);
   }
 
-  @Post()
+  // @Post()
   createUserProfile(
     @Body() params: UserProfileParams
   ): Observable<WriteUserProfileResponse> {
@@ -81,7 +88,7 @@ export class UserProfilesController {
     return this.toStream(new BadRequestException(ErrorMessage.TestBadRequest), 1000);
   }
 
-  @Put(':id')
+  // @Put(':id')
   updateUserProfile(
     @Param('id') id: string,
     @Body() params: UserProfile
@@ -102,7 +109,7 @@ export class UserProfilesController {
     return this.toStream(new BadRequestException(ErrorMessage.TestBadRequest), 1000);
   }
 
-  @Delete(':id')
+  // @Delete(':id')
   deleteUserProfile(@Param('id') id: string): Observable<WriteUserProfileResponse> {
     if (!this.userService.doesUserExist(id)) {
       throw new BadRequestException(ErrorMessage.NoUserMatch);

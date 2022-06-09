@@ -5,7 +5,8 @@
     <ng-container *ngSwitchCase="RouteItemContext.New">
       <app-api-status
         [requestState]="writeRequestState$ | async"
-        [displayType]="'inline'">
+        [displayType]="'inline'"
+        (dismissError)="onDismissWriteError()">
         <ng-template #success>
           <users-user-profile-form
             [context]="context"
@@ -16,7 +17,9 @@
       </app-api-status>
     </ng-container>
     <ng-container *ngSwitchCase="RouteItemContext.Edit">
-      <app-api-status [requestState]="writeRequestState$ | async"></app-api-status>
+      <app-api-status
+        [requestState]="writeRequestState$ | async"
+        (dismissError)="onDismissWriteError()"></app-api-status>
       <app-api-status [requestState]="readRequestState$ | async">
         <ng-template #success>
           <users-user-profile-form

@@ -49,6 +49,14 @@ export class ManageUserProfilesFacade {
     private dataService: UsersDataService
   ) {}
 
+  resetUserProfilesReadState() {
+    this.store.dispatch(UserProfilesActions.resetUserProfilesReadState());
+  }
+
+  resetUserProfilesWriteState() {
+    this.store.dispatch(UserProfilesActions.resetUserProfilesWriteState());
+  }
+
   loadUserProfiles() {
     this.store.dispatch(UserProfilesActions.loadUserProfiles());
   }

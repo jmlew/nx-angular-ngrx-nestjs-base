@@ -2,10 +2,13 @@ import {
   ChangeDetectionStrategy,
   Component,
   ContentChild,
+  EventEmitter,
   Input,
+  Output,
   TemplateRef,
 } from '@angular/core';
 import * as fromApiStatus from '@app/shared/api-status/util';
+import { isApiStatusFailed } from '@app/shared/api-status/util';
 
 /*
   Template for displaying content based on API status.
@@ -39,16 +42,30 @@ export type DisplayType = 'inline' | 'replace';
 })
 export class ApiStatusComponent {
   readonly ApiStatus = fromApiStatus.ApiStatus;
+  state: fromApiStatus.ApiRequestState;
+  isErrorShown: boolean;
 
   @ContentChild('idle') idle: TemplateRef<unknown>;
   @ContentChild('success') success: TemplateRef<unknown>;
   @ContentChild('failed') failed: TemplateRef<unknown>;
   @ContentChild('pending') pending: TemplateRef<unknown>;
 
-  @Input() requestState: fromApiStatus.ApiRequestState;
+  /**
+   * Input setter used to update the local state of the error message.
+   */
+  @Input() set requestState(state: fromApiStatus.ApiRequestState) {
+    this.isErrorShown = isApiStatusFailed(state);
+    this.state = state;
+  }
   @Input() displayType: DisplayType = 'replace';
+  @Output() dismissError = new EventEmitter<void>();
 
-  // TODO: Create inut setter to merge stream of request states with a click event stream
-  // on a button which removes the error status message on click but reshows on the next
-  // iteration.
+  /**
+   * Removes the error message and exmits a corresponding event to ensure parent state is
+   * updated to reflect the dismissal of the status.
+   */
+  onDismissError() {
+    this.isErrorShown = false;
+    this.dismissError.emit();
+  }
 }

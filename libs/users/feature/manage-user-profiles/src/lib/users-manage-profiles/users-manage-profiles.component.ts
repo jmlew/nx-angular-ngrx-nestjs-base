@@ -48,4 +48,12 @@ export class UsersManageProfilesComponent {
     const id: string = getUserProfileId(profile);
     this.userProfilesFacade.deleteUserProfile(id);
   }
+
+  onDismissReadError() {
+    this.userProfilesFacade.resetUserProfilesReadState();
+  }
+
+  onDismissWriteError() {
+    this.userProfilesFacade.resetUserProfilesWriteState();
+  }
 }

@@ -14,6 +14,9 @@ export default {
       imports: [...sharedModules],
     }),
   ],
+  argTypes: {
+    dismissError: { action: 'dismissError' },
+  },
 } as Meta<ApiStatusComponent>;
 
 const Template: Story<ApiStatusComponent> = (args: ApiStatusComponent) => ({
@@ -22,17 +25,17 @@ const Template: Story<ApiStatusComponent> = (args: ApiStatusComponent) => ({
 
 export const Idle = Template.bind({});
 Idle.args = {
-  requestState: fromUtils.getApiStatusInit(),
+  requestState: fromUtils.getApiInitState(),
 };
 export const Pending = Template.bind({});
 Pending.args = {
-  requestState: fromUtils.getApiStatusPending(),
+  requestState: fromUtils.getApiPendingState(),
 };
 export const Success = Template.bind({});
 Success.args = {
-  requestState: fromUtils.getApiStatusSuccess(),
+  requestState: fromUtils.getApiSuccessState(),
 };
 export const Error = Template.bind({});
 Error.args = {
-  requestState: fromUtils.getApiStatusError('Some error has occured!'),
+  requestState: fromUtils.getApiFailedState('Some error has occured!'),
 };
