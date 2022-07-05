@@ -1,6 +1,6 @@
 {
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "root": "libs/workitems/ui-manage",
   "sourceRoot": "libs/workitems/ui-manage/src",
   "prefix": "app",
   "targets": {

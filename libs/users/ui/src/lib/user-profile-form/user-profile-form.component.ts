@@ -6,7 +6,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { IconMat } from '@app/shared/ui-common';
 import { RouteItemContext, UserProfile, UserProfileParams } from '@app/users/domain';
 
@@ -43,9 +43,9 @@ export class UserProfileFormComponent implements OnInit {
 
   isNew: boolean;
   isView: boolean;
-  form: FormGroup;
+  form: UntypedFormGroup;
 
-  constructor(private readonly formBuilder: FormBuilder) {}
+  constructor(private readonly formBuilder: UntypedFormBuilder) {}
 
   ngOnInit() {
     this.isNew = this.context === RouteItemContext.New;
@@ -53,7 +53,7 @@ export class UserProfileFormComponent implements OnInit {
     this.form = this.buildForm();
   }
 
-  private buildForm(): FormGroup {
+  private buildForm(): UntypedFormGroup {
     const params: UserProfileParams = this.userProfile || this.createUserProfileParams();
     return this.formBuilder.group({
       [ParamKey.UserName]: [

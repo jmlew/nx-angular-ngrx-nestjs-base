@@ -9,7 +9,7 @@ const routes: Routes = [
     component: WorkitemsManageComponent,
   },
   {
-    path: '/:id',
+    path: ':id',
     component: WorkitemsManageComponent,
   },
 ];

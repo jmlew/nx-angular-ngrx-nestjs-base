@@ -1,6 +1,6 @@
 {
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "root": "libs/app-layout/feature-sidebar",
   "sourceRoot": "libs/app-layout/feature-sidebar/src",
   "prefix": "app",
   "targets": {

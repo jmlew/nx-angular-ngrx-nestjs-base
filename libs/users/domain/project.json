@@ -1,14 +1,12 @@
 {
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "root": "libs/users/domain",
   "sourceRoot": "libs/users/domain/src",
   "prefix": "users",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/libs/users/domain"
-      ],
+      "outputs": ["coverage/libs/users/domain"],
       "options": {
         "jestConfig": "libs/users/domain/jest.config.ts",
         "passWithNoTests": true
@@ -24,8 +22,5 @@
       }
     }
   },
-  "tags": [
-    "domain:users",
-    "type:domain-logic"
-  ]
+  "tags": ["domain:users", "type:domain-logic"]
 }

@@ -1,6 +1,6 @@
 {
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "root": "libs/workitems/feature-manage",
   "sourceRoot": "libs/workitems/feature-manage/src",
   "prefix": "app",
   "targets": {

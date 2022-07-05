@@ -135,6 +135,10 @@ Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
 
 Run `nx graph` to see a diagram of the dependencies of your projects.
 
+## Updating Angular and NX
+
+Run `nx migrate latest` then `nx migrate --run-migrations`. See [Updating Nx](https://nx.dev/using-nx/updating-nx).
+
 ## Further help
 
 Visit the [Nx Documentation](https://nx.dev/angular) to learn more.

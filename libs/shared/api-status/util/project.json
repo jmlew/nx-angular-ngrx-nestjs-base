@@ -1,14 +1,12 @@
 {
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "root": "libs/shared/api-status/util",
   "sourceRoot": "libs/shared/api-status/util/src",
   "prefix": "app",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/libs/shared/api-status/util"
-      ],
+      "outputs": ["coverage/libs/shared/api-status/util"],
       "options": {
         "jestConfig": "libs/shared/api-status/util/jest.config.ts",
         "passWithNoTests": true
@@ -24,8 +22,5 @@
       }
     }
   },
-  "tags": [
-    "type:util",
-    "domain:shared"
-  ]
+  "tags": ["type:util", "domain:shared"]
 }

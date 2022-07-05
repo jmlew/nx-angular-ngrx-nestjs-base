@@ -1,6 +1,6 @@
 {
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "root": "libs/users/shell",
   "sourceRoot": "libs/users/shell/src",
   "prefix": "app",
   "targets": {

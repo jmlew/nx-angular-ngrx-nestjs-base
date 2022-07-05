@@ -1,6 +1,6 @@
 {
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "root": "libs/users/feature/manage-user-profiles",
   "sourceRoot": "libs/users/feature/manage-user-profiles/src",
   "prefix": "users",
   "targets": {

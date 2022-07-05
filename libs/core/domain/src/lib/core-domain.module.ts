@@ -9,7 +9,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { rootMetaReducers, rootReducers, rootRuntimeChecks } from './+state';
 import {
-  DefaultRouterStateSerializer,
+  FullRouterStateSerializer,
   NavigationActionTiming,
   StoreRouterConnectingModule,
 } from '@ngrx/router-store';
@@ -35,7 +35,7 @@ import { NxModule } from '@nrwl/angular';
 
       // Important: the default serialiser must be used for the @nrwl/angular navigation
       // library to respond to routing.
-      serializer: DefaultRouterStateSerializer,
+      serializer: FullRouterStateSerializer,
     }),
   ],
   exports: [HttpClientModule],

@@ -1,6 +1,6 @@
-module.exports = {
+export default {
   displayName: 'workitems-ui-manage',
-  preset: '../../../jest.preset.ts',
+  preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
     'ts-jest': {

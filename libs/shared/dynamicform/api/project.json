@@ -1,6 +1,6 @@
 {
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "root": "libs/shared/dynamicform/api",
   "sourceRoot": "libs/shared/dynamicform/api/src",
   "prefix": "app",
   "targets": {

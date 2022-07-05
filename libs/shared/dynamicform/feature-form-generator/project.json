@@ -1,6 +1,6 @@
 {
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "root": "libs/shared/dynamicform/feature-form-generator",
   "sourceRoot": "libs/shared/dynamicform/feature-form-generator/src",
   "prefix": "app",
   "targets": {

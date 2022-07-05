@@ -1,5 +1,5 @@
 {
-  "root": "apps/mock-api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/mock-api/src",
   "projectType": "application",
   "targets": {
