@@ -15,5 +15,5 @@ export const rootMetaReducers: MetaReducer[] = !environment.production ? [] : []
 
 export const rootRuntimeChecks: Partial<RuntimeChecks> = {
   strictActionImmutability: true,
-  strictStateImmutability: true,
+  strictStateImmutability: false,
 };

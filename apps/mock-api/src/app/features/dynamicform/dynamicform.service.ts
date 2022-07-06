@@ -1,11 +1,9 @@
-import { FormConfig } from '@app/shared/dynamicform/api-model';
+import { GetFormConfigsResponse } from '@app/shared/dynamicform/api-model';
 import { Injectable } from '@nestjs/common';
 
 import * as dynamicFormDb from '../../../assets/db/dynamicform.json';
 
-interface DynamicFormDb {
-  configs: FormConfig[];
-}
+type DynamicFormDb = GetFormConfigsResponse;
 
 @Injectable()
 export class DynamicFormService {
@@ -19,7 +17,7 @@ export class DynamicFormService {
     this.db = { ...dynamicFormDb };
   }
 
-  getConfigs(): FormConfig[] {
-    return this.db.configs;
+  getConfigs(): GetFormConfigsResponse {
+    return this.db;
   }
 }

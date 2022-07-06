@@ -1,7 +1,11 @@
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { DynamicformFacade, FormConfig } from '@app/shared/dynamicform/domain';
+import {
+  DynamicformFacade,
+  FormConfigs,
+  FormControl,
+} from '@app/shared/dynamicform/domain';
 
 @Component({
   selector: 'app-dynamicform-generator',
@@ -11,7 +15,7 @@ import { DynamicformFacade, FormConfig } from '@app/shared/dynamicform/domain';
 })
 export class DynamicformGeneratorComponent {
   // Loaded via initialisation logic in main app shell.
-  formConfigList$: Observable<FormConfig[]> = this.dynamicformFacade.formConfigList$;
+  formControls$: Observable<FormControl[]> = this.dynamicformFacade.formControls$;
 
   constructor(private dynamicformFacade: DynamicformFacade) {}
 }

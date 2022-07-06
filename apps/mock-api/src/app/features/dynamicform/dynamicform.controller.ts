@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-import { FormConfig } from '@app/shared/dynamicform/api-model';
+import { GetFormConfigsResponse } from '@app/shared/dynamicform/api-model';
 import { Controller, Get } from '@nestjs/common';
 
 import { toStreamWithDelay } from '../../shared/utils';
@@ -15,7 +15,7 @@ export class DynamicFormController {
   constructor(private readonly dynamicFormService: DynamicFormService) {}
 
   @Get('configs')
-  getConfigs(): Observable<FormConfig[]> {
+  getConfigs(): Observable<GetFormConfigsResponse> {
     // throw new BadRequestException(ErrorMessage.NoDynamicFormCOnfigs);
     return this.toStream(this.dynamicFormService.getConfigs(), 1000);
   }

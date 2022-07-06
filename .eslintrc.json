@@ -33,7 +33,12 @@
               },
               {
                 "sourceTag": "type:feature",
-                "onlyDependOnLibsWithTags": ["type:domain-logic", "type:util", "type:ui"]
+                "onlyDependOnLibsWithTags": [
+                  "type:domain-logic",
+                  "type:util",
+                  "type:ui",
+                  "type:api"
+                ]
               },
               {
                 "sourceTag": "type:shell",

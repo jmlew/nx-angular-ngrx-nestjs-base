@@ -1,21 +1,34 @@
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, filter, map, mergeMap, skip } from 'rxjs';
 
 import { Injectable } from '@angular/core';
 
-import { FormConfig } from '../entities/form-config.model';
+import { GetFormConfigsResponse } from '../entities/api';
+import { FormConfigs, FormControl } from '../entities/form-config.model';
 import { FormConfigDataService } from '../infrastructure/form-config.data.service';
+
+export function isNonNull<T>(value: T): value is NonNullable<T> {
+  return value != null;
+}
 
 @Injectable({ providedIn: 'root' })
 export class DynamicformFacade {
-  private formConfigListSubject = new BehaviorSubject<FormConfig[]>([]);
-  formConfigList$: Observable<FormConfig[]> = this.formConfigListSubject.asObservable();
+  private formConfigsSubject = new BehaviorSubject<FormConfigs | null>(null);
+
+  formConfigs$: Observable<FormConfigs> = this.formConfigsSubject
+    .asObservable()
+    .pipe(filter(isNonNull));
+
+  formControls$: Observable<FormControl[]> = this.formConfigs$.pipe(
+    map((configs: FormConfigs) => configs.controls)
+  );
 
   constructor(private formConfigDataService: FormConfigDataService) {}
 
   loadConfigs(): void {
     this.formConfigDataService.getDynamicFormConfigs().subscribe({
-      next: (configs: FormConfig[]) => {
-        this.formConfigListSubject.next(configs);
+      next: (response: GetFormConfigsResponse) => {
+        const { configs } = response;
+        this.formConfigsSubject.next(configs);
       },
       error: (err) => {
         console.error('err', err);

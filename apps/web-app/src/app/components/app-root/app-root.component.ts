@@ -40,9 +40,9 @@ export class AppRootComponent implements OnInit {
 
     this.isAppReady$ = combineLatest([
       this.navigationFacade.routeItems$,
-      this.dynamicformFacade.formConfigList$,
+      this.dynamicformFacade.formConfigs$,
     ]).pipe(
-      map(([routeItems, formConfigList]) => true),
+      map(([routeItems, formConfigs]) => true),
       take(1)
     );
 

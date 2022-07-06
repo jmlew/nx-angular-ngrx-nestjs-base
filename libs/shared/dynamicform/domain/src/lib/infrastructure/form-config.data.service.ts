@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { BaseDataService } from '@app/shared/util-http';
 
-import { FormConfig } from '../entities/form-config.model';
+import { GetFormConfigsResponse } from '../entities/api';
 
 /*
   Data service to retrieve the dynamic form configs from the server.
@@ -21,8 +21,8 @@ export class FormConfigDataService {
 
   constructor(private data: BaseDataService) {}
 
-  getDynamicFormConfigs(): Observable<FormConfig[]> {
+  getDynamicFormConfigs(): Observable<GetFormConfigsResponse> {
     const url = `${this.baseUrl}/${ApiEndpoint.Configs}`;
-    return this.data.get<FormConfig[]>(url);
+    return this.data.get<GetFormConfigsResponse>(url);
   }
 }

@@ -9,10 +9,11 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let formConfig of formConfigList$ | async">
-      <td>{{ formConfig.id }}</td>
-      <td>{{ formConfig.name }}</td>
-      <td>{{ formConfig.label }}</td>
+    <tr *ngFor="let control of formControls$ | async">
+      <td>{{ control.key }}</td>
+      <td>{{ control.controlType }}</td>
+      <td>{{ control?.type }}</td>
+      <td>{{ control.label }}</td>
     </tr>
   </tbody>
 </table>
