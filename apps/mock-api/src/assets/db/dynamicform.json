@@ -1,66 +1,58 @@
 {
-  "configs": {
-    "controls": [
-      {
-        "controlType": "textbox",
-        "key": "name",
-        "label": "Name",
-        "validators": {
-          "required": true,
-          "minLength": 10
+  "data": {
+    "configs": {
+      "controls": [
+        {
+          "controlType": "textfield",
+          "key": "userName",
+          "label": "User Name",
+          "validators": {
+            "required": true,
+            "minLength": 10
+          },
+          "order": 1
         },
-        "order": 1
-      },
-      {
-        "controlType": "textbox",
-        "key": "email",
-        "label": "Email",
-        "type": "email",
-        "validators": {
-          "required": true,
-          "email": true
+        {
+          "controlType": "textfield",
+          "key": "emailId",
+          "label": "Email",
+          "type": "email",
+          "validators": {
+            "required": true,
+            "email": true
+          },
+          "order": 2
         },
-        "order": 2
-      },
-      {
-        "controlType": "dropdown",
-        "key": "country",
-        "label": "Country",
-        "options": [
-          { "key": "usa", "value": "United States of America" },
-          { "key": "br", "value": "Brazil" },
-          { "key": "other", "value": "Other" }
-        ],
-        "order": 3
-      },
-      {
-        "controlType": "checkbox",
-        "key": "agree",
-        "label": "I accept terms and services",
-        "type": "checkbox",
-        "validators": {
-          "required": true
+        {
+          "controlType": "textfield",
+          "key": "password",
+          "label": "User Password",
+          "type": "password",
+          "validators": {
+            "required": true,
+            "minLength": 10
+          },
+          "order": 3
         },
-        "order": 4
-      },
-      {
-        "controlType": "radio",
-        "key": "sex",
-        "label": "Sex",
-        "type": "radio",
-        "options": [
-          { "key": "male", "value": "Male" },
-          { "key": "female", "value": "Female" }
-        ],
-        "order": 5
-      },
-      {
-        "controlType": "textarea",
-        "key": "message",
-        "label": "Mesage",
-        "type": "textarea",
-        "order": 6
-      }
-    ]
+        {
+          "controlType": "checkbox",
+          "key": "isLocked",
+          "label": "Is Locked?",
+          "validators": {
+            "required": true
+          },
+          "order": 4
+        },
+        {
+          "controlType": "checkbox",
+          "key": "isInactive",
+          "label": "Is Inactive?",
+          "validators": {
+            "required": true
+          },
+          "order": 5
+        }
+      ]
+    }
   }
 }

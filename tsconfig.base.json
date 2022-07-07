@@ -17,27 +17,43 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@app/app-layout/feature-header": ["libs/app-layout/feature-header/src/index.ts"],
-      "@app/app-layout/feature-sidebar": ["libs/app-layout/feature-sidebar/src/index.ts"],
+      "@app/app-layout/feature-header": [
+        "libs/app-layout/feature-header/src/index.ts"
+      ],
+      "@app/app-layout/feature-sidebar": [
+        "libs/app-layout/feature-sidebar/src/index.ts"
+      ],
       "@app/app-layout/ui-header": ["libs/app-layout/ui-header/src/index.ts"],
       "@app/app-layout/ui-sidebar": ["libs/app-layout/ui-sidebar/src/index.ts"],
       "@app/core/domain": ["libs/core/domain/src/index.ts"],
-      "@app/shared-external-libraries": ["libs/shared/external-libraries/src/index.ts"],
+      "@app/shared-external-libraries": [
+        "libs/shared/external-libraries/src/index.ts"
+      ],
       "@app/shared/api-status/ui": ["libs/shared/api-status/ui/src/index.ts"],
-      "@app/shared/api-status/util": ["libs/shared/api-status/util/src/index.ts"],
-      "@app/shared/dynamicform/api": ["libs/shared/dynamicform/api/src/index.ts"],
+      "@app/shared/api-status/util": [
+        "libs/shared/api-status/util/src/index.ts"
+      ],
+      "@app/shared/dynamicform/api": [
+        "libs/shared/dynamicform/api/src/index.ts"
+      ],
       "@app/shared/dynamicform/api-model": [
         "libs/shared/dynamicform/domain/src/lib/entities/api/index.ts"
       ],
-      "@app/shared/dynamicform/domain": ["libs/shared/dynamicform/domain/src/index.ts"],
+      "@app/shared/dynamicform/domain": [
+        "libs/shared/dynamicform/domain/src/index.ts"
+      ],
       "@app/shared/dynamicform/feature-form-generator": [
         "libs/shared/dynamicform/feature-form-generator/src/index.ts"
       ],
       "@app/shared/environments": ["libs/shared/environments/src/index.ts"],
-      "@app/shared/navigation/domain": ["libs/shared/navigation/domain/src/index.ts"],
+      "@app/shared/navigation/domain": [
+        "libs/shared/navigation/domain/src/index.ts"
+      ],
       "@app/shared/ui-common": ["libs/shared/ui-common/src/index.ts"],
       "@app/shared/util-http": ["libs/shared/util-http/src/index.ts"],
-      "@app/users/api-model": ["libs/users/domain/src/lib/entities/api/index.ts"],
+      "@app/users/api-model": [
+        "libs/users/domain/src/lib/entities/api/index.ts"
+      ],
       "@app/users/domain": ["libs/users/domain/src/index.ts"],
       "@app/users/feature/manage-user-permissions": [
         "libs/users/feature/manage-user-permissions/src/index.ts"
@@ -54,7 +70,9 @@
         "libs/workitems/domain/src/lib/entities/workitem-api.model.ts"
       ],
       "@app/workitems/domain": ["libs/workitems/domain/src/index.ts"],
-      "@app/workitems/feature-manage": ["libs/workitems/feature-manage/src/index.ts"],
+      "@app/workitems/feature-manage": [
+        "libs/workitems/feature-manage/src/index.ts"
+      ],
       "@app/workitems/shell": ["libs/workitems/shell/src/index.ts"],
       "@app/workitems/ui-manage": ["libs/workitems/ui-manage/src/index.ts"]
     }

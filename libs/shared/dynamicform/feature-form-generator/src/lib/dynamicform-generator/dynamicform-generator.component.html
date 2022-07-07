@@ -1,19 +1,41 @@
 <h4>Dynamicform Form Generator</h4>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Label</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let control of formControls$ | async">
-      <td>{{ control.key }}</td>
-      <td>{{ control.controlType }}</td>
-      <td>{{ control?.type }}</td>
-      <td>{{ control.label }}</td>
-    </tr>
-  </tbody>
-</table>
+<mat-card>
+  <form
+    *ngIf="form"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()">
+    <div
+      fxLayout="column"
+      fxLayoutGap="1em"
+      class="w-100 p-3">
+      <div *ngFor="let config of controlConfigs">
+        <app-dynamicform-control
+          [config]="config"
+          [form]="form"></app-dynamicform-control>
+      </div>
+
+      <div
+        fxLayout="row"
+        fxLayoutAlign="end center"
+        fxLayoutGap="1em">
+        <button
+          mat-button
+          color="primary"
+          type="button"
+          (click)="onCancel()">
+          Cancel
+        </button>
+        <button
+          mat-flat-button
+          color="primary"
+          type="button"
+          (click)="onSubmit()"
+          [disabled]="form.invalid">
+          {{ labelSubmit }}
+        </button>
+      </div>
+
+    </div>
+  </form>
+</mat-card>

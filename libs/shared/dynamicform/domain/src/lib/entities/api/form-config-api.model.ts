@@ -5,9 +5,9 @@
  * https://github.com/nrwl/nx/issues/9738.
  */
 
-import { FormConfigs, FormControl } from '../form-config.model';
-export { FormConfigs, FormControl };
+import { FormSchemaConfigs, FormSchemaControlConfig } from '../form-config.model';
+export { FormSchemaConfigs, FormSchemaControlConfig };
 
 export interface GetFormConfigsResponse {
-  configs: FormConfigs;
+  configs: FormSchemaConfigs;
 }

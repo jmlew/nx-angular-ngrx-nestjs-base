@@ -14,10 +14,10 @@ export class DynamicFormService {
   }
 
   initDb() {
-    this.db = { ...dynamicFormDb };
+    this.db = { ...dynamicFormDb }.data as DynamicFormDb;
   }
 
-  getConfigs(): GetFormConfigsResponse {
+  getConfigsResponse(): GetFormConfigsResponse {
     return this.db;
   }
 }

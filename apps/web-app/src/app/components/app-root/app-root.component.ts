@@ -38,11 +38,8 @@ export class AppRootComponent implements OnInit {
   private initialiseApp() {
     console.log('App is initialising.');
 
-    this.isAppReady$ = combineLatest([
-      this.navigationFacade.routeItems$,
-      this.dynamicformFacade.formConfigs$,
-    ]).pipe(
-      map(([routeItems, formConfigs]) => true),
+    this.isAppReady$ = combineLatest([this.navigationFacade.routeItems$]).pipe(
+      map(([routeItems]) => true),
       take(1)
     );
 

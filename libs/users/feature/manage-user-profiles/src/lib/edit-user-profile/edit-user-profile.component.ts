@@ -31,7 +31,8 @@ export class EditUserProfileComponent {
     private route: ActivatedRoute
   ) {}
 
-  onEdit(profile: UserProfile) {
+  onEdit(data: unknown) {
+    const profile: UserProfile = data as UserProfile;
     const id: string = getUserProfileId(profile);
     this.userProfilesFacade.updateUserProfile(id, profile);
   }

@@ -19,6 +19,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -27,7 +28,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { LetModule } from '@ngrx/component';
 
 /**
  * Common collection of Material Design modules used throughout the app.
@@ -52,6 +53,7 @@ const matModules = [
   MatNativeDateModule,
   MatPaginatorModule,
   MatProgressSpinnerModule,
+  MatRadioModule,
   MatSelectModule,
   MatSidenavModule,
   MatSlideToggleModule,
@@ -62,7 +64,7 @@ const matModules = [
   MatTooltipModule,
 ];
 
-export const sharedModules = [...matModules, FlexLayoutModule, ReactiveComponentModule];
+export const sharedModules = [...matModules, FlexLayoutModule, LetModule];
 
 @NgModule({
   imports: [...sharedModules],

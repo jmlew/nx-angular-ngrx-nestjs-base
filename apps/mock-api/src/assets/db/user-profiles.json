@@ -5,8 +5,8 @@
       "userName": "Jason",
       "emailId": "jason@localhost",
       "password": "samplejasonpassword",
-      "isLocked": "Y",
-      "isInactive": "Y",
+      "isLocked": "true",
+      "isInactive": "false",
       "userRoles": [""],
       "lastLoginDatetime": "2018-07-16T07:32:20.421Z",
       "createdAt": "2018-07-16T07:32:20.421Z"
@@ -16,8 +16,8 @@
       "userName": "System",
       "emailId": "system@localhost",
       "password": "samplesystempassword",
-      "isLocked": "N",
-      "isInactive": "N",
+      "isLocked": "false",
+      "isInactive": "true",
       "userRoles": [""],
       "lastLoginDatetime": "2018-07-16T07:32:20.421Z",
       "createdAt": "2018-07-16T07:32:20.421Z"

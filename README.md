@@ -110,6 +110,15 @@ Or run each separately using `npm run serve:web` for the frontend and `npm run s
 - Web app server: `kill $(lsof -t -i:4200)`
 - Mock API server: `kill $(lsof -t -i:3333)`
 
+## Storybook
+
+Create storybook configs and storybook files for all components within a library.
+
+Run `nx g @nrwl/angular:storybook-configuration <project-name>` where <project-name> is
+the name of the library in workspace.json.
+
+Run all stories: `npm run storybook`.
+
 ## Build
 
 Run `npm run build` to build the project.

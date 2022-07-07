@@ -1,0 +1,68 @@
+<div
+  [formGroup]="form"
+  fxLayout="column"
+  fxLayoutGap="0.5em">
+
+  <ng-container [ngSwitch]="config.controlType">
+
+    <ng-container *ngSwitchCase="FormControlType.TextField">
+      <mat-label>{{config.label}}</mat-label>
+      <mat-form-field [appearance]="appearance">
+        <input
+          matInput
+          [formControlName]="config.key"
+          [placeholder]="config.label"
+          [type]="config.type || 'text'">
+      </mat-form-field>
+      <mat-error
+        *ngIf="isErrorShown"
+        class="alert alert-danger">
+        <div *ngIf="errorRequired">{{config.label + ' is required'}}</div>
+        <div *ngIf="errorMinLength">
+          {{config.label + ' must be at least ' +
+          requiredMinLength + ' characters long.'}}
+        </div>
+      </mat-error>
+    </ng-container>
+
+    <div *ngSwitchCase="FormControlType.TextArea">
+      <mat-label>{{config.label}}</mat-label>
+      <mat-form-field [appearance]="appearance">
+        <textarea
+          matInput
+          [formControlName]="config.key"
+          [placeholder]="config.label"></textarea>
+      </mat-form-field>
+    </div>
+
+    <div *ngSwitchCase="FormControlType.Select">
+      <mat-label>{{config.label}}</mat-label>
+      <mat-form-field [appearance]="appearance">
+        <mat-select [formControlName]="config.key">
+          <mat-option
+            *ngFor="let option of config.options"
+            [value]="option.key">
+            {{ option.value }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div *ngSwitchCase="FormControlType.Checkbox">
+      <mat-checkbox [formControlName]="config.key">{{config.label}}</mat-checkbox>
+    </div>
+
+    <div *ngSwitchCase="FormControlType.Radio">
+      <mat-label>{{config.label}}</mat-label>
+      <mat-radio-group [formControlName]="config.key">
+        <mat-radio-button
+          *ngFor="let option of config.options"
+          [value]="option.key">
+          {{ option.value }}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+  </ng-container>
+
+</div>

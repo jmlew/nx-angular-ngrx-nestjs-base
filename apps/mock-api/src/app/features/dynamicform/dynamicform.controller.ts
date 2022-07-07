@@ -17,7 +17,7 @@ export class DynamicFormController {
   @Get('configs')
   getConfigs(): Observable<GetFormConfigsResponse> {
     // throw new BadRequestException(ErrorMessage.NoDynamicFormCOnfigs);
-    return this.toStream(this.dynamicFormService.getConfigs(), 1000);
+    return this.toStream(this.dynamicFormService.getConfigsResponse(), 1000);
   }
 
   private toStream<T>(data: T, delay = 500) {
