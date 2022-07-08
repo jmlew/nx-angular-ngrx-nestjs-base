@@ -1,7 +1,7 @@
 <div
   [formGroup]="form"
   fxLayout="column"
-  fxLayoutGap="0.5em">
+  fxLayoutGap="0.25em">
 
   <ng-container [ngSwitch]="config.controlType">
 
@@ -13,16 +13,12 @@
           [formControlName]="config.key"
           [placeholder]="config.label"
           [type]="config.type || 'text'">
+        <mat-error *ngIf="isErrorShown">
+          <app-dynamicform-error-textfield
+            [control]="control"
+            [config]="config"></app-dynamicform-error-textfield>
+        </mat-error>
       </mat-form-field>
-      <mat-error
-        *ngIf="isErrorShown"
-        class="alert alert-danger">
-        <div *ngIf="errorRequired">{{config.label + ' is required'}}</div>
-        <div *ngIf="errorMinLength">
-          {{config.label + ' must be at least ' +
-          requiredMinLength + ' characters long.'}}
-        </div>
-      </mat-error>
     </ng-container>
 
     <div *ngSwitchCase="FormControlType.TextArea">
@@ -32,6 +28,11 @@
           matInput
           [formControlName]="config.key"
           [placeholder]="config.label"></textarea>
+        <mat-error *ngIf="isErrorShown">
+          <app-dynamicform-error-textfield
+            [control]="control"
+            [config]="config"></app-dynamicform-error-textfield>
+        </mat-error>
       </mat-form-field>
     </div>
 
@@ -45,6 +46,9 @@
             {{ option.value }}
           </mat-option>
         </mat-select>
+        <app-dynamicform-error-select
+          [control]="control"
+          [config]="config"></app-dynamicform-error-select>
       </mat-form-field>
     </div>
 
@@ -64,5 +68,4 @@
     </div>
 
   </ng-container>
-
 </div>

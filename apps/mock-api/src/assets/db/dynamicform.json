@@ -8,7 +8,7 @@
           "label": "User Name",
           "validators": {
             "required": true,
-            "minLength": 10
+            "minlength": 10
           },
           "order": 1
         },
@@ -30,7 +30,7 @@
           "type": "password",
           "validators": {
             "required": true,
-            "minLength": 10
+            "minlength": 10
           },
           "order": 3
         },

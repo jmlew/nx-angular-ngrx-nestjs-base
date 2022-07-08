@@ -1,0 +1,7 @@
+<div *ngIf="errorRequired">{{config.label + ' is required.'}}</div>
+<div *ngIf="errorMinLength">
+  {{config.label + ' must be at least ' + requiredMinLength + ' characters long.'}}
+</div>
+<div *ngIf="errorEmail">
+  {{config.label + ' should be a valid email.'}}
+</div>

@@ -7,6 +7,7 @@ import {
   FormControlValidators,
   FormControlsData,
   FormSchemaControlConfig,
+  FormValidatorName,
   formControlTypeMap,
 } from '@app/shared/dynamicform/domain';
 
@@ -70,16 +71,20 @@ export class FormControlService {
   }
 
   toFormGroup(controls: FormControlConfig[]): FormGroup {
-    type FormControlGroup = Record<string, [FormControlDataType, ValidatorFn[]]>;
+    type FormControlGroup = Record<string, [FormControlDataType, ValidatorFn[]?]>;
     const group: FormControlGroup = controls.reduce(
       (accum: FormControlGroup, control: FormControlConfig) => {
-        const validators: ValidatorFn[] =
-          control.validators != null ? this.getValidators(control.validators) : [];
-        const item: FormControlGroup = { [control.key]: [control.value, validators] };
+        const validators: ValidatorFn[] | null =
+          control.validators != null ? this.getValidators(control.validators) : null;
+        const item: FormControlGroup =
+          validators != null
+            ? { [control.key]: [control.value, validators] }
+            : { [control.key]: [control.value] };
         return { ...accum, ...item };
       },
       {} as FormControlGroup
     );
+    console.log('Form group', group);
     return this.fb.group(group);
   }
 
@@ -93,23 +98,23 @@ export class FormControlService {
 
   private getValidatorFn(name: string, value: unknown): ValidatorFn | undefined {
     switch (name) {
-      case 'min':
+      case FormValidatorName.Min:
         return Validators.min(value as number);
-      case 'max':
+      case FormValidatorName.Max:
         return Validators.max(value as number);
-      case 'required':
+      case FormValidatorName.Required:
         return value != null ? Validators.required : undefined;
-      case 'requiredTrue':
+      case FormValidatorName.RequiredTrue:
         return value != null ? Validators.requiredTrue : undefined;
-      case 'email':
+      case FormValidatorName.Email:
         return value != null ? Validators.email : undefined;
-      case 'minLength':
+      case FormValidatorName.MinLength:
         return Validators.minLength(value as number);
-      case 'maxLength':
+      case FormValidatorName.MaxLength:
         return Validators.maxLength(value as number);
-      case 'pattern':
+      case FormValidatorName.Pattern:
         return Validators.pattern(value as string);
-      case 'nullValidator':
+      case FormValidatorName.NullValidator:
         return value != null ? Validators.nullValidator : undefined;
       default:
         return undefined;

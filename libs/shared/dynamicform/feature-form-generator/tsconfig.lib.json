@@ -14,5 +14,9 @@
     "**/*.stories.ts",
     "**/*.stories.js"
   ],
-  "include": ["**/*.ts", "../domain/src/lib/entities/form-input.ts"]
+  "include": [
+    "**/*.ts",
+    "../domain/src/lib/entities/form-input.ts",
+    "../domain/src/lib/application/form-control.service.ts"
+  ]
 }

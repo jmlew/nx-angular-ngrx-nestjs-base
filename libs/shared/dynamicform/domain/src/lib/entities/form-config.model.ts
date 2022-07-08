@@ -46,8 +46,15 @@ export interface FormControlSelectOption {
   value: string;
 }
 
+// Keys must match the FormValidatorName enum.
 export interface FormControlValidators {
-  required: boolean;
   email?: boolean;
-  minLength?: number;
+  max?: number;
+  maxlength?: number;
+  min?: number;
+  minlength?: number;
+  nullvalidator?: boolean;
+  pattern?: string;
+  required?: boolean;
+  requiredtrue?: boolean;
 }

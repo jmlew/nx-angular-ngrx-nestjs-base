@@ -13,7 +13,7 @@ import {
   FormControlsData,
 } from '@app/shared/dynamicform/domain';
 
-import { FormControlService } from './form-control.service';
+import { FormControlService } from '../form-control.service';
 
 @Component({
   selector: 'app-dynamicform-generator',
@@ -51,6 +51,10 @@ export class DynamicformGeneratorComponent implements OnInit {
     );
 
     return this.formInputService.toFormGroup(this.controlConfigs);
+  }
+
+  get isFormInvalidMessageShown(): boolean {
+    return this.form.invalid && this.form.touched && this.form.dirty;
   }
 
   onSubmit() {
