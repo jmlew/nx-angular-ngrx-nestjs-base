@@ -21,6 +21,6 @@ export class DynamicformControlComponent {
   }
 
   get isErrorShown(): boolean {
-    return this.control.invalid && this.control.touched && this.control.dirty;
+    return this.control.invalid && this.control.touched;
   }
 }

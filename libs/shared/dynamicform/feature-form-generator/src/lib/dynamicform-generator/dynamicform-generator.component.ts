@@ -25,7 +25,7 @@ export class DynamicformGeneratorComponent implements OnInit {
   form: FormGroup;
   controlConfigs: FormControlConfig[];
 
-  @Input() formData: FormControlsData | unknown;
+  @Input() formData?: FormControlsData | unknown;
   @Input() labelSubmit?: string;
   @Output() formSubmit = new EventEmitter<unknown>();
   @Output() formCancel = new EventEmitter<void>();
@@ -46,15 +46,15 @@ export class DynamicformGeneratorComponent implements OnInit {
     }
 
     this.controlConfigs = this.formInputService.getFormControlConfigs(
-      this.formData as FormControlsData,
-      this.dynamicformFacade.formControls
+      this.dynamicformFacade.formControls,
+      this.formData as FormControlsData
     );
 
     return this.formInputService.toFormGroup(this.controlConfigs);
   }
 
   get isFormInvalidMessageShown(): boolean {
-    return this.form.invalid && this.form.touched && this.form.dirty;
+    return this.form.invalid && this.form.touched;
   }
 
   onSubmit() {

@@ -4,10 +4,10 @@
   [displayType]="'inline'"
   (dismissError)="onDismissWriteError()">
   <ng-template #success>
-    <users-user-profile-form
-      [context]="RouteItemContext.New"
+    <app-dynamicform-generator
+      [formData]="userProfile$ | async"
       (formSubmit)="onCreate($event)"
       (formCancel)="onCancel()">
-    </users-user-profile-form>
+    </app-dynamicform-generator>
   </ng-template>
 </app-api-status>

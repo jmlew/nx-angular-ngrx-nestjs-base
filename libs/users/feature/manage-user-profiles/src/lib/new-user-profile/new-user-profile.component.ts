@@ -31,7 +31,8 @@ export class NewUserProfileComponent {
     private route: ActivatedRoute
   ) {}
 
-  onCreate(profile: UserProfile) {
+  onCreate(data: unknown) {
+    const profile: UserProfile = data as UserProfile;
     this.userProfilesFacade.createUserProfile(profile);
   }
 

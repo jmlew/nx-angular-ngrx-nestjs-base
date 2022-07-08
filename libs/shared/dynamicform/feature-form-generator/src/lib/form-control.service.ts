@@ -16,21 +16,37 @@ export class FormControlService {
   constructor(private readonly fb: FormBuilder) {}
 
   getFormControlConfigs(
-    formData: FormControlsData,
-    schemaConfigs: FormSchemaControlConfig[]
+    schemaConfigs: FormSchemaControlConfig[],
+    formData?: FormControlsData
   ): FormControlConfig[] {
-    const controls: FormControlConfig[] = Object.keys(formData).map((key: string) => {
-      const value: FormControlDataType = formData[key] as FormControlDataType;
-      const matchingConfig: FormSchemaControlConfig | undefined = schemaConfigs.find(
-        (schemaConfig: FormSchemaControlConfig) => schemaConfig.key === key
-      );
-      const controlsLength: number = Object.keys(formData).length;
-      return matchingConfig != null
-        ? this.getFormControlConfig(matchingConfig, value, controlsLength)
-        : this.getDefaultFormControlConfig(key, value, controlsLength);
-    });
+    const controls: FormControlConfig[] = schemaConfigs.map(
+      (config: FormSchemaControlConfig) => {
+        const value: FormControlDataType =
+          formData != null ? (formData[config.key] as FormControlDataType) : '';
+        const controlsLength: number = Object.keys(schemaConfigs).length;
+        return this.getFormControlConfig(config, value, controlsLength);
+      }
+    );
 
     return controls.sort((a, b) => a.order - b.order);
+  }
+
+  private getFormControlConfig(
+    schemaConfig: FormSchemaControlConfig,
+    value: FormControlDataType,
+    order: number
+  ): FormControlConfig {
+    return {
+      // TODO: normalise values to form input types (strings to booleans, etc)
+      value,
+      key: schemaConfig.key,
+      controlType: this.getControlType(schemaConfig.controlType),
+      type: schemaConfig.type,
+      label: schemaConfig.label,
+      order: schemaConfig.order || order,
+      options: schemaConfig.options,
+      validators: schemaConfig.validators,
+    };
   }
 
   private getDefaultFormControlConfig(
@@ -50,24 +66,6 @@ export class FormControlService {
 
   private getControlType(controlType: string): FormControlType {
     return formControlTypeMap.get(controlType) || FormControlType.TextField;
-  }
-
-  private getFormControlConfig(
-    schemaConfig: FormSchemaControlConfig,
-    value: FormControlDataType,
-    order: number
-  ): FormControlConfig {
-    return {
-      // TODO: normalise values to form input types (strings to booleans, etc)
-      value,
-      key: schemaConfig.key,
-      controlType: this.getControlType(schemaConfig.controlType),
-      type: schemaConfig.type,
-      label: schemaConfig.label,
-      order: schemaConfig.order || order,
-      options: schemaConfig.options,
-      validators: schemaConfig.validators,
-    };
   }
 
   toFormGroup(controls: FormControlConfig[]): FormGroup {
