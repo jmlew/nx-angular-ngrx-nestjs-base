@@ -3,15 +3,13 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedExternalLibrariesModule } from '@app/shared-external-libraries';
 import { SharedDynamicformDomainModule } from '@app/shared/dynamicform/domain';
+import { SharedDynamicformUiModule } from '@app/shared/dynamicform/ui';
 
-import { DynamicformControlComponent } from './dynamicform-control/dynamicform-control.component';
-import { DynamicformErrorSelectComponent } from './dynamicform-error-select/dynamicform-error-select.component';
-import { DynamicformErrorTextfieldComponent } from './dynamicform-error-textfield/dynamicform-error-textfield.component';
 import { DynamicformGeneratorComponent } from './dynamicform-generator/dynamicform-generator.component';
-import { FormControlService } from './form-control.service';
+import { DynamicformService } from './dynamicform.service';
 
 const sharedModules = [SharedExternalLibrariesModule];
-const domainModules = [SharedDynamicformDomainModule];
+const domainModules = [SharedDynamicformDomainModule, SharedDynamicformUiModule];
 
 @NgModule({
   imports: [
@@ -21,13 +19,8 @@ const domainModules = [SharedDynamicformDomainModule];
     ...sharedModules,
     ...domainModules,
   ],
-  declarations: [
-    DynamicformGeneratorComponent,
-    DynamicformControlComponent,
-    DynamicformErrorTextfieldComponent,
-    DynamicformErrorSelectComponent,
-  ],
+  declarations: [DynamicformGeneratorComponent],
   exports: [DynamicformGeneratorComponent],
-  providers: [FormControlService],
+  providers: [DynamicformService],
 })
 export class SharedDynamicformFeatureFormGeneratorModule {}

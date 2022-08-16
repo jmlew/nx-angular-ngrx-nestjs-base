@@ -45,6 +45,7 @@
       "@app/shared/dynamicform/feature-form-generator": [
         "libs/shared/dynamicform/feature-form-generator/src/index.ts"
       ],
+      "@app/shared/dynamicform/ui": ["libs/shared/dynamicform/ui/src/index.ts"],
       "@app/shared/environments": ["libs/shared/environments/src/index.ts"],
       "@app/shared/navigation/domain": [
         "libs/shared/navigation/domain/src/index.ts"

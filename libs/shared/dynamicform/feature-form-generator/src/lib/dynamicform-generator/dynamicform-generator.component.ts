@@ -13,7 +13,7 @@ import {
   FormControlsData,
 } from '@app/shared/dynamicform/domain';
 
-import { FormControlService } from '../form-control.service';
+import { DynamicformService } from '../dynamicform.service';
 
 @Component({
   selector: 'app-dynamicform-generator',
@@ -25,14 +25,14 @@ export class DynamicformGeneratorComponent implements OnInit {
   form: FormGroup;
   controlConfigs: FormControlConfig[];
 
-  @Input() formData?: FormControlsData | unknown;
+  @Input() formData!: FormControlsData | unknown;
   @Input() labelSubmit?: string;
   @Output() formSubmit = new EventEmitter<unknown>();
   @Output() formCancel = new EventEmitter<void>();
 
   constructor(
     private dynamicformFacade: DynamicformFacade,
-    private formInputService: FormControlService
+    private formInputService: DynamicformService
   ) {}
 
   ngOnInit() {
@@ -59,10 +59,12 @@ export class DynamicformGeneratorComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
-      const values: unknown = this.form.value;
+      const values: unknown = {
+        ...(this.formData as FormControlsData),
+        ...this.form.value,
+      };
       console.log('values', values);
-      const rawValues: string = JSON.stringify(this.form.getRawValue());
-      console.log('rawValues', rawValues);
+      // const rawValues: string = JSON.stringify(this.form.getRawValue());
       this.formSubmit.emit(values);
     }
   }

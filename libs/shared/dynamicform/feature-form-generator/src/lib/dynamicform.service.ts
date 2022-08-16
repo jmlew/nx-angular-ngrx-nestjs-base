@@ -12,7 +12,7 @@ import {
 } from '@app/shared/dynamicform/domain';
 
 @Injectable()
-export class FormControlService {
+export class DynamicformService {
   constructor(private readonly fb: FormBuilder) {}
 
   getFormControlConfigs(
