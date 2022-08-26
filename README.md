@@ -15,6 +15,31 @@ The codebase combines a number of separate 'applications' (apps) and 'libraries'
 2. Mock-api
    > The Mock API server application (NestJS) which mocks interaction with teh real server during offline development.
 
+## Features
+
+### NestJS Mock API app
+
+The 'mock-api' app contains a NestJS application which replicates the APIs requested to ensure development can continue in parallel to that of the Backend. This mock API can be enabled as the source of all HTTP requests within the web-app when serving in dev mode and when the environments property `useMockInDev` is set to `true` (located in `src/environments/environment.ts`).
+
+#### Serving the mock API
+
+The app serves on the port defined in a variable in the .env file
+(`process.env.NX_MOCK_API_PORT`) and this matches the port number defined in the web-app's
+proxy file (`proxy.conf.json`), which is used to ensure all API calls within the app are
+redirected to the mock API.
+
+### Mock API testing
+
+The codebase includes a Thunder Tests directory which contains configs for testing both
+the NestJS APIs as well as some sample fake data APIs.
+This uses the [Thunder
+Client](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client)
+vscode extension listed in .vscode/extensions.json.
+
+## Code Structure
+
+Use the below convenience methods to generate boilerplate code structure of the apps and libs.
+
 ### Generate a domain (DDD schematics)
 
 `nx g @angular-architects/ddd:domain <some-domain> --directory <some-parent-directory> --type=internal --dry-run`
@@ -47,9 +72,9 @@ _Example: `nx g @angular-architects/ddd:api --directory dynamicform --shared --t
 
 ### Adding NgRX
 
-`nx g @nrwl/angular:ngrx <some-domain> --module=<some-domain-module-path> --directory +state/<some-state-category> --facade --useDataPersistence --dry-run`
+Use the NRWL CLI which is preferable to the DDD plugin NgRX schematics for generating NgRX boilerplate.
 
-> NB: Uses the NRWL CLI (this is preferable to the DDD plugin NgRX schematics).
+`nx g @nrwl/angular:ngrx <some-domain> --module=<some-domain-module-path> --directory +state/<some-state-category> --facade --useDataPersistence --dry-run`
 
 _Example: `nx g @nrwl/angular:ngrx users --directory +state/users --module=libs/users/domain/src/lib/users-domain.module.ts --syntax creators --facade`_
 
@@ -86,15 +111,14 @@ _Example: `nx g component users-manage-list --m=users-feature-manage`_
 - Remove: `nx g rm <some-lib-name> --dry-run`
 - Move: `nx g mv --project <some-lib-name> <some-dir>/<other-lib-name> --dry-run`
 
-## Features
+## Storybook
 
-### NestJS Mock API app
+Create storybook configs and storybook files for all components within a library.
 
-The 'mock-api' app contains a NestJS application which replicates the APIs requested to ensure development can continue in parallel to that of the Backend. This mock API can be enabled as the source of all HTTP requests within the web-app when serving in dev mode and when the environments property `useMockInDev` is set to `true` (located in `src/environments/environment.ts`).
+Run `nx g @nrwl/angular:storybook-configuration <project-name>` where <project-name> is
+the name of the library in workspace.json.
 
-#### Serving the mock API
-
-The app serves on the port defined in a variable in the .env file (`process.env.NX_MOCK_API_PORT`) and this matches the port number defined in the web-app's proxy file (`proxy.conf.json`), which is used to ensure all API calls within the app are redirected to the mock API.
+Run all stories: `npm run storybook`.
 
 ## Development server
 
@@ -117,27 +141,21 @@ Run `npm run build:prod` to build the production-ready project.
 
 ## Serve Build files locally
 
-Run `npm run serve:dist` to serve and test the built application which was generated using the BUILD command above using the `live-server` library. Navigate to `http://localhost:6600/`
-
-## Running unit tests
-
-Run `ng test my-app` to execute the unit tests via [Jest](https://jestjs.io).
-
-Run `nx affected:test` to execute the unit tests affected by a change.
-
-## Running end-to-end tests
-
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
-
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
+Run `npm run serve:dist` to serve and test the built application which was generated using
+the BUILD command above using the `live-server` library. Navigate to
+`http://localhost:6600/`
 
 ## Understand your workspace
 
-Run `nx graph` to see a diagram of the dependencies of your projects.
+Run `npm run graph` to see a diagram of the dependencies of your projects.
 
-## Updating Angular and NX
+## Updating Angular, NX, and project dependancies.
 
 Run `nx migrate latest` then `nx migrate --run-migrations`. See [Updating Nx](https://nx.dev/using-nx/updating-nx).
+
+## Recommended VSCode extensions
+
+Find a list in .vscode/extensions.json to ensure the best development experience.
 
 ## Further help
 
