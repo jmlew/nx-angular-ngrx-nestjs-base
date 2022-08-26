@@ -1,15 +1,6 @@
 import { Observable } from 'rxjs';
 
-import {
-  BadRequestException,
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Post,
-  Put,
-} from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 
 import { toStreamWithDelay } from '../../shared/utils';
 import { NavigationService } from './navigation.service';

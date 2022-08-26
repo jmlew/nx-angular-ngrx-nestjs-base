@@ -6,23 +6,20 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { IconMat } from '@app/shared/ui-common';
 import { RouteItemContext, UserProfile, UserProfileParams } from '@app/users/domain';
 
-/**
- * Temp: hold a reference to form values in enum which will be replaced by a Map of values
- * included in the configs loaded from the server.
- */
 export enum ParamKey {
   UserId = 'userId',
   EmailId = 'emailId',
   UserName = 'userName',
   Password = 'password',
-  IsLocked = 'isLocked',
-  IsInactive = 'isInactive',
-  LastLoginDatetime = 'lastLoginDatetime',
-  UserRoles = 'userRoles',
 }
 
 @Component({
@@ -51,6 +48,9 @@ export class UserProfileFormComponent implements OnInit {
     this.isNew = this.context === RouteItemContext.New;
     this.isView = this.context === RouteItemContext.View;
     this.form = this.buildForm();
+    if (this.isView) {
+      this.form.disable();
+    }
   }
 
   private buildForm(): UntypedFormGroup {
@@ -81,10 +81,6 @@ export class UserProfileFormComponent implements OnInit {
       [ParamKey.UserId]: '',
       [ParamKey.EmailId]: '',
       [ParamKey.Password]: '',
-      [ParamKey.IsLocked]: 'Y',
-      [ParamKey.IsInactive]: 'Y',
-      [ParamKey.LastLoginDatetime]: '',
-      [ParamKey.UserRoles]: [],
     };
   }
 

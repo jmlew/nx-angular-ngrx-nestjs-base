@@ -27,7 +27,6 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { ReactiveComponentModule } from '@ngrx/component';
 
 /**
  * Common collection of Material Design modules used throughout the app.
@@ -62,7 +61,7 @@ const matModules = [
   MatTooltipModule,
 ];
 
-export const sharedModules = [...matModules, FlexLayoutModule, ReactiveComponentModule];
+export const sharedModules = [...matModules, FlexLayoutModule];
 
 @NgModule({
   imports: [...sharedModules],

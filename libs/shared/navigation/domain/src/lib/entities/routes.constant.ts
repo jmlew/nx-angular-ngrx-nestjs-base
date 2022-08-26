@@ -5,7 +5,6 @@ export const orderedRootRouteNames: RouteName[] = [
   RouteName.Home,
   RouteName.Users,
   RouteName.Settings,
-  RouteName.Workitems,
   RouteName.Reports,
 ];
 
@@ -39,15 +38,6 @@ export const rootRoutesMap: Map<RouteName, RouteItem> = new Map([
       path: '/settings',
       label: 'Settings',
       icon: 'settings',
-    },
-  ],
-  [
-    RouteName.Workitems,
-    {
-      name: RouteName.Workitems,
-      path: '/workitems',
-      label: 'Workitems',
-      icon: 'exit_to_app',
     },
   ],
   [

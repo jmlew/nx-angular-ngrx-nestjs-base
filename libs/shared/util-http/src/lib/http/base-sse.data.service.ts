@@ -2,7 +2,14 @@ import { Observable, Observer, catchError, throwError } from 'rxjs';
 
 import { Injectable, NgZone } from '@angular/core';
 
-/* Data service providing HTTP functionality for Server Sent Events as Observables. */
+/*
+  Data service providing HTTP functionality for Server Sent Events as Observable stream.
+  Implemention example:
+  getSseStream<T>(url: string): SseStream<T[]> {
+    const sse: SseStream<{ data: T[] }> = this.sseData.getStream<{ data: T[] }>(url);
+    return { source: sse.source, data: sse.data.pipe(map((response: { data: T[] }) => response.data)), };
+  }
+*/
 
 export interface SseStream<T> {
   source: EventSource;
@@ -17,9 +24,7 @@ export class BaseSseDataService {
     const sse: SseStream<T> = this.createSseStream<T>(url);
     return {
       source: sse.source,
-      data: sse.data.pipe(
-        catchError((error: unknown) => throwError(() => error))
-      ),
+      data: sse.data.pipe(catchError((error: unknown) => throwError(() => error))),
     };
   }
 

@@ -17,20 +17,6 @@ const routes: Routes = [
           ),
       },
       {
-        path: RouteDomainPath.Roles,
-        loadChildren: () =>
-          import('@app/users/feature/manage-user-roles').then(
-            (module) => module.UsersFeatureManageUserRolesModule
-          ),
-      },
-      {
-        path: RouteDomainPath.Permissions,
-        loadChildren: () =>
-          import('@app/users/feature/manage-user-permissions').then(
-            (module) => module.UsersFeatureManageUserPermissionsModule
-          ),
-      },
-      {
         path: '',
         redirectTo: 'profiles',
         pathMatch: 'full',
@@ -45,38 +31,3 @@ const routes: Routes = [
   exports: [],
 })
 export class UsersShellModule {}
-
-/* const routes: Routes = [
-  {
-    path: '',
-    component: UsersShellComponent,
-    children: [
-      {
-        path: 'profiles',
-        loadChildren: () =>
-          import('@app/users/feature/manage-user-profiles').then(
-            (module) => module.UsersFeatureManageUserProfilesModule
-          ),
-      },
-      {
-        path: 'roles',
-        loadChildren: () =>
-          import('@app/users/feature/manage-user-roles').then(
-            (module) => module.UsersFeatureManageUserRolesModule
-          ),
-      },
-      {
-        path: 'permissions',
-        loadChildren: () =>
-          import('@app/users/feature/manage-user-permissions').then(
-            (module) => module.UsersFeatureManageUserPermissionsModule
-          ),
-      },
-      {
-        path: '',
-        redirectTo: 'profiles',
-        pathMatch: 'full',
-      },
-    ],
-  },
-]; */

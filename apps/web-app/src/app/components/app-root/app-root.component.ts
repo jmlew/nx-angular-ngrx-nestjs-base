@@ -2,7 +2,6 @@ import { Observable, combineLatest, map, take } from 'rxjs';
 
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DynamicformFacade } from '@app/shared/dynamicform/domain';
 import { NavigationFacade, RouteItem } from '@app/shared/navigation/domain';
 
 @Component({
@@ -15,8 +14,7 @@ export class AppRootComponent implements OnInit {
 
   constructor(
     private readonly router: Router,
-    private navigationFacade: NavigationFacade,
-    private dynamicformFacade: DynamicformFacade
+    private navigationFacade: NavigationFacade
   ) {}
 
   ngOnInit() {
@@ -28,25 +26,17 @@ export class AppRootComponent implements OnInit {
   }
 
   /**
-   * Initialises app by loading a collection of APIs which are dependant for the app to function.
-
-   * TODO: Ensure each stream emits values which represent a successful load of data only
-   * once the API response is retrieved. Since each of the below use BehaviourSubjects
-   * with default intial values.
-   * TODO: Add error and loading streams to ensure API state is reflected in the UI.
+   * Initialises app by loading a collection of dependancy APIs.
+   *
+   * TODO: Load all depemndant APIs and map the response statuses to the ready state.
    */
   private initialiseApp() {
     console.log('App is initialising.');
 
-    this.isAppReady$ = combineLatest([
-      this.navigationFacade.routeItems$,
-      this.dynamicformFacade.formConfigList$,
-    ]).pipe(
-      map(([routeItems, formConfigList]) => true),
+    this.isAppReady$ = combineLatest([this.navigationFacade.routeItems$]).pipe(
+      map(([routeItems]) => true),
       take(1)
     );
-
-    this.dynamicformFacade.loadConfigs();
     this.navigationFacade.loadRoutes();
   }
 }

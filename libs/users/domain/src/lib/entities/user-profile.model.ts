@@ -11,10 +11,6 @@ export interface UserProfileParams extends UserProfileId {
   userName: string; // Maps to LDAP user name.
   emailId: string;
   password: string;
-  isLocked: string;
-  isInactive: string;
-  lastLoginDatetime: string;
-  userRoles: string[]; // roleName from UserRole
 }
 
 export interface UserProfile extends UserProfileParams, DbItem {}

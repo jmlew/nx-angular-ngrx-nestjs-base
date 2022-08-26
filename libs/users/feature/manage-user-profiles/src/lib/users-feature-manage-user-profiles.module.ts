@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { SharedApiStatusUiModule } from '@app/shared/api-status/ui';
 import { UsersDomainModule } from '@app/users/domain';
 import { UsersUiModule } from '@app/users/ui';
-import { ReactiveComponentModule } from '@ngrx/component';
 
 import { EditUserProfileComponent } from './edit-user-profile/edit-user-profile.component';
 import { ManageUserProfilesRoutingModule } from './manage-user-profiles.routing.module';
@@ -17,7 +16,6 @@ const domainModules = [UsersDomainModule, UsersUiModule];
 @NgModule({
   imports: [
     CommonModule,
-    ReactiveComponentModule,
     ...sharedModules,
     ...domainModules,
     ManageUserProfilesRoutingModule,

@@ -9,26 +9,17 @@
     "mock-api": "apps/mock-api",
     "shared-api-status-ui": "libs/shared/api-status/ui",
     "shared-api-status-util": "libs/shared/api-status/util",
-    "shared-dynamicform-api": "libs/shared/dynamicform/api",
-    "shared-dynamicform-domain": "libs/shared/dynamicform/domain",
-    "shared-dynamicform-feature-form-generator": "libs/shared/dynamicform/feature-form-generator",
     "shared-environments": "libs/shared/environments",
     "shared-external-libraries": "libs/shared/external-libraries",
     "shared-navigation-domain": "libs/shared/navigation/domain",
     "shared-ui-common": "libs/shared/ui-common",
     "shared-util-http": "libs/shared/util-http",
     "users-domain": "libs/users/domain",
-    "users-feature-manage-user-permissions": "libs/users/feature/manage-user-permissions",
     "users-feature-manage-user-profiles": "libs/users/feature/manage-user-profiles",
-    "users-feature-manage-user-roles": "libs/users/feature/manage-user-roles",
     "users-shell": "libs/users/shell",
     "users-ui": "libs/users/ui",
     "web-app": "apps/web-app",
-    "web-app-e2e": "apps/web-app-e2e",
-    "workitems-domain": "libs/workitems/domain",
-    "workitems-feature-manage": "libs/workitems/feature-manage",
-    "workitems-shell": "libs/workitems/shell",
-    "workitems-ui-manage": "libs/workitems/ui-manage"
+    "web-app-e2e": "apps/web-app-e2e"
   },
   "$schema": "./node_modules/nx/schemas/workspace-schema.json"
 }
