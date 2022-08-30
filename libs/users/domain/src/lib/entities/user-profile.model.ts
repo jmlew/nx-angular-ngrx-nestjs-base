@@ -8,7 +8,7 @@ interface DbItem {
 }
 
 export interface UserProfileParams extends UserProfileId {
-  userName: string; // Maps to LDAP user name.
+  userName: string;
   emailId: string;
   password: string;
 }

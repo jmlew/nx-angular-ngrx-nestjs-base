@@ -2,9 +2,14 @@
 
 A Base [Angular](https://angular.io) web app and [NestJS](https://docs.nestjs.com/) mock backend API server.
 
-Organised as a [Nx](https://nx.dev) monorepo and composed using Domain Driven Design (DDD) principles to provides a best-practice starting point for developing modular and scaleable Angular apps.
+Organised as a [Nx](https://nx.dev) monorepo and composed using Domain Driven Design (DDD)
+principles to provides a best-practice starting point for developing modular and scaleable
+Angular apps.
 
 ## Architecture
+
+The architectural approach implemented here is documented under
+[Scaleable Frontend Architectures](https://luxproject.luxoft.com/confluence/display/APACUX/Scaleable+Frontend+Architectures)
 
 The codebase combines a number of separate 'applications' (apps) and 'libraries' (libs) within the same workspace in a [NX Monorepo](https://nx.dev). There are only two applications:
 

@@ -29,7 +29,7 @@ export enum ParamKey {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserProfileFormComponent implements OnInit {
-  @Input() userProfile: UserProfile;
+  @Input() userProfile?: UserProfile;
   @Input() context: RouteItemContext;
   @Output() formSubmit = new EventEmitter<UserProfileParams>();
   @Output() formCancel = new EventEmitter<void>();
@@ -101,7 +101,6 @@ export class UserProfileFormComponent implements OnInit {
   onSubmit() {
     if (this.form.valid) {
       const params: UserProfileParams = this.form.value;
-      // const user: User = { ...this.userProfile, ...params };
       this.formSubmit.emit(params);
     }
   }

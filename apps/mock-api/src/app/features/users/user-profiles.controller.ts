@@ -27,7 +27,7 @@ enum ErrorMessage {
   DuplicatePrimaryId = 'Duplicate primary ID in Mock CRM DB.',
 }
 
-@Controller('admin/user_profile')
+@Controller('users')
 export class UserProfilesController {
   constructor(private readonly userService: UsersService) {}
 
@@ -42,27 +42,12 @@ export class UserProfilesController {
     return this.toStream(this.userService.getAllUsers(), 1000);
   }
 
-  // Failed version, uncomment the method decorator above to enable and test this version.
-  @Get()
-  @HttpCode(400)
-  getUserProfilesFailed(): Observable<HttpException> {
-    return this.toStream(new BadRequestException(ErrorMessage.TestBadRequest), 1000);
-  }
-
   @Get(':id')
   getUserProfile(@Param('id') id: string): Observable<UserProfile> {
     if (!this.userService.doesUserExist(id)) {
       throw new BadRequestException(ErrorMessage.NoUserMatch);
     }
     return this.toStream(this.userService.getUserById(id));
-  }
-
-  // Failed version, uncomment the method decorator above to enable and test this version.
-  @Get(':id')
-  @HttpCode(400)
-  getUserProfileFailed(@Param('id') id: string): Observable<HttpException> {
-    // throw new BadRequestException(ErrorMessage.TestBadRequest);
-    return this.toStream(new BadRequestException(ErrorMessage.TestBadRequest), 1000);
   }
 
   @Post()
@@ -78,14 +63,6 @@ export class UserProfilesController {
     return this.toStream(this.userService.createUser(params));
   }
 
-  // Failed version, uncomment the method decorator above to enable and test this version.
-  @Post()
-  @HttpCode(400)
-  createUserProfileFailed(@Body() params: UserProfileParams): Observable<HttpException> {
-    // throw new BadRequestException(ErrorMessage.TestBadRequest);
-    return this.toStream(new BadRequestException(ErrorMessage.TestBadRequest), 1000);
-  }
-
   @Put(':id')
   updateUserProfile(
     @Param('id') id: string,
@@ -97,6 +74,39 @@ export class UserProfilesController {
     return this.toStream(this.userService.updateUser(id, params), 1000);
   }
 
+  @Delete(':id')
+  deleteUserProfile(@Param('id') id: string): Observable<WriteUserProfileResponse> {
+    if (!this.userService.doesUserExist(id)) {
+      throw new BadRequestException(ErrorMessage.NoUserMatch);
+    }
+    return this.toStream(this.userService.deleteUser(id));
+  }
+
+  /**
+   * Failed versions. Test the below by uncommenting the CRUD method decorator in teh
+   * corresponding functions above to disable and use the below versions instead.
+   */
+
+  @Get()
+  @HttpCode(400)
+  getUserProfilesFailed(): Observable<HttpException> {
+    return this.toStream(new BadRequestException(ErrorMessage.TestBadRequest), 1000);
+  }
+
+  @Get(':id')
+  @HttpCode(400)
+  getUserProfileFailed(@Param('id') id: string): Observable<HttpException> {
+    // throw new BadRequestException(ErrorMessage.TestBadRequest);
+    return this.toStream(new BadRequestException(ErrorMessage.TestBadRequest), 1000);
+  }
+
+  @Post()
+  @HttpCode(400)
+  createUserProfileFailed(@Body() params: UserProfileParams): Observable<HttpException> {
+    // throw new BadRequestException(ErrorMessage.TestBadRequest);
+    return this.toStream(new BadRequestException(ErrorMessage.TestBadRequest), 1000);
+  }
+
   @Put(':id')
   @HttpCode(400)
   updateUserProfileFaile(
@@ -105,14 +115,6 @@ export class UserProfilesController {
   ): Observable<HttpException> {
     // throw new BadRequestException(ErrorMessage.TestBadRequest);
     return this.toStream(new BadRequestException(ErrorMessage.TestBadRequest), 1000);
-  }
-
-  @Delete(':id')
-  deleteUserProfile(@Param('id') id: string): Observable<WriteUserProfileResponse> {
-    if (!this.userService.doesUserExist(id)) {
-      throw new BadRequestException(ErrorMessage.NoUserMatch);
-    }
-    return this.toStream(this.userService.deleteUser(id));
   }
 
   @Delete(':id')

@@ -8,8 +8,7 @@ import { UserProfile, UserProfileParams } from '../entities/user-profile.model';
 
 enum ApiEndpoint {
   Base = 'api',
-  Admin = 'admin',
-  Profile = 'user_profile',
+  Profile = 'users',
   Role = 'role',
   Permission = 'permission',
 }
@@ -24,7 +23,7 @@ export enum DataItemType {
 export class UsersDataService {
   constructor(private data: BaseDataService) {}
 
-  private baseUrl = `${ApiEndpoint.Base}/${ApiEndpoint.Admin}`;
+  private baseUrl = `${ApiEndpoint.Base}`;
 
   private urlMap: Map<DataItemType, string> = new Map([
     [DataItemType.Profile, `${this.baseUrl}/${ApiEndpoint.Profile}`],
