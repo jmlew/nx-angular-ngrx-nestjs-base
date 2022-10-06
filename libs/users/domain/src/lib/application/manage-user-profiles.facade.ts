@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 
 import { Injectable } from '@angular/core';
-import { ApiRequestState } from '@app/shared/api-status/util';
+import { ApiState } from '@app/shared/api-status/util';
 import { Store, select } from '@ngrx/store';
 
 import * as UserProfilesActions from '../+state/profiles/profiles.actions';
@@ -28,10 +28,10 @@ import { UsersDataService } from '../infrastructure/users.data.service';
 
 @Injectable()
 export class ManageUserProfilesFacade {
-  userProfilesReadRequestState$: Observable<ApiRequestState> = this.store.pipe(
+  userProfilesReadRequestState$: Observable<ApiState> = this.store.pipe(
     select(UserProfilesSelectors.selectUserProfilesReadRequestState)
   );
-  userProfilesWriteRequestState$: Observable<ApiRequestState> = this.store.pipe(
+  userProfilesWriteRequestState$: Observable<ApiState> = this.store.pipe(
     select(UserProfilesSelectors.selectUserProfilesWriteRequestState)
   );
   allUserProfiles$: Observable<UserProfile[]> = this.store.pipe(

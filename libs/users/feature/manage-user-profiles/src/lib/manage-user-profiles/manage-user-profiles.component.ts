@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApiRequestState, ApiStatus } from '@app/shared/api-status/util';
+import { ApiState, ApiStatus } from '@app/shared/api-status/util';
 import {
   ManageUserProfilesFacade,
   RouteItemPath,
@@ -19,9 +19,9 @@ export class ManageUserProfilesComponent {
   readonly ApiStatus = ApiStatus;
   readonly userProfiles$: Observable<UserProfile[]> =
     this.userProfilesFacade.allUserProfiles$;
-  readonly readRequestState$: Observable<ApiRequestState> =
+  readonly readRequestState$: Observable<ApiState> =
     this.userProfilesFacade.userProfilesReadRequestState$;
-  readonly writeRequestState$: Observable<ApiRequestState> =
+  readonly writeRequestState$: Observable<ApiState> =
     this.userProfilesFacade.userProfilesWriteRequestState$;
 
   constructor(

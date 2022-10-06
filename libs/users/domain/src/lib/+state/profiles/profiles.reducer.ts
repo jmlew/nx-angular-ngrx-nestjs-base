@@ -21,8 +21,8 @@ export type UserProfileEntities = Dictionary<UserProfile>;
 export interface UserProfilesState extends EntityState<UserProfile> {
   // Flag to indicate whether the full collection has loaded (use with ApiRequestState)
   areAllLoaded: boolean;
-  readState: fromApiStatus.ApiRequestState;
-  writeState: fromApiStatus.ApiRequestState;
+  readState: fromApiStatus.ApiState;
+  writeState: fromApiStatus.ApiState;
 }
 
 export const userProfilesAdapter: EntityAdapter<UserProfile> =

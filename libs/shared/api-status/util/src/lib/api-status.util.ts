@@ -1,87 +1,87 @@
 import { ApiStatus } from './api-status.enum';
-import { ApiRequestState } from './api-status.model';
+import { ApiState } from './api-status.model';
 
-export function onApiStateInit<T extends ApiRequestState>(state: T): T {
+export function onApiStateInit<T extends ApiState>(state: T): T {
   return {
     ...state,
     ...getApiInitState(),
   };
 }
 
-export function onApiStatePending<T extends ApiRequestState>(state: T): T {
+export function onApiStatePending<T extends ApiState>(state: T): T {
   return {
     ...state,
     ...getApiPendingState(),
   };
 }
 
-export function onApiStateSuccess<T extends ApiRequestState>(state: T): T {
+export function onApiStateSuccess<T extends ApiState>(state: T): T {
   return {
     ...state,
     ...getApiSuccessState(),
   };
 }
 
-export function onApiStateFailed<T extends ApiRequestState>(state: T, error: string): T {
+export function onApiStateFailed<T extends ApiState>(state: T, error: string): T {
   return {
     ...state,
     ...getApiFailedState(error),
   };
 }
 
-export function getApiInitState(): ApiRequestState {
+export function getApiInitState(): ApiState {
   return {
     status: ApiStatus.Idle,
     error: null,
   };
 }
 
-export function getApiPendingState(): ApiRequestState {
+export function getApiPendingState(): ApiState {
   return {
     status: ApiStatus.Pending,
     error: null,
   };
 }
 
-export function getApiSuccessState(): ApiRequestState {
+export function getApiSuccessState(): ApiState {
   return {
     status: ApiStatus.Succeeded,
     error: null,
   };
 }
 
-export function getApiFailedState(error: string): ApiRequestState {
+export function getApiFailedState(error: string): ApiState {
   return {
     status: ApiStatus.Failed,
     error,
   };
 }
 
-export function getApiRequestState<T extends ApiRequestState>(state: T): ApiRequestState {
+export function getApiRequestState<T extends ApiState>(state: T): ApiState {
   const { status, error } = state;
   return { status, error };
 }
 
-export function getApiRequestStatus<T extends ApiRequestState>(state: T): ApiStatus {
+export function getApiRequestStatus<T extends ApiState>(state: T): ApiStatus {
   return state.status;
 }
 
-export function getApiRequestError<T extends ApiRequestState>(state: T): string | null {
+export function getApiRequestError<T extends ApiState>(state: T): string | null {
   return state.error;
 }
 
-export function isApiStatusIdle<T extends ApiRequestState>(state: T): boolean {
+export function isApiStatusIdle<T extends ApiState>(state: T): boolean {
   return getApiRequestStatus(state) === ApiStatus.Idle;
 }
 
-export function isApiStatusPending<T extends ApiRequestState>(state: T): boolean {
+export function isApiStatusPending<T extends ApiState>(state: T): boolean {
   return getApiRequestStatus(state) === ApiStatus.Pending;
 }
 
-export function isApiStatusSucceeded<T extends ApiRequestState>(state: T): boolean {
+export function isApiStatusSucceeded<T extends ApiState>(state: T): boolean {
   return getApiRequestStatus(state) === ApiStatus.Succeeded;
 }
 
-export function isApiStatusFailed<T extends ApiRequestState>(state: T): boolean {
+export function isApiStatusFailed<T extends ApiState>(state: T): boolean {
   return getApiRequestStatus(state) === ApiStatus.Failed;
 }

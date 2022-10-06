@@ -33,12 +33,12 @@ export const {
 
 export const selectUserProfilesReadRequestState = createSelector(
   selectUserProfilesState,
-  (state: UserProfilesState): fromApiStatus.ApiRequestState => state.readState
+  (state: UserProfilesState): fromApiStatus.ApiState => state.readState
 );
 
 export const selectUserProfilesWriteRequestState = createSelector(
   selectUserProfilesState,
-  (state: UserProfilesState): fromApiStatus.ApiRequestState => state.writeState
+  (state: UserProfilesState): fromApiStatus.ApiState => state.writeState
 );
 
 export const selectUserProfilesReadError = createSelector(

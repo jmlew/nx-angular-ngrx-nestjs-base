@@ -42,7 +42,7 @@ export type DisplayType = 'inline' | 'replace';
 })
 export class ApiStatusComponent {
   readonly ApiStatus = fromApiStatus.ApiStatus;
-  state: fromApiStatus.ApiRequestState;
+  state: fromApiStatus.ApiState;
   isErrorShown: boolean;
 
   @ContentChild('idle') idle: TemplateRef<unknown>;
@@ -53,7 +53,7 @@ export class ApiStatusComponent {
   /**
    * Input setter used to update the local state of the error message.
    */
-  @Input() set requestState(state: fromApiStatus.ApiRequestState) {
+  @Input() set requestState(state: fromApiStatus.ApiState) {
     this.isErrorShown = isApiStatusFailed(state);
     this.state = state;
   }
