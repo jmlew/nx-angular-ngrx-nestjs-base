@@ -1,6 +1,6 @@
 import { navigation } from '@nrwl/angular';
 import { Store } from '@ngrx/store';
-import { filter, first, map, Observable, of, tap } from 'rxjs';
+import { filter, first, map, Observable, tap } from 'rxjs';
 import { Inject, Injectable, Type } from '@angular/core';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
@@ -17,8 +17,6 @@ import {
 
 import {
   RouteDomainPath,
-  RouteItemContext,
-  RouteDataType,
   RouteItemPath,
   UsersRouteParam,
 } from '../entities/user-routes.enum';

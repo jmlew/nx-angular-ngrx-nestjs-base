@@ -2,15 +2,17 @@
   "data": [
     {
       "userId": "user-foo",
-      "userName": "Jason",
-      "emailId": "jason@localhost",
-      "password": "samplejasonpassword"
+      "userName": "John",
+      "emailId": "john@sampleuser.com",
+      "password": "samplepassword",
+      "createdAt": "2018-07-16T07:32:20.421Z"
     },
     {
       "userId": "user-bar",
-      "userName": "System",
-      "emailId": "system@localhost",
-      "password": "samplesystempassword"
+      "userName": "Fred",
+      "emailId": "fred@sampleuser.com",
+      "password": "samplepassword",
+      "createdAt": "2018-07-16T07:32:20.421Z"
     }
   ]
 }
