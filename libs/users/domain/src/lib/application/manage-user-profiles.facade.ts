@@ -9,7 +9,6 @@ import * as UserProfilesFeature from '../+state/profiles/profiles.reducer';
 import * as UserProfilesSelectors from '../+state/profiles/profiles.selectors';
 import { UserProfile, UserProfileParams } from '../entities/user-profile.model';
 import { RouteItemContext } from '../entities/user-routes.enum';
-import { UsersDataService } from '../infrastructure/users.data.service';
 
 /**
  * Application facade which acts as the main point of contact for implementing a specific
@@ -44,10 +43,7 @@ export class ManageUserProfilesFacade {
     select(UserProfilesSelectors.selectUserProfileRouteItemContext)
   );
 
-  constructor(
-    private readonly store: Store<UserProfilesFeature.UserProfilesState>,
-    private dataService: UsersDataService
-  ) {}
+  constructor(private readonly store: Store<UserProfilesFeature.UserProfilesState>) {}
 
   resetUserProfilesReadState() {
     this.store.dispatch(UserProfilesActions.resetUserProfilesReadState());
