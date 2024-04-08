@@ -8,10 +8,11 @@ Angular apps.
 
 ## Architecture
 
-The architectural approach implemented here is documented under
-[Scaleable Frontend Architectures](https://luxproject.luxoft.com/confluence/display/APACUX/Scaleable+Frontend+Architectures)
+The architectural approach implemented here is documented under my [Scaleable Frontend Architectures guidelines](https://bit.ly/scaleable-apps)
 
-The codebase combines a number of separate 'applications' (apps) which are simple shells containing several 'libraries' (libs) which provide the real functionality, all within the same workspace in a [NX Monorepo](https://nx.dev). There are only two applications:
+The state management approach implemented here is documented under my [Scalable Frontend App State Management guidelines](https://bit.ly/scaleable-apps-state)
+
+The codebase combines a number of separate 'applications' (apps) which are simple shells containing several 'libraries' (libs) to provide the real functionality, all within the same workspace in a [NX Monorepo](https://nx.dev). There are only two applications:
 
 1. Web-app
 
